@@ -5,6 +5,7 @@
 #include <commctrl.h>
 #include <shellapi.h>
 #include "gateway_gui/backend.hpp"
+#include "gateway_gui/settings.hpp"
 #include <limits>
 #include <string>
 #include <vector>
@@ -312,14 +313,21 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         subtitle = control(L"STATIC", L"连接 Yuzu 房间，让 Citra 一起联机", 0);
         for (const wchar_t* label : {L"服务器地址", L"服务器 UDP 端口", L"本机 Citra 接入端口", L"房间密码（可选）"})
             fields.push_back(control(L"STATIC", label, 0));
-        server_edit = control(L"EDIT", L"127.0.0.1", WS_TABSTOP | ES_AUTOHSCROLL, Server);
-        remote_edit = control(L"EDIT", L"24872", WS_TABSTOP | ES_NUMBER | ES_AUTOHSCROLL, RemotePort);
-        local_edit = control(L"EDIT", L"24875", WS_TABSTOP | ES_NUMBER | ES_AUTOHSCROLL, LocalPort);
+        server_edit = control(L"EDIT", L"", WS_TABSTOP | ES_AUTOHSCROLL, Server);
+        remote_edit = control(L"EDIT", L"", WS_TABSTOP | ES_NUMBER | ES_AUTOHSCROLL, RemotePort);
+        local_edit = control(L"EDIT", L"8888", WS_TABSTOP | ES_NUMBER | ES_AUTOHSCROLL, LocalPort);
         password_edit = control(L"EDIT", L"", WS_TABSTOP | ES_PASSWORD | ES_AUTOHSCROLL, Password);
         SendMessageW(server_edit, EM_SETLIMITTEXT, 253, 0);
         SendMessageW(remote_edit, EM_SETLIMITTEXT, 5, 0);
         SendMessageW(local_edit, EM_SETLIMITTEXT, 5, 0);
         SendMessageW(password_edit, EM_SETLIMITTEXT, 4096, 0);
+        if (!smoke) {
+            const auto saved = gateway_gui::load_settings(gateway_gui::settings_path());
+            SetWindowTextW(server_edit, saved.server.c_str());
+            SetWindowTextW(remote_edit, saved.server_port.c_str());
+            SetWindowTextW(local_edit, saved.local_port.c_str());
+            SetWindowTextW(password_edit, saved.password.c_str());
+        }
         button = control(L"BUTTON", L"启动网关", WS_TABSTOP | BS_DEFPUSHBUTTON, Connect);
         count_text = control(L"STATIC", L"已接入 0 台 Citra", 0);
         state_text = control(L"STATIC", L"网关未启动", 0);
@@ -366,6 +374,9 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         return 0;
     case WM_CLOSE:
         smoke_log("WM_CLOSE");
+        if (!smoke && !closing && !gateway_gui::save_settings(gateway_gui::settings_path(),
+            {text(server_edit), text(remote_edit), text(local_edit), text(password_edit)}))
+            MessageBoxW(h, L"无法保存输入设置，请检查本机用户配置目录的写入权限。", L"设置未保存", MB_OK | MB_ICONWARNING);
         closing = true; backend.stop(); update(); return 0;
     case WM_DESTROY:
         smoke_log("WM_DESTROY");

@@ -9,7 +9,7 @@ try {
     $cxx='G:/msys64/mingw64/bin/g++.exe'
     & $cxx @flags '-c' 'tests/test_backend.cpp' '-o' "$out/test_backend.o"
     if ($LASTEXITCODE) { throw 'test compilation failed' }
-    $objects=@(Get-ChildItem -LiteralPath $out -Filter '*.o' | Where-Object { $_.BaseName -notin @('main','cli_main','test_gateway') } | ForEach-Object { "$out/$($_.Name)" })
+    $objects=@(Get-ChildItem -LiteralPath $out -Filter '*.o' | Where-Object { $_.BaseName -notin @('main','cli_main','test_gateway','test_settings','app_res') } | ForEach-Object { "$out/$($_.Name)" })
     & $cxx '-pipe' '-static' '-static-libgcc' '-static-libstdc++' @objects 'G:/msys64/mingw64/lib/libzstd.a' '-lws2_32' '-lwinmm' '-liphlpapi' '-o' "$out/backend-tests.exe"
     if ($LASTEXITCODE) { throw 'test link failed' }
     & "$out/backend-tests.exe"

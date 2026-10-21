@@ -38,6 +38,12 @@ try {
     $names = @('citra_protocol','room_protocol','room_session','transport','identity','trace','control','gateway','backend','control_bytes','control_crypto','control_ldn_ctrl','control_map','control_state','control_uds_frames','control_heartbeat','enet_callbacks','enet_compress','enet_host','enet_list','enet_packet','enet_peer','enet_protocol','enet_unix','enet_win32')
     $core = @($names | ForEach-Object { "$out/$_.o" })
     $originalObjects = @()
+    Compile-Test ($flags + @('-c','tests/test_settings.cpp','-o',"$out/test_settings.o"))
+    Compile-Test ($link + @('-municode',"$out/test_settings.o",'-lshell32','-lcrypt32','-o',"$out/settings-tests.exe"))
+    $settingsFile = "$out/settings-test-$([guid]::NewGuid().ToString('N')).ini"
+    foreach ($mode in @('write','read-clear','read-empty')) {
+        Run-Test "$out/settings-tests.exe" "$mode $settingsFile" "settings-$mode"
+    }
     foreach ($unit in @(@('original_room',"$original/network/room.cpp"),@('original_packet',"$original/network/packet.cpp"),@('original_verify',"$original/network/verify_user.cpp"),@('citra_session','../citra-room/src/session.cpp'))) {
         $obj = "$out/$($unit[0]).o"
         Compile-Test ($flags + @('-c',$unit[1],'-o',$obj))

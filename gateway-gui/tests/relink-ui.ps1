@@ -8,6 +8,8 @@ try {
     if ($LASTEXITCODE) { throw 'UI compilation failed' }
     $names=@('citra_protocol','room_protocol','room_session','transport','identity','trace','control','gateway','backend','control_bytes','control_crypto','control_ldn_ctrl','control_map','control_state','control_uds_frames','control_heartbeat','enet_callbacks','enet_compress','enet_host','enet_list','enet_packet','enet_peer','enet_protocol','enet_unix','enet_win32')
     $objects=@($names | ForEach-Object { "$out/$_.o" })
-    & $cxx '-pipe' '-static' '-static-libgcc' '-static-libstdc++' '-Wl,--no-insert-timestamp' '-mwindows' '-municode' "$out/main.o" @objects 'G:/msys64/mingw64/lib/libzstd.a' '-lws2_32' '-lwinmm' '-liphlpapi' '-lcomctl32' '-lgdi32' '-o' "$out/XXGU-Gateway/XXGU-Gateway.exe"
+    & 'G:/msys64/mingw64/bin/windres.exe' --include=res res/app.rc -O coff -o "$out/app_res.o"
+    if ($LASTEXITCODE) { throw 'UI resources failed' }
+    & $cxx '-pipe' '-static' '-static-libgcc' '-static-libstdc++' '-Wl,--no-insert-timestamp' '-mwindows' '-municode' "$out/main.o" "$out/app_res.o" @objects 'G:/msys64/mingw64/lib/libzstd.a' '-lws2_32' '-lwinmm' '-liphlpapi' '-lcomctl32' '-lgdi32' '-lshell32' '-lcrypt32' '-o' "$out/XXGU-Gateway/XXGU-Gateway.exe"
     if ($LASTEXITCODE) { throw 'UI link failed' }
 } finally { Pop-Location }

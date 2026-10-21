@@ -13,7 +13,7 @@ try {
     $original = '../../01052024-yuzu-mirror-master/src'
     $flags = @('-pipe','-std=c++20','-O2','-Wall','-Wextra','-Wpedantic','-finput-charset=UTF-8','-fexec-charset=UTF-8','-DNOMINMAX','-DWIN32_LEAN_AND_MEAN','-DFMT_HEADER_ONLY','-Iinclude','-I../citra-gateway/include','-I../citra-room/include','-I../citra-control/include','-I../room-client/include','-I../room-transport/include','-I../room-transport/support/include',"-I$enet/include","-I$fmt/include","-I$original",'-IG:/msys64/mingw64/include')
     $link = @('-pipe','-static','-static-libgcc','-static-libstdc++','-Wl,--no-insert-timestamp')
-    $tail = @('G:/msys64/mingw64/lib/libzstd.a','-lws2_32','-lwinmm','-liphlpapi')
+    $tail = @('G:/msys64/mingw64/lib/libzstd.a','-lws2_32','-lwinmm','-liphlpapi','-lcrypt32')
     function Compile([string]$tool, [string[]]$arguments) {
         & $tool @arguments
         if ($LASTEXITCODE -ne 0) { throw "Compiler failed: $($arguments -join ' ')" }
@@ -64,7 +64,7 @@ try {
     if ($RunTests) {
         & './tests/verify.ps1'
     }
-    $inputs = @('src/backend.cpp','src/main.cpp','include/gateway_gui/backend.hpp','build.ps1','USER-GUIDE.md') + @($units | ForEach-Object { $_[1] })
+    $inputs = @('src/backend.cpp','src/main.cpp','include/gateway_gui/backend.hpp','include/gateway_gui/settings.hpp','build.ps1','USER-GUIDE.md') + @($units | ForEach-Object { $_[1] })
     $hashes = @($inputs | Sort-Object -Unique | ForEach-Object { [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash.ToLower()} })
     [pscustomobject]@{version='V335';executable_sha256=(Get-FileHash -LiteralPath "$package/XXGU-Gateway.exe").Hash.ToLower();inputs=$hashes} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$out/artifacts.json" -Encoding UTF8
     python package.py

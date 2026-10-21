@@ -8,7 +8,7 @@ here = Path(__file__).resolve().parents[1]
 out = here / '.build-desktop'
 package = out / 'XXGU-Gateway'
 manifest = json.loads((package / 'BUILD-MANIFEST.json').read_text())
-with ZipFile(out / 'XXGU-Gateway-V334-win64.zip') as archive:
+with ZipFile(out / f"XXGU-Gateway-{manifest['version']}-win64.zip") as archive:
     assert archive.testzip() is None
     exe = archive.read('XXGU-Gateway/XXGU-Gateway.exe')
     assert sha256(exe).hexdigest() == manifest['executable_sha256']
