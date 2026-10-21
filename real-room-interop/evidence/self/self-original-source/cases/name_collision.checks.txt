@@ -1,0 +1,19 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS name_collision_server_frame_count :: count=1
+PASS name_collision_no_join_success
+PASS name_collision_bytes_exact :: actual=08 expected=08
+PASS name_collision_observed_decodes
+PASS name_collision_observed_is_server_error
+PASS name_collision_observed_id :: got NameCollision
+PASS name_collision_observed_server_version :: got 0
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 12776)=127.0.0.1:39576(pid=12776)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE wall_ms=37
+NOTE command_line=build-mingw/real_room_self_server.exe --name rri-self-name_collision --description real-room-interop --port 39576 --password pw1 --slots 8 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes

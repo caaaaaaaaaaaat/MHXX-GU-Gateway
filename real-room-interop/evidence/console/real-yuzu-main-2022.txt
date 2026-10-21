@@ -1,0 +1,168 @@
+﻿SERVER IDENTITY: path=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe bytes=2017792 sha256=5175d6a108b022fe47c793fb3a57c2f26a7c1404a0f71827f464586963d8778a
+SERVER IDENTITY ACCEPTED: tag=yuzu-main-2022 build_id=2022-09-24 main build 7edc31be2 (source compared line by line) source_compared=true
+BIND GATE: allowed=true loopback_only=false inject=false reason=binary cannot bind a single address (empty Room::Create address -> ENet ENET_HOST_ANY 0.0.0.0); allowed only by -AllowWildcardBind
+REAL MODE: yuzu-main-2022 (C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe), protocol=v1, cases=all, wildcard_bind_authorized=true
+NOTE: the room server is a separate child process; stdout/stderr are captured to files and the port is checked before/after the run.
+CASE bind_gate              protocol=v1 server=yuzu-main-2022           checks=10 failed=0 ms=9 PASS
+    NOTE static evidence from the binaries themselves; no room server was started
+    NOTE wall_ms=9
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe
+CASE join                   protocol=v1 server=yuzu-main-2022           checks=22 failed=0 ms=1601 PASS
+    NOTE assigned_fake_ip=c0 a8 0e ce
+    NOTE release_ms=0
+    NOTE wall_ms=1672
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-join --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39573(pid=42204)
+    NOTE server_ready_via=ready-marker
+CASE version_mismatch       protocol=v1 server=yuzu-main-2022           checks=14 failed=0 ms=1 PASS
+    NOTE wall_ms=35
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-version_mismatch --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39574(pid=14072)
+    NOTE server_ready_via=ready-marker
+CASE wrong_password         protocol=v1 server=yuzu-main-2022           checks=14 failed=0 ms=0 PASS
+    NOTE wall_ms=43
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-wrong_password --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39575(pid=18384)
+    NOTE server_ready_via=ready-marker
+CASE name_collision         protocol=v1 server=yuzu-main-2022           checks=17 failed=0 ms=1 PASS
+    NOTE wall_ms=36
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-name_collision --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39576(pid=39248)
+    NOTE server_ready_via=ready-marker
+CASE ip_collision           protocol=v1 server=yuzu-main-2022           checks=18 failed=0 ms=0 PASS
+    NOTE wall_ms=37
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-ip_collision --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39577(pid=27600)
+    NOTE server_ready_via=ready-marker
+CASE room_full              protocol=v1 server=yuzu-main-2022           checks=19 failed=0 ms=1 PASS
+    NOTE capacity=2
+    NOTE wall_ms=45
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-room_full --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 2 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39578(pid=42556)
+    NOTE server_ready_via=ready-marker
+CASE release                protocol=v1 server=yuzu-main-2022           checks=18 failed=0 ms=1 PASS
+    NOTE release_elapsed_ms=0
+    NOTE capacity=2
+    NOTE wall_ms=42
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-release --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 2 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39579(pid=3052)
+    NOTE server_ready_via=ready-marker
+CASE m2_parity              protocol=v1 server=yuzu-main-2022           checks=14 failed=0 ms=6 PASS
+    NOTE m2_transport_does_not_expose_raw_wire_bytes; raw capture comes from the dedicated raw client in this harness
+    NOTE wall_ms=50
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-m2_parity --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=no
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39580(pid=38488)
+    NOTE server_ready_via=ready-marker
+CASE port_conflict          protocol=v1 server=yuzu-main-2022           checks=12 failed=0 ms=5001 PASS
+    NOTE second_launch_outcome=refused error=room server did not report 'Room is open' within 5000 ms; stdout tail:  ; stderr tail: [   0.000044] Network <Error> dedicated_room\yuzu_room.cpp:main:290: preferred-game-id not set!
+
+This should get set to allow users to find your room.
+
+Set with --preferred-game-id id
+
+[   0.000045] Network <Error> dedicated_room\yuzu_room.cpp:main:305: Ban list file not set!
+
+This should get set to load and save room ban list.
+
+Set with --ban-list-file <file>
+
+[   0.000047] Network <Info> dedicated_room\yuzu_room.cpp:main:310: Token is empty: Hosting a private room
+
+[   0.000665] Network <Info> dedicated_room\yuzu_room.cpp:main:364: Failed to create room:
+    NOTE wall_ms=5044
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-port_conflict --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39581(pid=27880)
+    NOTE server_ready_via=ready-marker
+CASE family_isolation       protocol=v1 server=yuzu-main-2022           checks=14 failed=0 ms=0 PASS
+    NOTE sent v1 JoinRequest with citra network_version=4; server_version in response must be the v1 value 1
+    NOTE wall_ms=38
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-family_isolation --room-description real-room-interop --preferred-game RealRoomInterop --port 39582 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39582(pid=1648)
+    NOTE server_ready_via=ready-marker
+CASE proxy_route            protocol=v1 server=yuzu-main-2022           checks=17 failed=0 ms=378 PASS
+    NOTE routing is by destination IPv4 only (room.cpp:853-868)
+    NOTE dest_ip=c0 a8 50 b3
+    NOTE wall_ms=414
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-proxy_route --room-description real-room-interop --preferred-game RealRoomInterop --port 39583 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39583(pid=38360)
+    NOTE server_ready_via=ready-marker
+CASE proxy_broadcast        protocol=v1 server=yuzu-main-2022           checks=16 failed=0 ms=365 PASS
+    NOTE broadcast = every member except the sender (room.cpp:840-852)
+    NOTE wall_ms=400
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-proxy_broadcast --room-description real-room-interop --preferred-game RealRoomInterop --port 39584 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39584(pid=3260)
+    NOTE server_ready_via=ready-marker
+CASE dataplane_size         protocol=v1 server=yuzu-main-2022           checks=13 failed=0 ms=252 PASS
+    NOTE MaxMessageSize=500 applies to chat only (room.cpp:944-945); the data plane forwards a 1200-byte LDN payload intact
+    NOTE wall_ms=289
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-dataplane_size --room-description real-room-interop --preferred-game RealRoomInterop --port 39585 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39585(pid=35524)
+    NOTE server_ready_via=ready-marker
+CASE chat_limit             protocol=v1 server=yuzu-main-2022           checks=15 failed=0 ms=256 PASS
+    NOTE wall_ms=319
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-chat_limit --room-description real-room-interop --preferred-game RealRoomInterop --port 39586 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39586(pid=19328)
+    NOTE server_ready_via=ready-marker
+CASE unjoined_source        protocol=v1 server=yuzu-main-2022           checks=12 failed=0 ms=390 PASS
+    NOTE VERIFIED FACT (V-016): the room forwarded data from a peer that never joined (no sender validation); frame_bytes_exact=yes
+    NOTE record-only case: the room neither validates sender membership nor that local_ip equals the sender's fake IP (room.cpp:815-871)
+    NOTE wall_ms=433
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-unjoined_source --room-description real-room-interop --preferred-game RealRoomInterop --port 39587 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39587(pid=3172)
+    NOTE server_ready_via=ready-marker
+CASE error_order            protocol=v1 server=yuzu-main-2022           checks=33 failed=0 ms=1 PASS
+    NOTE contested_ip=c0 a8 68 e4
+    NOTE each client above breaks two rules at once; the observed byte is the highest-priority failing check, not the last one
+    NOTE wall_ms=46
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-error_order --room-description real-room-interop --preferred-game RealRoomInterop --port 39588 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39588(pid=40864)
+    NOTE server_ready_via=ready-marker
+CASE fixture_bytes          protocol=v1 server=yuzu-main-2022           checks=19 failed=0 ms=1 PASS
+    NOTE m2_fixture_path=../room-client/fixtures/join-success.hex
+    NOTE m2_fixture_frames=2
+    NOTE m2_fixture_room_information_fields=name=R slots=4 port=24872 preferred_game=GU members=1 nickname=Test fake_ip=c0a80102
+    NOTE m2_fixture_fake_ip=c0 a8 01 02
+    NOTE observed_join_success=02 c0 a8 01 02
+    NOTE observed_room_information=03 00 00 00 16 72 72 69 2d 72 65 61 6c 2d 66 69 78 74 75 72 65 5f 62 79 74 65 73 00 00 00 11 72 65 61 6c 2d 72 6f 6f 6d 2d 69 6e 74 65 72 6f 70 00 00 00 04 9a a5 00 00 00 0f 52 65 61 6c 52 6f 6f 6d 49 6e 74 65 72 6f 70 00 00 00 00 00 00 00 01 00 00 00 06 72 72 69 2d 74 31 c0 a8 01 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    NOTE room_information_first_difference_offset=4
+    NOTE room_information_first_difference_reason=the M2 fixture room is named "R" (port 24872) and holds one synthetic member whose game info is already set, while this real room carries its own name (first differing byte is the room name length) and broadcasts RoomInformation before JoinSuccess, so no SetGameInfo can be reflected yet; JoinSuccess is pinned to the fixture instead by requesting the fixture's fake IP as the preferred IP
+    NOTE comparison uses the bytes that crossed the wire and the bytes stored in the M2 fixture file; no frame is decoded and re-encoded before comparing
+    NOTE wall_ms=37
+    NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-fixture_bytes --room-description real-room-interop --preferred-game RealRoomInterop --port 39589 --max_members 4 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39589(pid=32344)
+    NOTE server_ready_via=ready-marker
+RESULT mode=real protocol=v1 server=yuzu-main-2022 cases=19 failed=0 elapsed_ms=9255

@@ -1,0 +1,15 @@
+[   0.000051] Network <Error> dedicated_room\yuzu_room.cpp:main:297: preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+[   0.000052] Network <Error> dedicated_room\yuzu_room.cpp:main:315: Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+[   0.000053] Network <Info> dedicated_room\yuzu_room.cpp:main:320: Token is empty: Hosting a private room
+[   0.005178] Network <Info> dedicated_room\yuzu_room.cpp:main:377: Room is open. Close with Q+Enter...
+[   3.394324] Network <Info> network\room.cpp:SendStatusMessage:755: [127.0.0.1] rri-obs-a has joined.
+[   4.928467] Network <Info> network\room.cpp:SendStatusMessage:755: [127.0.0.1] rri-obs-b has joined.
+[  12.929495] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-obs-b has left.
+[  13.395528] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-obs-a has left.
+[  13.950246] Network <Info> network\room.cpp:SendStatusMessage:755: [127.0.0.1] rri-obs-c has joined.
+[  21.952288] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-obs-c has left.
+[  21.952288] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-obs-c has left.

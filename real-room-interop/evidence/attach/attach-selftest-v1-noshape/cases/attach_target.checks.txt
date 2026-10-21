@@ -1,0 +1,7 @@
+PASS attach_target_is_loopback :: 127.0.0.1:39811
+PASS attach_listening_before_first_case :: 127.0.0.1:39811(pid=39688)
+PASS attach_listening_after_last_case :: 127.0.0.1:39811(pid=39688)
+NOTE server_is_inventory=false; the V-017 inventory check is skipped on purpose
+NOTE attach_wildcard_endpoint=false
+NOTE target_started_by_this_run=false; the server outlives this run, so no port-release check is meaningful here
+NOTE case set: the v4/v1 client-side cases only; server-configured cases are listed as skipped in summary.json

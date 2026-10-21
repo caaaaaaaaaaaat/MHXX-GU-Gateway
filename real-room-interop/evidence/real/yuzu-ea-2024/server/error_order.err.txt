@@ -1,0 +1,11 @@
+[   0.000042] Network <Error> dedicated_room\yuzu_room.cpp:main:297: preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+[   0.000043] Network <Error> dedicated_room\yuzu_room.cpp:main:315: Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+[   0.000044] Network <Info> dedicated_room\yuzu_room.cpp:main:320: Token is empty: Hosting a private room
+[   0.004329] Network <Info> dedicated_room\yuzu_room.cpp:main:377: Room is open. Close with Q+Enter...
+[   0.021678] Network <Info> network\room.cpp:SendStatusMessage:755: [127.0.0.1] rri-c1 has joined.
+[   0.022383] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-c1 has left.
+[   0.022383] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-c1 has left.

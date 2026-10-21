@@ -1,0 +1,12 @@
+preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+
+Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+
+token is empty: Hosting a private room
+
+Room is open. Close with Q+Enter...
+

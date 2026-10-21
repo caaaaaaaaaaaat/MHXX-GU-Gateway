@@ -1,0 +1,20 @@
+PASS transport_state_joined :: state=Joined failure=
+PASS transport_room_information_present
+PASS transport_assigned_ip_present
+PASS transport_no_server_error
+PASS transport_room_name_matches :: got=rri-real-m2_parity
+PASS transport_host_live
+PASS transport_left :: state=Idle
+PASS transport_observes_wrong_password :: server_error=WrongPassword
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 12272)=127.0.0.1:39580(pid=12272)
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=0 expected_extra=1
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE m2_transport_does_not_expose_raw_wire_bytes; raw capture comes from the dedicated raw client in this harness
+NOTE wall_ms=50
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39580 --room-name rri-real-m2_parity --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=no
+NOTE server_bind_endpoints=127.0.0.1:39580(pid=12272)
+NOTE server_ready_via=ready-marker

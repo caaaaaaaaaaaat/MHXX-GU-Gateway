@@ -1,0 +1,3 @@
+[   0.004208] Network <Info> network/room.cpp:SendStatusMessage:789: [127.0.0.1] rri-a1 has joined.
+[   0.004591] Network <Info> network/room.cpp:SendStatusMessage:792: [127.0.0.1] rri-a1 has left.
+[   0.004591] Network <Info> network/room.cpp:SendStatusMessage:792: [127.0.0.1] rri-a1 has left.

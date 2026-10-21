@@ -1,0 +1,20 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS chat_received_by_other_member :: count=1
+PASS chat_nickname :: got=rri-a1
+PASS chat_truncated_to_max_message_size_500 :: got=500
+PASS chat_not_echoed_to_sender :: count=0
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 36768)=127.0.0.1:39586(pid=36768)
+PASS server_log_reports_member_join :: join_success_frames=2 log_joined_lines=2
+PASS no_third_party_peer :: log_joined_lines=2 captured_join_success_frames=2 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE wall_ms=425
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39586 --room-name rri-real-chat_limit --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE server_bind_endpoints=127.0.0.1:39586(pid=36768)
+NOTE server_ready_via=ready-marker

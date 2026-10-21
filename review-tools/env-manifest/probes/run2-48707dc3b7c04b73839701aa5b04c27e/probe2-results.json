@@ -1,0 +1,72 @@
+﻿[
+    {
+        "name":  "P35b-tiny-88byte-max-sections",
+        "verdict":  "len=88 secCount=0xFFFF code=0 out=probes\\run2-48707dc3b7c04b73839701aa5b04c27e\\p35b.json",
+        "detail":  "invalid|truncated_section_table|exec_status=invalid_pe"
+    },
+    {
+        "name":  "P36b-tiny-88byte-huge-optional",
+        "verdict":  "len=88 optSize=0xFFF0 code=0 out=probes\\run2-48707dc3b7c04b73839701aa5b04c27e\\p36b.json",
+        "detail":  "invalid|truncated_optional_header|exec_status=invalid_pe"
+    },
+    {
+        "name":  "P40-very-long-input-path",
+        "verdict":  "len=4007 code=1 msg=使用“1”个参数调用“GetFullPath”时发生异常:“指定的路径或文件名太长，或者两者都太长。完全限定文件名必须少于 260 个字符，并且目录名必须少于 248 个字符。”",
+        "detail":  "NO_OUTPUT_FILE"
+    },
+    {
+        "name":  "P41-NUL.exe-device-input",
+        "verdict":  "code=0 msg=probes\\run2-48707dc3b7c04b73839701aa5b04c27e\\p41.json",
+        "detail":  "not_provided|unknown|exec_status=missing"
+    },
+    {
+        "name":  "P42-AUX.exe-device-input",
+        "verdict":  "code=0 msg=probes\\run2-48707dc3b7c04b73839701aa5b04c27e\\p42.json",
+        "detail":  "not_provided|unknown|exec_status=missing"
+    },
+    {
+        "name":  "P43-NUL.json-output",
+        "verdict":  "code=0 extExists=False extLen=0 normalTestPath=False",
+        "detail":  "Win32 reserved-name quirk: file is really written via normal File.Open; normal-path Test-Path maps to NUL device"
+    },
+    {
+        "name":  "P44-output-through-junction",
+        "verdict":  "code=1 msg=OUTPUT_REPARSE_POINT_REJECTED",
+        "detail":  "rejected=True outsideFile=False"
+    },
+    {
+        "name":  "P45-input-through-junction",
+        "verdict":  "code=1 msg=INPUT_REPARSE_POINT_REJECTED",
+        "detail":  "rejected=True"
+    },
+    {
+        "name":  "P46-output-through-dir-symlink-to-CWindows",
+        "verdict":  "UNTESTED",
+        "detail":  "symlink create failed (privilege?): 此操作需要管理员权限。"
+    },
+    {
+        "name":  "P47-embedded-NUL-char-input",
+        "verdict":  "code=1 msg=使用“1”个参数调用“IsPathRooted”时发生异常:“路径中具有非法字符。”",
+        "detail":  "NO_OUTPUT_FILE"
+    },
+    {
+        "name":  "P48-whitespace-input",
+        "verdict":  "code=1 msg=INPUT_EXTENSION_MUST_BE_.EXE",
+        "detail":  "NO_OUTPUT_FILE"
+    },
+    {
+        "name":  "P49-drive-enumeration",
+        "verdict":  "drives=C:\\=Fixed,D:\\=Fixed,E:\\=Fixed,F:\\=Fixed,G:\\=Fixed",
+        "detail":  "networkMappedCount=0"
+    },
+    {
+        "name":  "P50-source-hashes",
+        "verdict":  "copiedCollector=F16D103612C54964C24BF4668A748195215FF43F9EBF77C6EAB9F7149337A1A8",
+        "detail":  "origCollector=F16D103612C54964C24BF4668A748195215FF43F9EBF77C6EAB9F7149337A1A8 origTests=6883F252A518BF2CD6012142A134E2AE0D7BC3284BBB6FBAF919EFCBCFF8C31B"
+    },
+    {
+        "name":  "P51-review-timestamp",
+        "verdict":  "reviewedUtc=2026-10-14T14:08:54.4015597Z",
+        "detail":  "localNow=2026-10-14T22:08:54.4025592+08:00"
+    }
+]

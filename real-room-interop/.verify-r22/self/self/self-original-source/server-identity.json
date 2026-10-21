@@ -1,0 +1,19 @@
+{
+  "tool": "real-room-interop",
+  "server_tag": "self-original-source",
+  "server_exe": "build-mingw/real_room_self_server.exe",
+  "server_exe_bytes": 7949058,
+  "server_exe_sha256": "414d7187607e77176dcc263c55a022aa345a8d826905fe728c8df56211a3172c",
+  "build_id": "in-tree original source (unmodified 01052024-yuzu-mirror-master)",
+  "source_compared": true,
+  "protocol": "v1",
+  "loopback_only": true,
+  "allow_wildcard_bind": false,
+  "ready_marker": "SELF_SERVER_READY",
+  "injected_bind_address": false,
+  "cases_total": 18,
+  "cases_failed": 0,
+  "elapsed_ms": 8275,
+  "loopback_only_observed": true,
+  "observed_bind_endpoints": []
+}

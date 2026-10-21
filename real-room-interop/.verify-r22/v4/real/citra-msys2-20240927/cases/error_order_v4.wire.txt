@@ -1,0 +1,13 @@
+# scenario=error_order_v4 protocol=v4 server=citra-msys2-20240927 ok=1 ms=1
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent
+A C2S t=0 ch=0 reliable len=52 01 00 00 00 06 72 72 69 2d 61 31 00 00 00 0a 63 6f 6e 73 6f 6c 65 2d 61 31 ff ff ff ff ff ff 00 00 00 01 00 00 00 09 70 77 31 2d 77 72 6f 6e 67 00 00 00 00
+A S2C t=0 ch=0 reliable len=1 0a
+B C2S t=1 ch=0 reliable len=42 01 00 00 00 02 72 72 00 00 00 0a 63 6f 6e 73 6f 6c 65 2d 62 31 ff ff ff ff ff ff 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+B S2C t=1 ch=0 reliable len=1 07
+D C2S t=0 ch=0 reliable len=46 01 00 00 00 06 72 72 69 2d 64 31 00 00 00 0a 63 6f 6e 73 6f 6c 65 2d 64 31 00 1f 32 be 52 3f 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+D S2C t=0 ch=0 reliable len=1 08
+E C2S t=0 ch=0 reliable len=46 01 00 00 00 06 72 72 69 2d 65 31 00 00 00 0a 63 6f 6e 73 6f 6c 65 2d 63 31 ff ff ff ff ff ff 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+E S2C t=0 ch=0 reliable len=1 0d
+C C2S t=0 ch=0 reliable len=46 01 00 00 00 06 72 72 69 2d 63 31 00 00 00 0a 63 6f 6e 73 6f 6c 65 2d 63 31 ff ff ff ff ff ff 00 00 00 04 00 00 00 03 70 77 31 00 00 00 00
+C S2C t=0 ch=0 reliable len=122 03 00 00 00 17 72 72 69 2d 72 65 61 6c 2d 65 72 72 6f 72 5f 6f 72 64 65 72 5f 76 34 00 00 00 11 72 65 61 6c 2d 72 6f 6f 6d 2d 69 6e 74 65 72 6f 70 00 00 00 08 9a 9d 00 00 00 0f 52 65 61 6c 52 6f 6f 6d 49 6e 74 65 72 6f 70 00 00 00 00 00 00 00 01 00 00 00 06 72 72 69 2d 63 31 00 1f 32 be 52 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+C S2C t=0 ch=0 reliable len=7 02 00 1f 32 be 52 3f

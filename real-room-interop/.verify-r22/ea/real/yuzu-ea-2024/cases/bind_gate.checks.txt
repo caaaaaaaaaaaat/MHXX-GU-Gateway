@@ -1,0 +1,13 @@
+PASS yuzu_main_2022_has_no_bind_option :: no --bind-address in the binary
+PASS yuzu_ea_2024_has_bind_option
+PASS citra_room_has_no_bind_option
+PASS yuzu_main_2022_refused_by_default :: binary has no --bind-address option, so it would listen on 0.0.0.0; refusing without -AllowWildcardBind
+PASS yuzu_ea_2024_allowed_and_injected :: binary supports --bind-address: injecting --bind-address 127.0.0.1
+PASS yuzu_main_2022_allowed_with_allow_wildcard :: binary cannot bind a single address (empty Room::Create address -> ENet ENET_HOST_ANY 0.0.0.0); allowed only by -AllowWildcardBind
+PASS citra_room_refused_by_default :: binary has no --bind-address option, so it would listen on 0.0.0.0; refusing without -AllowWildcardBind
+PASS citra_room_allowed_with_allow_wildcard :: binary cannot bind a single address (empty Room::Create address -> ENet ENET_HOST_ANY 0.0.0.0); allowed only by -AllowWildcardBind
+PASS explicit_wildcard_arg_refused_by_default :: args bind 0.0.0.0 which is not 127.0.0.1; -AllowWildcardBind is required
+PASS explicit_loopback_arg_allowed :: args pin the room to 127.0.0.1
+NOTE static evidence from the binaries themselves; no room server was started
+NOTE wall_ms=9
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe

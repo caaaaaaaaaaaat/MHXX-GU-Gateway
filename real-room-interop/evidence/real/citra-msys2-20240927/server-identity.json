@@ -1,0 +1,19 @@
+{
+  "tool": "real-room-interop",
+  "server_tag": "citra-msys2-20240927",
+  "server_exe": "F:\\citra mul\\citra-windows-msys2-20240927-608383e\\citra-room.exe",
+  "server_exe_bytes": 5902336,
+  "server_exe_sha256": "15eb1d9d6c7423bd9f446828abf49c1d82299339bc7bc80caba292c3f826779d",
+  "build_id": "citra msys2 20240927-608383e (source NOT compared)",
+  "source_compared": false,
+  "protocol": "v4",
+  "loopback_only": false,
+  "allow_wildcard_bind": true,
+  "ready_marker": "Room is open",
+  "injected_bind_address": false,
+  "cases_total": 11,
+  "cases_failed": 0,
+  "elapsed_ms": 6559,
+  "loopback_only_observed": false,
+  "observed_bind_endpoints": ["0.0.0.0:39572 pid=49400", "0.0.0.0:39573 pid=45368", "0.0.0.0:39574 pid=48056", "0.0.0.0:39575 pid=45112", "0.0.0.0:39576 pid=49448", "0.0.0.0:39577 pid=39940", "0.0.0.0:39578 pid=50080", "0.0.0.0:39579 pid=46900", "0.0.0.0:39580 pid=43284", "0.0.0.0:39581 pid=48860"]
+}

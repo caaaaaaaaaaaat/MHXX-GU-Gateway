@@ -1,0 +1,8 @@
+[   0.000050] Network <Error> dedicated_room\yuzu_room.cpp:main:290: preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+[   0.000052] Network <Error> dedicated_room\yuzu_room.cpp:main:305: Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+[   0.000053] Network <Info> dedicated_room\yuzu_room.cpp:main:310: Token is empty: Hosting a private room
+[   0.001316] Network <Info> dedicated_room\yuzu_room.cpp:main:367: Room is open. Close with Q+Enter...

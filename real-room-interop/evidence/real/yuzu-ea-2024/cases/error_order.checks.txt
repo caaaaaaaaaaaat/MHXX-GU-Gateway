@@ -1,0 +1,40 @@
+PASS connect_password
+PASS password_before_version_server_frame_count :: count=1
+PASS password_before_version_no_join_success
+PASS password_before_version_bytes_exact :: actual=0b expected=0b
+PASS password_before_version_observed_decodes
+PASS password_before_version_observed_is_server_error
+PASS password_before_version_observed_id :: got WrongPassword
+PASS password_before_version_observed_server_version :: got 0
+PASS connect_nickname
+PASS nickname_before_version_server_frame_count :: count=1
+PASS nickname_before_version_no_join_success
+PASS nickname_before_version_bytes_exact :: actual=08 expected=08
+PASS nickname_before_version_observed_decodes
+PASS nickname_before_version_observed_is_server_error
+PASS nickname_before_version_observed_id :: got NameCollision
+PASS nickname_before_version_observed_server_version :: got 0
+PASS connect_c
+PASS join_success_c
+PASS connect_ip
+PASS ip_before_version_server_frame_count :: count=1
+PASS ip_before_version_no_join_success
+PASS ip_before_version_bytes_exact :: actual=09 expected=09
+PASS ip_before_version_observed_decodes
+PASS ip_before_version_observed_is_server_error
+PASS ip_before_version_observed_id :: got IpCollision
+PASS ip_before_version_observed_server_version :: got 0
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 19168)=127.0.0.1:39588(pid=19168)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE contested_ip=c0 a8 4e c0
+NOTE each client above breaks two rules at once; the observed byte is the highest-priority failing check, not the last one
+NOTE wall_ms=55
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39588 --room-name rri-real-error_order --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE server_bind_endpoints=127.0.0.1:39588(pid=19168)
+NOTE server_ready_via=ready-marker

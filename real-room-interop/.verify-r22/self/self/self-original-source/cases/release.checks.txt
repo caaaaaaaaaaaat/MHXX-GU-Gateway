@@ -1,0 +1,22 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS third_client_rejected_server_frame_count :: count=1
+PASS third_client_rejected_no_join_success
+PASS third_client_rejected_bytes_exact :: actual=0d expected=0d
+PASS connect_d
+PASS join_success_d
+PASS rejected_and_disconnected_slot_reclaimed_within_bound :: joined=1 elapsed_ms=1
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 42904)=127.0.0.1:39579(pid=42904)
+PASS server_log_reports_member_join :: join_success_frames=3 log_joined_lines=3
+PASS no_third_party_peer :: log_joined_lines=3 captured_join_success_frames=3 expected_extra=0
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE release_elapsed_ms=1
+NOTE capacity=2
+NOTE wall_ms=36
+NOTE command_line=build-mingw/real_room_self_server.exe --name rri-self-release --description real-room-interop --port 39579 --password pw1 --slots 2 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes

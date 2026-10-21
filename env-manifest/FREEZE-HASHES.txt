@@ -1,0 +1,31 @@
+# crossplay/env-manifest frozen hash manifest
+# Frozen by: environment-manifest collector agent (owner of crossplay/env-manifest/**)
+# Freeze UTC timestamp: 2026-10-14T14:04:13.0474775Z
+# Host shell used: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+# Host PowerShell version: 5.1.22621.5624 (.NET Framework; Windows PowerShell)
+# Algorithm: SHA256, hex lowercase
+#
+# Exact command used to produce every hash row below (run from the workspace root
+# "G:\抛瓦饮料\跨平台联机"):
+#   $base = 'G:\抛瓦饮料\跨平台联机'
+#   $files = @( 'crossplay\env-manifest\Collect-EnvironmentManifest.ps1', ... )
+#   foreach ($rel in $files) {
+#     $h = (Get-FileHash -LiteralPath (Join-Path $base $rel) -Algorithm SHA256).Hash.ToLowerInvariant()
+#     "$h|" + (Get-Item -LiteralPath (Join-Path $base $rel)).Length + "|$rel"
+#   }
+# Format of every row below:  <sha256>|<size_bytes>|<path relative to G:\抛瓦饮料\跨平台联机>
+#
+# [SOURCE] the complete tool source set (2 files)
+f16d103612c54964c24bf4668a748195215ff43f9ebf77c6eab9f7149337a1a8|14005|crossplay\env-manifest\Collect-EnvironmentManifest.ps1
+6883f252a518bf2cd6012142a134e2ae0d7bc3284bbb6fbaf919efcbcff8c31b|18788|crossplay\env-manifest\tests\Run-Tests.ps1
+#
+# [EVIDENCE] generated artifacts retained inside the tree as run evidence
+b6d2b14c4af1b0f010e09260bc2c9456d7d22071208863b2099b983a7cc11e0f|8843|crossplay\env-manifest\tests\artifacts\run-4b40ec393d8748fdb93184224156dbfd\test-results.json
+d7e5110b0930a5fe46a3be48dff604b4e5e373c013170a089f60eb2861325ffe|8843|crossplay\env-manifest\tests\artifacts\run-ddc3326a164f422e91bb0ffc42a22b1f\test-results.json
+902f6cc19e8036707b01a56fe613bc00d95a24a0ec4281afa9ceae73ee272c98|8843|crossplay\env-manifest\tests\artifacts\run-f56aa26e5d6144609cd34efad8fd437a\test-results.json
+974134da627c226f3de509350fd8824c8e25bda32dfad2fe051f71e079f372fb|9730|crossplay\env-manifest\output\environment-manifest.json
+43a8e58efa6ca0c0005430d5acf3532c79e6d7ddbcf85dd9464bc98f88eebedd|10433|crossplay\env-manifest\output\sample-populated.json
+#
+# This file does not hash itself. Its own SHA256 is recorded in
+# docs/env-manifest-report.md (and can be recomputed with:
+#   Get-FileHash -LiteralPath 'crossplay\env-manifest\FREEZE-HASHES.txt' -Algorithm SHA256).

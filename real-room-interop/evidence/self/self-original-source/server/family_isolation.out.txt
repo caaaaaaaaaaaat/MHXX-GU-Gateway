@@ -1,0 +1,2 @@
+SELF_SERVER_READY room=rri-self-family_isolation bind=127.0.0.1 port=39582 slots=8 password=(set)
+SELF_SERVER_STOPPED

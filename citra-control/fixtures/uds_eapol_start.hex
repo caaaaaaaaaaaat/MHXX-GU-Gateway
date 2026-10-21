@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# citra-control hand-written synthetic golden - NOT a capture, ROM dump or save file.
+#
+# frame: LLC(EAPoL 0x888E, 8 bytes) followed by EAPoLStartPacket (0x30).
+#   magic 0x0201 | association_id 0x0003 | unknown 0x0001 | pad 0x0000
+#   node: friend_code_seed 0x0000000000000000
+#         username 10 x u16_be = PLAYER1 then five NUL code units
+#         pad 0x00000000 | network_node_id 0x0002 | pad 0x000000000000
+# total length 56 bytes (0x38)
+frame = aa aa 03 00 00 00 88 8e 02 01 00 03 00 01 00 00 00 00 00 00 00 00 00 00 00 50 00 4c 00 41 00 59 00 45 00 52 00 31 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00 00 00 00

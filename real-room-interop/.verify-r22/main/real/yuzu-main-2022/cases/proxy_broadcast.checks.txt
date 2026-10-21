@@ -1,0 +1,23 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS broadcast_reached_member_b :: count=1 hex=05 01 c0 a8 cf 2b 13 88 01 c0 a8 63 63 13 89 03 01 00 00 00 18 7a 81 88 8f 96 9d a4 ab b2 b9 c0 c7 ce d5 dc e3 ea f1 f8 ff 06 0d 14 1b
+PASS broadcast_reached_member_c :: count=1
+PASS broadcast_not_echoed_to_sender :: count=0
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 41212)=0.0.0.0:39584(pid=41212)
+PASS server_log_reports_member_join :: join_success_frames=3 log_joined_lines=3
+PASS no_third_party_peer :: log_joined_lines=3 captured_join_success_frames=3 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE broadcast = every member except the sender (room.cpp:840-852)
+NOTE wall_ms=409
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-proxy_broadcast --room-description real-room-interop --preferred-game RealRoomInterop --port 39584 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39584(pid=41212)
+NOTE server_ready_via=ready-marker

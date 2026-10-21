@@ -1,0 +1,1013 @@
+﻿{
+    "schema":  1,
+    "files":  [
+                  {
+                      "path":  "vendor/enet-1.3.18.tar.gz",
+                      "sha256":  "37381831c5ccbb41c3c71e867203fee847670f67717f297f930290d18985ad5f"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/.github/workflows/cmake.yml",
+                      "sha256":  "239f1e9e895cfd6b828010d56dbe1e5f24a0e85cdb4cd93fcabb5a8f8685d33c"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/callbacks.c",
+                      "sha256":  "0d42c2a191c7d22ed0da2b14617b958cce2efd2a185b3aef9fe51a0fb6704ba2"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/ChangeLog",
+                      "sha256":  "9809c36bbbf725ee072039590e50b3decbe09621563c21a8370eb522fc5c4944"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/CMakeLists.txt",
+                      "sha256":  "cf62987f6d3d936e2d1fa6c5a40d266f218accb4a99ca8d650da14f529ee7f0b"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/compress.c",
+                      "sha256":  "6af9da787bf5aaeb44befcf4e4a822d6e4d0972279bac73004f628bf06788774"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/configure.ac",
+                      "sha256":  "f1d238805070bfbdec08d7d517a3795e62685bda94a22911211fe5a1373878dc"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/docs/design.dox",
+                      "sha256":  "8f585611da934b246932ca786e2dd9acfb380044b752d805be360c123865c67c"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/docs/FAQ.dox",
+                      "sha256":  "215f8aba15290ceb298fca2188ce2dd1f6ad9dfea71c960250fd31fa12070e4b"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/docs/install.dox",
+                      "sha256":  "80f6a04cc1e5afffc0a5ecd5a23196211469f5e40b40a28ddea05943b1c296af"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/docs/license.dox",
+                      "sha256":  "5d54b300b7cdd64b99df61ad290567a73799873c3e7dd8e80db1089ed559a570"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/docs/mainpage.dox",
+                      "sha256":  "52e3dd9245bb81ce6360995e83edd1ed135eab57115c3a378b50817172c7d4f4"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/docs/tutorial.dox",
+                      "sha256":  "b1e758701964b8ed01d13131da9170d229c1de22c466b49756cd592b370f6d0f"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/Doxyfile",
+                      "sha256":  "4e4f82f1e7e470b33e47a498d4ee5d6a1fc57ce686d3756d3ddfc9973e095458"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/DoxygenLayout.xml",
+                      "sha256":  "ec4edca623a06ee3a33222db87f932c1cc2343acd94850091ccacd8236acf9d5"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/enet.dsp",
+                      "sha256":  "e616f4088ce8fcb38efd2372b6264d01f37241bdec4ccf461a297e3a0782a0e4"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/enet_dll.cbp",
+                      "sha256":  "5f1f789e47651f950c26f091e791b89ff981d931b3cac42592640a9df7d352cb"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/host.c",
+                      "sha256":  "396e27689fe5ad6cc88d3a96fb93fa274f951663fe2f627391ab8f48a6d95830"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/callbacks.h",
+                      "sha256":  "20b3d8834bd19b77d9e8b6bcef4cd6fccb9875a4c1cdb0e5f7881b1b285c8d16"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/enet.h",
+                      "sha256":  "1780a6ecc27574a207438639869573f4e417bffc9c95f48a95837a887fad9acf"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/list.h",
+                      "sha256":  "845120efb4ad1633eb2f61c8d8f5529b33de2170152779bc6046ac0453cab46b"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/protocol.h",
+                      "sha256":  "32de2a7e94e7dcfdf1b9fae2e4cde44f2e44ef49e9a1c4a9dac2165289da281f"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/time.h",
+                      "sha256":  "808d5c402c908c14afd0df385855a1b8713e5f69a04008c341a70928647d3e6e"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/types.h",
+                      "sha256":  "543482db06a0086983641f550effec827e0ccf722667d4e1956cc92cb074dca6"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/unix.h",
+                      "sha256":  "c37171b9f5f37e813059f6e37f247d32ae96037b6f2165d743fc757c6ea80c83"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/utility.h",
+                      "sha256":  "5f9f3b9f5110d6a0e4be94bcf7950031985c278b49c922f637074e30784fc392"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/include/enet/win32.h",
+                      "sha256":  "4d16a2c8301570fc54264bfe7bfb4b8bdbf86e2a1d8a6e047633e6fd79d4964f"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/libenet.pc.in",
+                      "sha256":  "00f3fcb315a33c8fe3860bdcacf5d25a46f5ac38e93e77f91ebae94fda2d9c84"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/LICENSE",
+                      "sha256":  "a29cd246638974da7c6edf423a0a69d4a6f7d759940b7cfa9a2bc3442ac3834c"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/list.c",
+                      "sha256":  "c5350bfa7b7d3cc49fa4b2ebab92e359995e4b1ca47c2c17b0fa338dad87e5a4"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/m4/.keep",
+                      "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/Makefile.am",
+                      "sha256":  "bf0d7504c810cff4ab8e4c0ad000a4e7835d4ad8fcb3aaa5914baa7f5f9d6266"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/packet.c",
+                      "sha256":  "cfa444c3bf8460a1a14909166b08efc2cf82112b4368011814396d6d09a3bce7"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/peer.c",
+                      "sha256":  "a967be4d6b03e8059838587f6f0e13fe092109121f51bec4ed039721ddc1a157"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/premake4.lua",
+                      "sha256":  "5a85499504e4be9187baf1baecbca1be5a4933ade0eea5b19cc7016e4bcd668b"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/protocol.c",
+                      "sha256":  "5f9bf575cef8c36a24687e4f4c2fd2f2d2f57232350816376a18f50b4a328095"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/README",
+                      "sha256":  "30355fcc7dba245ab2462f17cd7ef9ba5eb141ef055cea36972480b66cd879eb"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/unix.c",
+                      "sha256":  "eb901bc255150fdf867b4a71419b1b233e5bb0858abf298da282320a2fa02045"
+                  },
+                  {
+                      "path":  "vendor/enet-2662c0de09e36f2a2030ccc2c528a3e4c9e8138a/win32.c",
+                      "sha256":  "bf36d2239b6fe5c779d84605c44f0fbeb48330a0a8ea26006a1af0c7ee7cb6f0"
+                  },
+                  {
+                      "path":  "vendor/fmt-10.2.1.tar.gz",
+                      "sha256":  "1723f27eed50e751037f49dcdf73e33b17658f1178ea1c1f829a30bb02335745"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.clang-format",
+                      "sha256":  "2f571c8a846242630c03a81d97c0d892e22be0c0e954847cd184ae80028508ff"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/dependabot.yml",
+                      "sha256":  "10da898d9aa5980cd70b1eb83ba4af32251f4d43685c90bf2af23c434d47fe72"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/issue_template.md",
+                      "sha256":  "4d08044b5a6819592c7ff5cfaaae6c9f0259fb3de6d779a27dfe12523bfe7c58"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/pull_request_template.md",
+                      "sha256":  "4547e593fddf1cd9df97eb380f41a27176afac43cacd3cf793274e0fb8c4d6f6"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/cifuzz.yml",
+                      "sha256":  "c1a10ff002a8a5633f96be7a16ba105e7948675db5f29ffd42d1b96f494a41a0"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/doc.yml",
+                      "sha256":  "fabc31f98d24397a4700d8ff351415ff49de97b1523f710d404f5ab3ca242a43"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/lint.yml",
+                      "sha256":  "c78f512dad97ea6c1563755ca43c08545b74bc4914ec2f2cbd1a14ce8c235917"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/linux.yml",
+                      "sha256":  "cc434d4c42784c23e67cb25d85dfdc09e3f7446fc0d92629a77ac245806e812f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/macos.yml",
+                      "sha256":  "08cc895c1bf72208973d9bcd6495181c3c4c325df97f96c23985f7a3f540daaf"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/scorecard.yml",
+                      "sha256":  "a1c6b3f6bcc44b5bfa2d3d48b707bc12e7d5a90a93dc4cfd857be777e2828bc5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.github/workflows/windows.yml",
+                      "sha256":  "c11edb04a1912a298a63608c3d81994a060642cb179aae4a5f74bf1bf6f53047"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/.gitignore",
+                      "sha256":  "7020b55a6d78b3c6f1ca4ebd79e8ca78a4189ba74304172a6a7a2c2cb6d7e12b"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/ChangeLog.md",
+                      "sha256":  "c719372f390c04bbb8c0e74ad673ae59ee35a1b955bb37a87b4ef1bee774713f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/CMakeLists.txt",
+                      "sha256":  "17b1dace7784dce06b97942af57a1ed385a58c0a3d8008e4219b1a957bbbcd37"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/CONTRIBUTING.md",
+                      "sha256":  "be39c4f99e35a65dc2212867fc13a58478c0591e2e1e523cc07a9e77a0c681f3"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_static/bootstrap.min.js",
+                      "sha256":  "60c6bec0033a424572cfdf7da1d5fb94f4719286006a7f2cb9e76ee24d99babf"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_static/breathe.css",
+                      "sha256":  "0b77c07b1dee940c15de038d1c33a6e7c0f7b7287e69b4d57a149abc2c5a44dd"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_static/fonts/glyphicons-halflings-regular.eot",
+                      "sha256":  "f495f34e4f177cf0115af995bbbfeb3fcabc88502876e76fc51a4ab439bc8431"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_static/fonts/glyphicons-halflings-regular.svg",
+                      "sha256":  "d168d50a88c730b4e6830dc0da2a2b51dae4658a77d9619943c27b8ecfc19d1a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_static/fonts/glyphicons-halflings-regular.ttf",
+                      "sha256":  "bd18efd3efd70fec8ad09611a20cdbf99440b2c1d40085c29be036f891d65358"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_static/fonts/glyphicons-halflings-regular.woff",
+                      "sha256":  "fc969dc1c6ff531abcf368089dcbaf5775133b0626ff56b52301a059fc0f9e1e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_templates/layout.html",
+                      "sha256":  "229e10dd7a17d7d2c6dca10b9213b713d7beffa697c45ddb193788d6a898bb23"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/_templates/search.html",
+                      "sha256":  "cca09ab69e3df514a678f7424419cfd87f5a008de270f6ef73a7e74bd04cf9c6"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/api.rst",
+                      "sha256":  "e945506661e6cffb3bb375737dbb4031a860046d5b99ee1d65ae9644a2aac627"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/basic-bootstrap/layout.html",
+                      "sha256":  "7f8a09d0da266e50bea4cff38709d0f8a28c874efd007d9d3e10cc1311352a5d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/basic-bootstrap/README",
+                      "sha256":  "38ab9c9b7143bfcefda25cded266e36d998bb0ea0107f8f4ed4138cc65de5955"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/basic-bootstrap/theme.conf",
+                      "sha256":  "e96582b1973ede0a49ff99fbda6a39eef816135655ade6877590b3b08e088578"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/alerts.less",
+                      "sha256":  "8752cb6b680b0e8fa285e4ae835add72bf1a32f9ec50981fe540dfa29efcbd59"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/badges.less",
+                      "sha256":  "d6031ff921184f84603675aa8805dc49a0e153e86b7518522d74e63f23c74449"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/bootstrap.less",
+                      "sha256":  "bfa65ee52a2ad303eb040845a12bee61ce94addbdd4bfdcefc995274c714901b"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/breadcrumbs.less",
+                      "sha256":  "1cc333c9046b9d4e9c77f00f4e55051954fa5f4f7e0e5e313a3f86a1c1105bfc"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/button-groups.less",
+                      "sha256":  "4555d7328878db95e7d0e18c739ae53a8c5ad4f3f13f397367dc4987b527c93c"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/buttons.less",
+                      "sha256":  "eb1eda217d72709ffd9a40eb8c5f369374f92f67da771eb57a0e0a2fb26a619f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/carousel.less",
+                      "sha256":  "cbf1318f043510361804876e82c24c1be215ba9a0740d7aef74a74f595cb7efa"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/close.less",
+                      "sha256":  "2fd6f373ff01b2a9390c0188dfce1b5daf9a9dade3d2dd3bd54c8e162b552162"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/code.less",
+                      "sha256":  "c95264fc75f2eb08c79db7b897a9d1276181d9a44c00f0a03e52e01b32f05ee5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/component-animations.less",
+                      "sha256":  "e939f4d9361dbda882fe9b55321a7621fd6b9de588256b279da0e31951f5063a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/dropdowns.less",
+                      "sha256":  "794259db97813f7c4891f997d2455b41e523cb365d2fee4f26cb2e7e18819564"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/forms.less",
+                      "sha256":  "0a0447254cb06be606593b5b856061d6e6d8cc79833ea009b5b2424c93711da9"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/glyphicons.less",
+                      "sha256":  "9eb7afd3a350be6212439cc87c8968e2ec7d633bc1ca420382a241865cf6790a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/grid.less",
+                      "sha256":  "25b2c2b08b37220d575821fee45f653c1c5d6f4af2c0cf3e46240fd4f6a83949"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/input-groups.less",
+                      "sha256":  "f66a363daafa4d9b7a8b99e20248d15dd344979ff9df11dd71e5fe1402687545"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/jumbotron.less",
+                      "sha256":  "0fed801dc908191a60d0a93b57d5798cfed07c5c08d3b38135bd31065e01533a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/labels.less",
+                      "sha256":  "faafe8a60b7492091a64a2abe957ad14b332c750794fca80e4f0ca5ed2db636f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/list-group.less",
+                      "sha256":  "c753e483cb591d3f4b3c0f6623534132a06589f452f6bc25303ca00a2870cdc4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/media.less",
+                      "sha256":  "8d70a75870be691446355a67bf6979760ea343d57f8382a907a43dec875ab732"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins.less",
+                      "sha256":  "c95ae6ac3bb9eaf321e005ce3b7f4f7e036c57b32bdf03d14462b648cf281b0f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/alerts.less",
+                      "sha256":  "71c8c0b6e22a2d4167a6ef5407c0efdf45de3d461fc577db768cd6ec062adad4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/background-variant.less",
+                      "sha256":  "3162642add99709b0e31dbf4f9553cd8011136f5ab3cb780a9b51468896061a5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/border-radius.less",
+                      "sha256":  "e69871b5803835bb67df40d9e172a1548e3903488ca31afc6568683e5985c928"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/buttons.less",
+                      "sha256":  "cb34013e037e8b3acb576a551614ef4887d7ba24af2187ebb41a30fedd32908d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/center-block.less",
+                      "sha256":  "42a5bfd1e72a04ce62dc2cb9f2f0f5fc2468893cbcbc7eb9cfc07d8be7205213"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/clearfix.less",
+                      "sha256":  "755e6753a82607893d65e40036ba1ebc69a55bbdcbd3925a826967acf2ed725b"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/forms.less",
+                      "sha256":  "88ac5cb8c5ba5fc009d9d65ab72decd0d34cf8706eb83327566761ae6aecd192"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/gradients.less",
+                      "sha256":  "d5b157b8b8aab78a06c7c4135ae460ebfa41c5b18910f5201227072ccbe34bc0"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/grid.less",
+                      "sha256":  "4fb5dc644bc25c99bd6a761f162e09e652aba9782c45aa4b0f3aca6bbad14318"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/grid-framework.less",
+                      "sha256":  "af38c56d485286efbbe2948b28782b0d5f345297c33e783b30a81f388b110290"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/hide-text.less",
+                      "sha256":  "bb632ae8e91795fd17cf096ebe87995c8e8b57258c11f707a826ed811d6af42c"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/image.less",
+                      "sha256":  "5bc36f8b6451ac063d47c2c0b41c6f788407dd2a002aeb58b6271a869838509f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/labels.less",
+                      "sha256":  "b434d897ac8d38e01d8f48b3b2e1d7b1fe4e5831a76ee874d21d3d89ebe1650c"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/list-group.less",
+                      "sha256":  "cfe0bc7b28fc78f625121566965cd8c5c9c915644e92139709a2dfa2b8fa39d5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/nav-divider.less",
+                      "sha256":  "8043f8d3ab4d8d3cd8635f777d51bd8101b9f0d5017f9920c10da2b7bafd8d4e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/nav-vertical-align.less",
+                      "sha256":  "ab36bdc7fb86b18ba779bb80068d3ae1614e96f6888fe8f06ebfb2038a7ca848"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/opacity.less",
+                      "sha256":  "7e43cf5bd7958467451c6e1c7420ce457f270fdb1e0ab7f703718f4559a5bf9e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/pagination.less",
+                      "sha256":  "143135b97fd2c6a9415d3048b3056f5ade2b03da9230bfb51470a843cc4a40ba"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/panels.less",
+                      "sha256":  "315dc3f8368bd42ea3d2a60d020aff2c3b7b6df9c5d9b4cde0f5e3de52274b4a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/progress-bar.less",
+                      "sha256":  "e3e441c81bfe1f3ce319ee5d40c8c93319ad169913a3155cec86e2e6a400bbe4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/reset-filter.less",
+                      "sha256":  "699ed793530ccf11b1722b2943596c571d341434c64192b4504305137e9a20c9"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/resize.less",
+                      "sha256":  "b6132814f56a8f4385e9d3564f06e318547ca330f5c7c7344886f553d64bdab9"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/responsive-visibility.less",
+                      "sha256":  "e9ebf72582537b98de036b6a06ae243b2b01e7d9c2fe64f27bef14283f2c295d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/size.less",
+                      "sha256":  "731273ad4146e5cc8dcd0c42005b72201e9b7209a9260504262b9675ef833aa3"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/tab-focus.less",
+                      "sha256":  "dee41df40f2fc5fc667099e4bbf45920e7571cd777cf07fe110a7e3c417d8f27"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/table-row.less",
+                      "sha256":  "fbc0a73ea2a8e232f66fbc6684f29d9d2f361f9fbfe2191318606209230fc1b8"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/text-emphasis.less",
+                      "sha256":  "a0851f0cb517506264c9b992d04810c0f1f49d2104429af70bb59541ff823f6b"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/text-overflow.less",
+                      "sha256":  "6aade69b4f606ff0099a4408fda4f5e7ac0dbd96c23739b0c201ac7200e8a8fc"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/mixins/vendor-prefixes.less",
+                      "sha256":  "01ad5a26a0daed71d5e6199508e0486a017d1b504a7bb6bc4fa9efb113bbefac"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/modals.less",
+                      "sha256":  "3625bcdddc2beb21b5d492058b8f547f7f59c51f885fb0e76691c781104053e3"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/navbar.less",
+                      "sha256":  "b4182a2424e86c7b30904e08236614866747cf5fdd577e236d1d58bd21af7da9"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/navs.less",
+                      "sha256":  "ea99b5e866e74642a3ba1ab55a0a53e0e0711e67a8928e8a2471b84edc3e0456"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/normalize.less",
+                      "sha256":  "fe74d9ac9cdec66345262b32169128fb1ff7f4d336aeae596243b65f7f438207"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/pager.less",
+                      "sha256":  "8e7904979425cb356b50cbc9edafae5fb885e5c4310781a81b5bd506f073c09d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/pagination.less",
+                      "sha256":  "9577f96de5be5a2439ad8ae4547ba95c80b49172b1b66fce186f5a1baa351cb0"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/panels.less",
+                      "sha256":  "c553cfc9a3906b4af05f1d89187e9c6f2fe0da098b5cfef8fba6fee0cd55a576"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/popovers.less",
+                      "sha256":  "b358ade752c10001128fdedc8db4b0295ff487d1d82582ac8175e5f879f80398"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/print.less",
+                      "sha256":  "e6d86053a9fc241255758f872a0d458b3dba747b0f780d7ef73b665bd34fce48"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/progress-bars.less",
+                      "sha256":  "81417d06a65ee59b9fabc441cd4f197fe7c7b68a11d5596860f98341a2f3e165"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/responsive-embed.less",
+                      "sha256":  "d98e5144917146bf819ee6c6107ca71812fd39e8c35a2b513a221cee4f0c7cb6"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/responsive-utilities.less",
+                      "sha256":  "82faef37dbded5a6f428e716e0b8f987979279173b1bf56957807569907b17d7"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/scaffolding.less",
+                      "sha256":  "93a3f9f49c1faf4222535cc7fce282b6ef190dfc0a86b7ab9238ba7aeb46a068"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/tables.less",
+                      "sha256":  "e3f64698fd0aeead734d0963566f8331414f9f257cc9ba89636dad09fdeee764"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/theme.less",
+                      "sha256":  "b531887b0dfdfabc6a263024f6a925af2078a43270724878ade1534204755468"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/thumbnails.less",
+                      "sha256":  "87e9879c7e6dec7154d80aa42a86c45ed8876b68a868644ccb9cd6b4a6c53e0e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/tooltip.less",
+                      "sha256":  "244f8dc0192197f086b6bc639296914622215dc2d1af6d13352f07cd53134243"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/type.less",
+                      "sha256":  "e7c5327ecb5ddbbf5639aacdad1bb748230b78d661fbf12aba8a2c9f5381d003"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/utilities.less",
+                      "sha256":  "f6034c1e380bf94417fdc53f9c93bbc67762c6571689e8e974dbbf3c6c97398a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/variables.less",
+                      "sha256":  "1b01409079113487709db2de60da615102539afb09c3c8e0c2a7e4a31b235382"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/bootstrap/wells.less",
+                      "sha256":  "48e8b334504d224e809c60fef66fc28e1f5412bade4b219952b341d0c4b7d7db"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/build.py",
+                      "sha256":  "497dbaca2264b484af4b61f7ad39872265e5b05572bb67c1bc1ef91665cb4974"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/CMakeLists.txt",
+                      "sha256":  "8354477e3743f42063dc6b6ed940f6fcfa56fe67de5956d2c900d87a86186970"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/conf.py",
+                      "sha256":  "ffd02d7719f47e5417c2409bc01d3c6c2b02b62a901f78cf3b27886e7d1e8e8c"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/contents.rst",
+                      "sha256":  "d50e56cc23ea2a4776a8d3a88906d585bf2851aeb0242689168959b0a8075a92"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/fmt.less",
+                      "sha256":  "5572bc269ca2cce02df13b130c4854ac150fda512c30dbd387870291268296fc"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/index.rst",
+                      "sha256":  "fae3dc205bb0ace874e1518e21e37dfb4c34c71c1d26e6f4dfa9e11b03072389"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/python-license.txt",
+                      "sha256":  "dcc4d9738d3e8d3b9f51286f1dc90d0c49ea8325982008ced021932a0b0b0cda"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/syntax.rst",
+                      "sha256":  "414a303ffc42f3e009b995e39aacdae918c8bb1eff023fa1770ca518a13eb7a5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/doc/usage.rst",
+                      "sha256":  "3ad79b7887b0ae5d6edc57fff9e96e4fad737169feb906573e5a9dd74f484236"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/args.h",
+                      "sha256":  "418b645e9022277a5858841c07a3c65237053d45311a8c099573ac517b43d1c2"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/chrono.h",
+                      "sha256":  "a38d6c02f64e2af3684369ad4df6ab88be203a0d4bdfbf51fde542f83546eac9"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/color.h",
+                      "sha256":  "014c9dacc521f9c3768468f46a71545d10da1f3c4a8b826b8596b8a03588a77a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/compile.h",
+                      "sha256":  "69aa4297b42f273bbfacf5c9eebe4b6a26b552d06fb74cd151c47260c37b6850"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/core.h",
+                      "sha256":  "143d591df63db5b20786eb8ca756012e0b7e2c6dab7f002488e2c701e897a91f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/format.h",
+                      "sha256":  "63bd5a34d139bfca1727bfbaf941afbb5751c871adaaa91b77dce58a70723073"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/format-inl.h",
+                      "sha256":  "c390df52884480b131dffd17842af3dde8eae6cd7f1aafda30b63efa369d6e61"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/os.h",
+                      "sha256":  "89b7a98365b90127e11d5e84c2fa58443088164ec9c99ce262ed303a7c197eed"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/ostream.h",
+                      "sha256":  "f839f36281b36ac9e514e4c6d944f6f6699a2101bb36e9d4809aade4bd25ff61"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/printf.h",
+                      "sha256":  "d121c2b5b48f68de396ca3ac5fa32b7c7dd77dd8d8e9684e8604a88756e680e5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/ranges.h",
+                      "sha256":  "87a9911af535273e9f9bed00d6da3083b71eec3491c9a54013258a882342b6f3"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/std.h",
+                      "sha256":  "06467b405f40291f40f26c6e46c15d756254581c397413a77c02b2b7d62dcb41"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/include/fmt/xchar.h",
+                      "sha256":  "e7b39f998679214676059671b9085d2ab2549634ac0e49f8ff94028a1a3e69dc"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/LICENSE",
+                      "sha256":  "07580f2a3b35709ce703d523f447b242f6dfec7582a8c0df102c7fa2849375f8"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/README.md",
+                      "sha256":  "4ec2ba1bb691625cbc1fb9f0fe84b6a5e2238712e2fd8ce8bf16e302c9a013aa"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/src/fmt.cc",
+                      "sha256":  "a7a20b0413289cd030377848f66483a39f18f87ab77f1e8b0a5af49ddcab5ee7"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/src/format.cc",
+                      "sha256":  "b57f3cba7860115d82218d1539eba8126ccbda16be83f0231dc1fd996f1a22b2"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/src/os.cc",
+                      "sha256":  "3c8b7de9a8088092ced498e7e42fca722879a6fcf18317a5efea334468350448"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/Android.mk",
+                      "sha256":  "3bed3cd78eda81bab8836b2ba69da50e88a1781760fb4219a35236bb34b58e6f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/AndroidManifest.xml",
+                      "sha256":  "efe10ca9770cd6e40029ec80966c019e3618764c7da5a864fd6d2e26386e52de"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/bazel/.bazelversion",
+                      "sha256":  "f5da1e44bbd559283a4a4f8f1188fdfaef7ea2e8ec22fdfec81c4a72dc61736a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/bazel/BUILD.bazel",
+                      "sha256":  "829c5d1f1d20a2d79b2f7188cf205a2265fedfbcaa2a5a2245ac422f376ca046"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/bazel/README.md",
+                      "sha256":  "b6ec5b5cd424ea70bdadf50488bddae1e8336e4acba0f0fcee33c4a1107ad772"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/bazel/WORKSPACE.bazel",
+                      "sha256":  "419a00d235dc68ff5915a88c9a8e10c967cc1f27cd674bc58cac70a070bb8200"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/build.gradle",
+                      "sha256":  "761326806692d751cfb7ff2f4f7d4d7c0aa10de6856bba6ceb22dda2582c4c19"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/build-docs.py",
+                      "sha256":  "c8a1fb52538b81a297630161ca8a50932880378b9dabcc32fbc2e4aa9ec7e03a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/C++.sublime-syntax",
+                      "sha256":  "dc918929ddf6994bd0da45bfd619ecfdbd5e77482005dfb2049e1278541e06ac"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/cmake/FindSetEnv.cmake",
+                      "sha256":  "44fa708653778bc92c337fcc976e662f12e4a8efa943b5d0717c714897e34425"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/cmake/fmt.pc.in",
+                      "sha256":  "734b9afb583495c8297b6f4736f2dc780d5075ece0f5fd2aa40e872524437051"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/cmake/fmt-config.cmake.in",
+                      "sha256":  "a7e7ed7e1d21b05b7ba76d8ed6b2d286ef7771fe03dd1d946ece665a35c413fd"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/cmake/JoinPaths.cmake",
+                      "sha256":  "8b7434dd86fdcb38e7ea037da0d3e069a015a439bfc5738f950c2b3cd9d04c9f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/compute-powers.py",
+                      "sha256":  "8277d722c399ece7616a8c43d23f13a61a5789df6759f5689e7a4aa85aa4b30e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/docopt.py",
+                      "sha256":  "ee8a677f71fa3ab35fb456c141d8853a366fe91d5fe73c2f84e7b4d3014f6980"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/manage.py",
+                      "sha256":  "ca47898e54fbd2cbfdc1163a8b2fe6b21ec7be95d36ad9f627ad94083ae8faf4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/printable.py",
+                      "sha256":  "c60d5af1143573bfb0995b36c3de7b56b2d8f8a910fbd7fea58b64bccf95f669"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/README",
+                      "sha256":  "99df194e16daa0f113f65261da812d08d4c69c2c08335744870c3d20880b3908"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/rtd/conf.py",
+                      "sha256":  "5501e7ba6dae96e277a8cfa4bf68269b5d615951f04e5c0ab4afd5ed4764fbfb"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/rtd/index.rst",
+                      "sha256":  "d466aed9423ba45a6a65709687475b6fef7db5c9c35ff8b26d7e98f49bc2de16"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/rtd/theme/layout.html",
+                      "sha256":  "3dfacd74f51054a229898085f710090d1e8000e88c2c66552200b8d8be52df71"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/rtd/theme/theme.conf",
+                      "sha256":  "e96582b1973ede0a49ff99fbda6a39eef816135655ade6877590b3b08e088578"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/support/Vagrantfile",
+                      "sha256":  "4f409a586748af4c34122115d88f5488ab2dd5719c875a18285b39d0aa52f265"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/add-subdirectory-test/CMakeLists.txt",
+                      "sha256":  "724f3726afe9b4897eaf8c4412e1dfc4e670145be135afe6ce343a8f73e40bc4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/add-subdirectory-test/main.cc",
+                      "sha256":  "a1dffad8659518d3afc6ec6a76f0ceeff7a978b73e8ac56229298bdd61723f4e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/args-test.cc",
+                      "sha256":  "0e84c0331ca099c7b42f9241a8b27061b827c711b5b1be159c29a6b771583047"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/assert-test.cc",
+                      "sha256":  "e4ad44e268c093a2b2e3310d249b04aae630376ba7e60be481984b38a08c943d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/chrono-test.cc",
+                      "sha256":  "7e52265032317d07288ede75eeb20a2cd3a5ce6fb55c5230b0d89a7b77b556c2"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/CMakeLists.txt",
+                      "sha256":  "15e0235cb374baed0f3ba833b57e483a723fc98a719d0dd6b0ef1ad4e87fd7b6"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/color-test.cc",
+                      "sha256":  "547f18c0cc6995be479dcb1db5eec2025f3564605f110004b56e45ec8da76283"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/compile-error-test/CMakeLists.txt",
+                      "sha256":  "cc2562cb881b94c9a3d24ace7ecd62f225776ea749895fa63f665862f1220f7e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/compile-fp-test.cc",
+                      "sha256":  "8c82468fb46cd9742df2eca896ed149feba16d27a4ea4036fd8cda24a0559a96"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/compile-test.cc",
+                      "sha256":  "324f76415b19a070885d1463d9ab4edc2cbfb87275ca5081f6613e0013934b85"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/core-test.cc",
+                      "sha256":  "adbeba888f01d177057eae21671e6786f29862de9cc9975f4772891a80adf278"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/cuda-test/CMakeLists.txt",
+                      "sha256":  "164bf731833d3e1f062cc7a592e3400b5a1eba02d11396059630482a9d485b13"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/cuda-test/cpp14.cc",
+                      "sha256":  "eead20f766c7b92118e4270712ab4cd67cd1a1f6e806120eb3b07c9dfe55a54b"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/cuda-test/cuda-cpp14.cu",
+                      "sha256":  "03ca2f1f6da2b7d9b5a72172d8fc266f38bbcdd63b7ab902ceba9bb14a052756"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/detect-stdfs.cc",
+                      "sha256":  "4a90585b1afb17d0b1ff511af66a132b4b946fe0fad5892a52ed3413945d3b37"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/enforce-checks-test.cc",
+                      "sha256":  "81484c31cad7b3495a746887e790c2c0cc77fe0c1252251a47796ca8b8854880"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/find-package-test/CMakeLists.txt",
+                      "sha256":  "8ba32aa78684d9f173b0b2f404cbb2261c64e108e628d2fc63fe0e25c6b8d103"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/find-package-test/main.cc",
+                      "sha256":  "9d18781837ea0373de73f68a6b569033526d4e601e1da0553da42f2d00603383"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/format-impl-test.cc",
+                      "sha256":  "965a1ac1e7c743f12679871c4261183f9cb2b9f8bfce66fa9b0a24f69efc6064"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/format-test.cc",
+                      "sha256":  "6d51a6a155cc972abc05910d9bd052ea04e6d853325053fc2090186541703695"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/.gitignore",
+                      "sha256":  "ee7c3240dcf16788b92c9f7642171be381a8d63184dd45c14024c867de728f99"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/build.sh",
+                      "sha256":  "cdc1e779610dc134c78a1184182bd3d997a14cf2c00b9d7abbef86ff19ffef31"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/chrono-duration.cc",
+                      "sha256":  "6cbec065eaf12e8c1d44bd6d1baac68f69ce263e0ace49f9de7704bbdc8fdc91"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/chrono-timepoint.cc",
+                      "sha256":  "2238b277d8c4248927e7a3278b93246dc1a707171bca31d5de1e38e81db692ca"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/CMakeLists.txt",
+                      "sha256":  "efbe58fd97b6416b8bb0d01ac11b71da4d850f9bdcb7f0f3eb7edacb05f907d1"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/float.cc",
+                      "sha256":  "6bcf73b39b26b59ea2542f64b38104fda54c644c0e918035cb0c990e82672dd8"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/fuzzer-common.h",
+                      "sha256":  "35da4d8f7a86435ffe4e99b12bb9e73c58bdbeec878c8cf9d53272c488281ccd"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/main.cc",
+                      "sha256":  "8328d417518b8dd2203e51c1b0346e9cefc2327a97b124db589937835ec0f1b4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/named-arg.cc",
+                      "sha256":  "7752e1dfd95ccbe29fa3c63492a7697b54c2be63f57ca189e7a0d89989986c5f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/one-arg.cc",
+                      "sha256":  "5e4a8d3dbdeaab85d8731ed66cc35db694a2382806119d57a691246390eb3dc8"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/README.md",
+                      "sha256":  "6fbe23b8a3b185e842167eb39a50b28320634f728743a6747be1f7c28b32139d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/fuzzing/two-args.cc",
+                      "sha256":  "745d0eabf68dda4ed271623dc8ad4dcae265b90e20686215643228e081488ed5"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest/.clang-format",
+                      "sha256":  "abadb738c47dea7e085bb1e16516c55751b715d662447dfaea05c94016bcc85d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest/CMakeLists.txt",
+                      "sha256":  "b508954bc7178a2f365daff7a3745dd4a07b4042dff42bdcffa51af9bdca2f96"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest/gmock/gmock.h",
+                      "sha256":  "8d7cf0d78a345178ae039ba59238ef0fdbb5f082b6708feb8be99ef4a35c2b80"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest/gmock-gtest-all.cc",
+                      "sha256":  "c0e53c5c11fc5bcff518caf46ec940214a17b909911692730c4b7b115d3305ef"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest/gtest/gtest.h",
+                      "sha256":  "879e382a9ffb5e260b39df1e44b8d4d1f8f9ff6ff838567c5915487c9233d55b"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest/gtest/gtest-spi.h",
+                      "sha256":  "bc7de52471740743412a62784af636375d05bf913302c74fc50483f20eff45f4"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest-extra.cc",
+                      "sha256":  "1d81aacc7971e1ac2f377ac3d68da6efd12a750016e58f786f9c7e6629cd48eb"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest-extra.h",
+                      "sha256":  "c8230ddcd9202c63e113c47505977258267a1490263b6f56ec8321bd8a9bf0cc"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/gtest-extra-test.cc",
+                      "sha256":  "4095efe77db5ead4a64b810c8571a110a302eba3810bce3325833c5a4601f5c3"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/header-only-test.cc",
+                      "sha256":  "fcae3bb2de8c48e369ac292541547d779772d47e5b57279a93f1e2281c829413"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/mock-allocator.h",
+                      "sha256":  "ae871f9ad3b3cc1fdde2e251474d8439309f88955852c3a48faedc0f83953f3f"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/module-test.cc",
+                      "sha256":  "6d510a06dcb71d59ec7eb707e5dca3a264e8e2cb70d304f9bdfc956c45677c16"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/noexception-test.cc",
+                      "sha256":  "f9fcb5f1f6ee8b7b75293e807dc484fbc64375d2712fd5b3d90bd6a143ae629e"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/os-test.cc",
+                      "sha256":  "c4ed38ecf9e83841dc172728c37b7c17f3d9668abcee3e9534268fb0e730352d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/ostream-test.cc",
+                      "sha256":  "179d0e4d6938da6a606cb960e45681ecb2eb0a5b5a5226acab39b8e733149f6a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/posix-mock.h",
+                      "sha256":  "89c5e485bffe7c24fc93726749abff4b5fcabcb59cbca956cd684cd3f4776980"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/posix-mock-test.cc",
+                      "sha256":  "0525c262f525e48cb04dbb810a6f3b329e16756ab523247b7df22298d6a2d046"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/printf-test.cc",
+                      "sha256":  "fae10dc57bbf6802b16c488cc5171adb00c33295a66796cda8a92c0d76fd90a7"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/ranges-odr-test.cc",
+                      "sha256":  "64e3b8c8ff2dea9b5dec00aba6622646bdbad83b72cd6f264f365004dae9821d"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/ranges-test.cc",
+                      "sha256":  "274be18a8a12d8854a290d518c4d1ba9af0f216c64abfee92988e51ea2377c05"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/scan.h",
+                      "sha256":  "74d2a0f57c2d30202c325d0347ffb1bb09ecd269f7071d1a962ae99b83f7ffe2"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/scan-test.cc",
+                      "sha256":  "c62467942c1aeec4f50592105487cc3ae701fed69af62c8dba558adee4d2a298"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/static-export-test/CMakeLists.txt",
+                      "sha256":  "f0c081d49590846413b3965283c91c882c85679ec9f90c02f302dbf9f2529caa"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/static-export-test/library.cc",
+                      "sha256":  "c29971cd8eeb091a28906d62c86fe494b10827ac570c2216b26e5fe953d9a592"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/static-export-test/main.cc",
+                      "sha256":  "7d67e1f228ea02492c02e4ab517f1bf19b1b03a675eea559f8c1b0955ea088c8"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/std-test.cc",
+                      "sha256":  "16c45e98d1c98c6e8eadbd569aa0c9d7e0f6ab0609c8ed74db6334012436239a"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/test-assert.h",
+                      "sha256":  "35cbd8af45cc1600ac12108a1cdd43b7d6ed6b5a91817aed5d2e53cf8f60f04c"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/test-main.cc",
+                      "sha256":  "3366e937721943a8ecb9c9a0a9055d8962b156ca27e755f8ed5f2a431987d01c"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/unicode-test.cc",
+                      "sha256":  "e619856880d604a0102733fd9c2412cab0c4b7cbf8990a575331191dc5c1d2ff"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/util.cc",
+                      "sha256":  "81159a3487d4aa98133233548f522d3ed57bc662343e6128f285f9f66d50ecef"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/util.h",
+                      "sha256":  "995f78ab64156e1c1a839448a4f4da839eab83f3370c8a06a54e646a72b97d05"
+                  },
+                  {
+                      "path":  "vendor/fmt-e69e5f977d458f2650bb346dadf2ad30c5320281/test/xchar-test.cc",
+                      "sha256":  "8a0f1a42595483b07ac6832b94ae8cbf6581fa1997ccacd84137bf9af036f371"
+                  },
+                  {
+                      "path":  "vendor/zstd-installed/LICENSE",
+                      "sha256":  "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+                  }
+              ]
+}

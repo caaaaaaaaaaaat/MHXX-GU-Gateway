@@ -1,0 +1,36 @@
+# 构建产物(各模块 build 脚本的输出目录)
+.build*/
+build/
+build-attach/
+build-mingw/
+*-RunGroup/
+
+# 运行时输出与测试工作目录(含递归 junction 的测试产物)
+work/
+output/
+artifacts/
+
+# 第三方上游源码快照(体积大且内嵌独立 git 仓库,不属于本仓库;
+# 获取方式见 README「构建依赖」一节)
+reference/
+
+# 二进制与目标文件
+*.exe
+*.dll
+*.o
+*.obj
+*.a
+*.lib
+*.exp
+
+# 日志
+*.log
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/

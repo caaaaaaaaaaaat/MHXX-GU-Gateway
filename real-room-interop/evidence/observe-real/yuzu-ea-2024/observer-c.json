@@ -1,0 +1,18 @@
+{
+  "tool": "real-room-interop",
+  "mode": "observe",
+  "run_id": "20261014T171948Z-44780",
+  "start_utc": "2026-10-14T17:19:48.154Z",
+  "end_utc": "2026-10-14T17:19:56.157Z",
+  "exe": {"path": "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe", "bytes": 20169061, "sha256": "c7cb8883a615ccebd79afdd802edce51768bfe97492f991ecc1b3c992c9a86a4"},
+  "command_line": "\"G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe\" observe --room 127.0.0.1 --room-port 24930 --password pw1 --nickname rri-obs-c --seconds 8 --out G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-c.json",
+  "protocol": "v1",
+  "via": "raw",
+  "room": {"address": "127.0.0.1", "port": 24930, "nickname": "rri-obs-c", "password_set": true, "loopback_only": true, "local_socket": "127.0.0.1:ephemeral (RawClient binds loopback)"},
+  "decode_failures": 0,
+  "events": [
+    {"t_ms":0,"via":"raw","raw_sha256":"dac00d9b0f1a2c2e3b9c302c2d21045d992f7bf0b8babb7bba7a7d5cc2ae8642","kind":"room_information","room_name":"mhxg","description":"gc","member_slots":8,"room_port":24930,"preferred_game_name":"RealRoomInterop","host_username":"","member_count":1,"members":[{"nickname":"rri-obs-c","fake_ip":"192.168.178.131","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""}]},
+    {"t_ms":0,"via":"raw","raw_sha256":"5332434b009e27b1733dba000399848c7d073890699bf6c997544fe36120e870","kind":"join_success","fake_ip":"192.168.178.131","moderator":false,"room_name":"mhxg","member_slots":8,"room_port":24930}
+  ],
+  "summary": {"exit": 0, "seconds": 8, "events": 2, "join_success": 1, "room_information": 1, "errors": 0, "unknown": 0, "decode_failures": 0, "status": 0, "chat": 0, "proxy": 0, "ldn": 0, "other": 0, "joined": true, "saw_self": true, "self_fake_ip": "192.168.178.131", "max_member_count": 1, "members_seen": ["rri-obs-c"]}
+}

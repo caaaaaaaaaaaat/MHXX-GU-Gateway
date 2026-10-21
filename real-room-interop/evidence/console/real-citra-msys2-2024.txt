@@ -1,0 +1,86 @@
+﻿SERVER IDENTITY: path=F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe bytes=5902336 sha256=15eb1d9d6c7423bd9f446828abf49c1d82299339bc7bc80caba292c3f826779d
+SERVER IDENTITY ACCEPTED: tag=citra-msys2-20240927 build_id=citra msys2 20240927-608383e (source NOT compared) source_compared=false
+BIND GATE: allowed=true loopback_only=false inject=false reason=binary cannot bind a single address (empty Room::Create address -> ENet ENET_HOST_ANY 0.0.0.0); allowed only by -AllowWildcardBind
+REAL MODE: citra-msys2-20240927 (F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe), protocol=v4, cases=all, wildcard_bind_authorized=true
+NOTE: the room server is a separate child process; stdout/stderr are captured to files and the port is checked before/after the run.
+CASE join                   protocol=v4 server=citra-msys2-20240927     checks=23 failed=0 ms=1604 PASS
+    NOTE assigned_mac=00:1f:32:9b:30:96
+    NOTE wall_ms=4842
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-join_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39572 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39572(pid=41420)
+    NOTE server_ready_via=ready-marker
+CASE version_mismatch       protocol=v4 server=citra-msys2-20240927     checks=14 failed=0 ms=1 PASS
+    NOTE sent v1 network_version=1 to the v4 room; the response carries server_version=4, so the two families do not share a version space
+    NOTE wall_ms=33
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-version_mismatch_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39573(pid=39336)
+    NOTE server_ready_via=ready-marker
+CASE wrong_password         protocol=v4 server=citra-msys2-20240927     checks=14 failed=0 ms=0 PASS
+    NOTE wall_ms=33
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-wrong_password_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39574(pid=3952)
+    NOTE server_ready_via=ready-marker
+CASE name_collision         protocol=v4 server=citra-msys2-20240927     checks=17 failed=0 ms=1 PASS
+    NOTE wall_ms=31
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-name_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39575(pid=42496)
+    NOTE server_ready_via=ready-marker
+CASE room_full              protocol=v4 server=citra-msys2-20240927     checks=19 failed=0 ms=1 PASS
+    NOTE capacity=2
+    NOTE wall_ms=33
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-room_full_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 2 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39576(pid=35324)
+    NOTE server_ready_via=ready-marker
+CASE chat                   protocol=v4 server=citra-msys2-20240927     checks=15 failed=0 ms=254 PASS
+    NOTE citra truncates chat at room.cpp:913-914 (MaxMessageSize=500)
+    NOTE wall_ms=314
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-chat_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39577(pid=42632)
+    NOTE server_ready_via=ready-marker
+CASE wifi_route             protocol=v4 server=citra-msys2-20240927     checks=17 failed=0 ms=377 PASS
+    NOTE routing is by destination MAC only (citra room.cpp:876-892)
+    NOTE dest_mac=00:1f:32:8a:d2:ec
+    NOTE wall_ms=410
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-wifi_route_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39578(pid=30856)
+    NOTE server_ready_via=ready-marker
+CASE wifi_broadcast         protocol=v4 server=citra-msys2-20240927     checks=16 failed=0 ms=367 PASS
+    NOTE broadcast = every member except the sender (citra room.cpp:863-875)
+    NOTE wall_ms=423
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-wifi_broadcast_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39579(pid=31976)
+    NOTE server_ready_via=ready-marker
+CASE console_id_collision_v4 protocol=v4 server=citra-msys2-20240927     checks=17 failed=0 ms=1 PASS
+    NOTE same console_id_hash console-a1, different nickname/MAC -> exactly 13
+    NOTE wall_ms=32
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-console_id_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39580(pid=12848)
+    NOTE server_ready_via=ready-marker
+CASE error_order_v4         protocol=v4 server=citra-msys2-20240927     checks=41 failed=0 ms=2 PASS
+    NOTE contested_mac=00:1f:32:cb:74:77
+    NOTE each client above breaks two rules at once; the observed byte is the highest-priority failing check, not the last one
+    NOTE wall_ms=33
+    NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-error_order_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+    NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+    NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+    NOTE server_bind_endpoints=0.0.0.0:39581(pid=22676)
+    NOTE server_ready_via=ready-marker
+RESULT mode=real protocol=v4 server=citra-msys2-20240927 cases=11 failed=0 elapsed_ms=6468

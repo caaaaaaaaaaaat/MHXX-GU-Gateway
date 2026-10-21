@@ -1,0 +1,21 @@
+PASS connect
+PASS version_mismatch_server_frame_count :: count=1
+PASS version_mismatch_no_join_success
+PASS version_mismatch_bytes_exact :: actual=09 00 00 00 04 expected=09 00 00 00 04
+PASS version_mismatch_observed_decodes
+PASS version_mismatch_observed_is_server_error
+PASS version_mismatch_observed_id :: got VersionMismatch
+PASS version_mismatch_observed_server_version :: got 4
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 41988)=0.0.0.0:39573(pid=41988)
+PASS no_third_party_peer :: log_joined_lines=0 captured_join_success_frames=0 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE sent v1 network_version=1 to the v4 room; the response carries server_version=4, so the two families do not share a version space
+NOTE wall_ms=32
+NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-version_mismatch_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39573(pid=41988)
+NOTE server_ready_via=ready-marker

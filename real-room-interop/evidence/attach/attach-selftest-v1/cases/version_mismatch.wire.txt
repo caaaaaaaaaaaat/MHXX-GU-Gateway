@@ -1,0 +1,4 @@
+# scenario=version_mismatch protocol=v1 server=attach-selftest-v1 ok=1 ms=1
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent
+A C2S t=0 ch=0 reliable len=30 01 00 00 00 06 72 72 69 2d 61 31 ff ff ff ff 00 00 00 02 00 00 00 03 70 77 31 00 00 00 00
+A S2C t=1 ch=0 reliable len=5 0a 00 00 00 01

@@ -1,0 +1,5 @@
+# scenario=fixture_bytes protocol=v1 server=yuzu-ea-2024 ok=1 ms=1
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent
+A C2S t=1 ch=0 reliable len=30 01 00 00 00 06 72 72 69 2d 74 31 c0 a8 01 02 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+A S2C t=1 ch=0 reliable len=123 03 00 00 00 16 72 72 69 2d 72 65 61 6c 2d 66 69 78 74 75 72 65 5f 62 79 74 65 73 00 00 00 11 72 65 61 6c 2d 72 6f 6f 6d 2d 69 6e 74 65 72 6f 70 00 00 00 04 9a a5 00 00 00 0f 52 65 61 6c 52 6f 6f 6d 49 6e 74 65 72 6f 70 00 00 00 00 00 00 00 01 00 00 00 06 72 72 69 2d 74 31 c0 a8 01 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+A S2C t=1 ch=0 reliable len=5 02 c0 a8 01 02

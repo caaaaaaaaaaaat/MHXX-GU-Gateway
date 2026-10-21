@@ -1,0 +1,6 @@
+OBSERVE start run_id=20261014T171948Z-44780 nickname=rri-obs-c room=127.0.0.1:24930 via=raw seconds=8
+OBSERVE room_information t_ms=0 member_count=1 room=mhxg slots=8 port=24930
+OBSERVE   member_table member_count=1 room=mhxg
+OBSERVE     member nickname=rri-obs-c fake_ip=192.168.178.131 game= game_id=0 game_version= username= display_name=
+OBSERVE join_success t_ms=0 fake_ip=192.168.178.131 moderator=false room=mhxg slots=8
+OBSERVE_RESULT exit=0 seconds=8 events=2 join_success=1 room_information=1 errors=0 unknown=0 decode_failures=0 status=0 chat=0 proxy=0 ldn=0 other=0 max_member_count=1 saw_self=1 joined=1 members=rri-obs-c

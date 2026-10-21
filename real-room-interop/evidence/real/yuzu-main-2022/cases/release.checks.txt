@@ -1,0 +1,26 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS third_client_rejected_server_frame_count :: count=1
+PASS third_client_rejected_no_join_success
+PASS third_client_rejected_bytes_exact :: actual=0d expected=0d
+PASS connect_d
+PASS join_success_d
+PASS rejected_and_disconnected_slot_reclaimed_within_bound :: joined=1 elapsed_ms=1
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 49700)=0.0.0.0:39579(pid=49700)
+PASS server_log_reports_member_join :: join_success_frames=3 log_joined_lines=3
+PASS no_third_party_peer :: log_joined_lines=3 captured_join_success_frames=3 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE release_elapsed_ms=1
+NOTE capacity=2
+NOTE wall_ms=43
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-release --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 2 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39579(pid=49700)
+NOTE server_ready_via=ready-marker

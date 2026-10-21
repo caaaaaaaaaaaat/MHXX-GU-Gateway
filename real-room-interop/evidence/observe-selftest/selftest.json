@@ -1,0 +1,136 @@
+{
+    "tool":  "real-room-interop",
+    "mode":  "observe-selftest",
+    "server":  "in-tree original source (01052024-yuzu-mirror-master)",
+    "room":  {
+                 "port":  39690,
+                 "slots":  4,
+                 "address":  "127.0.0.1",
+                 "password_set":  true
+             },
+    "observers":  {
+                      "b_seconds":  4,
+                      "a_seconds":  6,
+                      "b":  "rri-obs-b",
+                      "a":  "rri-obs-a",
+                      "b_join_delay_ms":  1500
+                  },
+    "server_command":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_self_server.exe --name rri-observe-self --description observe-self-test --preferred-game RealRoomInterop --port 39690 --password pw1 --slots 4",
+    "server_bound_loopback_only":  true,
+    "checks_total":  22,
+    "checks_failed":  0,
+    "checks":  [
+                   {
+                       "name":  "self_server_ready_by_endpoint",
+                       "ok":  true,
+                       "detail":  "pid=44840 port=39690"
+                   },
+                   {
+                       "name":  "observer_a_exit0",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "observer_b_exit0",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "observer_a_json_written",
+                       "ok":  true,
+                       "detail":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-selftest\\observer-a.json"
+                   },
+                   {
+                       "name":  "observer_b_json_written",
+                       "ok":  true,
+                       "detail":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-selftest\\observer-b.json"
+                   },
+                   {
+                       "name":  "a_joined",
+                       "ok":  true,
+                       "detail":  "joined=True"
+                   },
+                   {
+                       "name":  "a_saw_self",
+                       "ok":  true,
+                       "detail":  "saw_self=True"
+                   },
+                   {
+                       "name":  "a_decode_failures_zero",
+                       "ok":  true,
+                       "detail":  "decode_failures=0"
+                   },
+                   {
+                       "name":  "b_joined",
+                       "ok":  true,
+                       "detail":  "joined=True"
+                   },
+                   {
+                       "name":  "b_saw_self",
+                       "ok":  true,
+                       "detail":  "saw_self=True"
+                   },
+                   {
+                       "name":  "b_decode_failures_zero",
+                       "ok":  true,
+                       "detail":  "decode_failures=0"
+                   },
+                   {
+                       "name":  "a_room_information_seen",
+                       "ok":  true,
+                       "detail":  "count=3"
+                   },
+                   {
+                       "name":  "a_first_room_information_member_count_1",
+                       "ok":  true,
+                       "detail":  "counts=1,2,1"
+                   },
+                   {
+                       "name":  "a_sees_two_members_after_second_join",
+                       "ok":  true,
+                       "detail":  "max_member_count=2"
+                   },
+                   {
+                       "name":  "a_two_member_broadcast_contains_both_nicknames",
+                       "ok":  true,
+                       "detail":  "members=rri-obs-a,rri-obs-b"
+                   },
+                   {
+                       "name":  "a_assigned_fake_ip_matches_member_table",
+                       "ok":  true,
+                       "detail":  "join_success=192.168.132.40 member_table=192.168.132.40"
+                   },
+                   {
+                       "name":  "a_room_name_matches",
+                       "ok":  true,
+                       "detail":  "room_name=rri-observe-self"
+                   },
+                   {
+                       "name":  "b_max_member_count_two",
+                       "ok":  true,
+                       "detail":  "max_member_count=2"
+                   },
+                   {
+                       "name":  "a_members_seen_both",
+                       "ok":  true,
+                       "detail":  "members_seen=rri-obs-a,rri-obs-b"
+                   },
+                   {
+                       "name":  "self_server_graceful_stop",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "self_server_log_reports_two_joins",
+                       "ok":  true,
+                       "detail":  "stderr/stdout contains both has-joined lines"
+                   },
+                   {
+                       "name":  "self_server_port_released",
+                       "ok":  true,
+                       "detail":  "no UDP endpoint for pid=44840 port=39690"
+                   }
+               ],
+    "elapsed_ms":  8760,
+    "note":  "harness self-proof only; it says nothing about real release binaries or G-c"
+}

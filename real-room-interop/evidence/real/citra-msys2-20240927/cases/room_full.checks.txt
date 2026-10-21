@@ -1,0 +1,26 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS room_full_server_frame_count :: count=1
+PASS room_full_no_join_success
+PASS room_full_bytes_exact :: actual=0c expected=0c
+PASS room_full_observed_decodes
+PASS room_full_observed_is_server_error
+PASS room_full_observed_id :: got RoomIsFull
+PASS room_full_observed_server_version :: got 0
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 49448)=0.0.0.0:39576(pid=49448)
+PASS server_log_reports_member_join :: join_success_frames=2 log_joined_lines=2
+PASS no_third_party_peer :: log_joined_lines=2 captured_join_success_frames=2 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE capacity=2
+NOTE wall_ms=34
+NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-room_full_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 2 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39576(pid=49448)
+NOTE server_ready_via=ready-marker

@@ -1,0 +1,47 @@
+{
+    "produced_utc":  "2026-10-14T14:08:10.4241907Z",
+    "collector":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\Collect-EnvironmentManifest.ps1",
+    "run_root":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\probes\\run3-65270c81bb2f4de0bfb17358dfc7d645",
+    "observations":  [
+                         {
+                             "id":  "Q01-default-relative-from-foreign-cwd",
+                             "status":  "PASS",
+                             "detail":  "printed=output\\environment-manifest.json abs=G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\output\\environment-manifest.json leak=False"
+                         },
+                         {
+                             "id":  "Q02-explicit-relative-from-foreign-cwd",
+                             "status":  "PASS",
+                             "detail":  "printed=rel-canary.json abs=True leak=False"
+                         },
+                         {
+                             "id":  "Q03-relative-subdir",
+                             "status":  "PASS",
+                             "detail":  "printed=sub3\\rel.json abs=G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\sub3\\rel.json"
+                         },
+                         {
+                             "id":  "Q04-absolute-inside-prints-relative",
+                             "status":  "PASS",
+                             "detail":  "printed=abs-in.json rooted=False"
+                         },
+                         {
+                             "id":  "Q05-absolute-outside-rejected",
+                             "status":  "PASS",
+                             "detail":  "err=OUTPUT_OUTSIDE_TOOL_TREE"
+                         },
+                         {
+                             "id":  "Q06-force-clobbers-arbitrary-json",
+                             "status":  "FINDING",
+                             "detail":  "reconfirmed on new build; post_len=9730"
+                         },
+                         {
+                             "id":  "Q07-default-no-clobber",
+                             "status":  "PASS",
+                             "detail":  "err=OUTPUT_EXISTS_USE_FORCE"
+                         },
+                         {
+                             "id":  "Q08-no-workspace-root-leak",
+                             "status":  "PASS",
+                             "detail":  "no leaks at workspace root"
+                         }
+                     ]
+}

@@ -1,0 +1,19 @@
+{
+  "tool": "real-room-interop",
+  "server_tag": "yuzu-main-2022",
+  "server_exe": "C:\\Users\\马光述\\AppData\\Local\\yuzu\\yuzu-windows-msvc\\yuzu-room.exe",
+  "server_exe_bytes": 2017792,
+  "server_exe_sha256": "5175d6a108b022fe47c793fb3a57c2f26a7c1404a0f71827f464586963d8778a",
+  "build_id": "2022-09-24 main build 7edc31be2 (source compared line by line)",
+  "source_compared": true,
+  "protocol": "v1",
+  "loopback_only": false,
+  "allow_wildcard_bind": true,
+  "ready_marker": "Room is open",
+  "injected_bind_address": false,
+  "cases_total": 19,
+  "cases_failed": 0,
+  "elapsed_ms": 9540,
+  "loopback_only_observed": false,
+  "observed_bind_endpoints": ["0.0.0.0:39573 pid=37804", "0.0.0.0:39574 pid=34240", "0.0.0.0:39575 pid=41040", "0.0.0.0:39576 pid=39624", "0.0.0.0:39577 pid=42432", "0.0.0.0:39578 pid=42104", "0.0.0.0:39579 pid=18200", "0.0.0.0:39580 pid=36332", "0.0.0.0:39581 pid=41136", "0.0.0.0:39582 pid=42344", "0.0.0.0:39583 pid=27076", "0.0.0.0:39584 pid=41212", "0.0.0.0:39585 pid=41988", "0.0.0.0:39586 pid=41628", "0.0.0.0:39587 pid=30148", "0.0.0.0:39588 pid=42240", "0.0.0.0:39589 pid=40496"]
+}

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# real-room-interop: server arguments for 2022-09-24 main yuzu-room.exe (7edc31be2).
+# Consumed by: real_room_interop.exe real -Protocol v1 -RoomArgsFile config/yuzu-room.args
+# Placeholders substituted per case: {room} {port} {slots} {password} {tag}.
+# This build has NO --bind-address option (confirmed by static inventory AND source), so
+# Room::Create receives an empty bind address and ENet listens on 0.0.0.0. Real mode
+# therefore refuses to start it unless -AllowWildcardBind is given explicitly.
+* = --room-name {room} --room-description real-room-interop --preferred-game RealRoomInterop --port {port} --max_members {slots} --password {password}

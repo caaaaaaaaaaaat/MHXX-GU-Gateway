@@ -1,0 +1,13 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS chat_received_by_other_member :: count=1
+PASS chat_nickname :: got=rri-a1
+PASS chat_truncated_to_max_message_size_500 :: got=500
+PASS chat_not_echoed_to_sender :: count=0
+NOTE wall_ms=261
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39811 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=two free member slots

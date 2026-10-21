@@ -1,0 +1,23 @@
+PASS connect_a
+PASS first_client_joined_with_preferred_ip
+PASS preferred_ip_honoured :: assigned=c0 a8 07 07
+PASS connect_b
+PASS ip_collision_server_frame_count :: count=1
+PASS ip_collision_no_join_success
+PASS ip_collision_bytes_exact :: actual=09 expected=09
+PASS ip_collision_observed_decodes
+PASS ip_collision_observed_is_server_error
+PASS ip_collision_observed_id :: got IpCollision
+PASS ip_collision_observed_server_version :: got 0
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 49308)=127.0.0.1:39577(pid=49308)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE wall_ms=70
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39577 --room-name rri-real-ip_collision --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE server_bind_endpoints=127.0.0.1:39577(pid=49308)
+NOTE server_ready_via=ready-marker

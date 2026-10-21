@@ -1,0 +1,9 @@
+Independent M1 reviewer probe
+Command from workspace root: & ./crossplay/review-tools/m1/build_review.ps1
+Compiler: g++.exe (Rev5, Built by MSYS2 project) 16.1.0
+Exit code: 0
+OBS: noncanonical bool rejected; terminal reason erased by disconnect; Leaving receive rejected; Joining SetGameInfo rejected; LDN/Proxy inner safety and inbound endpoint checks deferred.
+PASS 1266 independent checks (including explicitly labelled gap observations)
+
+Compiled only into this reviewer directory: unchanged original src/network/packet.cpp, read-only M1 src/protocol.cpp and src/session.cpp, own review_m1.cpp. No ENet, Room, emulator runtime, GUI, socket or game instantiated. No original implementer test executable or builds repeated.
+14 compiler warnings came solely from original network/packet.cpp:17,23,89,103,117,188,200,212 (u64/u_long or signed/unsigned conversion). No warnings from M1 or reviewer source. Full warning text was returned by the tool execution; these are warnings, not compile/link failures.

@@ -1,0 +1,25 @@
+mode=attach
+attach_addr=127.0.0.1:39812
+protocol=v4
+server_is_inventory=false
+server_started_by_this_run=false
+not_distribution_evidence=true
+room_name=rri-attach-v4
+slots=8
+endpoints_before=0.0.0.0:39812(pid=41916)
+endpoints_after=0.0.0.0:39812(pid=41916)
+cases_executed=10
+cases_failed=0
+cases_skipped=1
+executed_cases:
+join_v4
+version_mismatch_v4
+wrong_password_v4
+name_collision_v4
+console_id_collision_v4
+error_order_v4
+chat_v4
+wifi_route_v4
+wifi_broadcast_v4
+skipped_cases:
+room_full_v4 :: needs a room this run starts with a known small -slots and fills itself; the foreign room cannot be re-configured without stopping the server under test

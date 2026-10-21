@@ -1,0 +1,7 @@
+# scenario=name_collision protocol=v1 server=attach-selftest-v1 ok=1 ms=25
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent
+A C2S t=1 ch=0 reliable len=30 01 00 00 00 06 72 72 69 2d 61 31 ff ff ff ff 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+A S2C t=13 ch=0 reliable len=132 03 00 00 00 13 72 72 69 2d 61 74 74 61 63 68 2d 73 65 6c 66 74 65 73 74 00 00 00 1d 72 65 61 6c 2d 72 6f 6f 6d 2d 69 6e 74 65 72 6f 70 20 73 65 6c 66 20 73 65 72 76 65 72 00 00 00 08 9b 83 00 00 00 0f 52 65 61 6c 52 6f 6f 6d 49 6e 74 65 72 6f 70 00 00 00 00 00 00 00 01 00 00 00 06 72 72 69 2d 61 31 c0 a8 76 59 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+A S2C t=13 ch=0 reliable len=5 02 c0 a8 76 59
+B C2S t=1 ch=0 reliable len=30 01 00 00 00 06 72 72 69 2d 61 31 ff ff ff ff 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+B S2C t=1 ch=0 reliable len=1 08

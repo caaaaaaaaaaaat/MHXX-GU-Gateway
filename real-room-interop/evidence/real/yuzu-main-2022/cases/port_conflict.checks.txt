@@ -1,0 +1,33 @@
+PASS port_reported_busy_while_room_runs :: port 39581 is present in the UDP endpoint table: 0.0.0.0:39581(pid=49684)
+PASS second_server_refused_on_busy_port :: room server did not report 'Room is open' within 5000 ms; stdout tail:  ; stderr tail: [   0.000061] Network <Error> dedicated_room\yuzu_room.cpp:main:290: preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+[   0.000063] Network <Error> dedicated_room\yuzu_room.cpp:main:305: Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+[   0.000066] Network <Info> dedicated_room\yuzu_room.cpp:main:310: Token is empty: Hosting a private room
+[   0.001038] Network <Info> dedicated_room\yuzu_room.cpp:main:364: Failed to create room:
+PASS connect_a
+PASS join_success_a
+PASS primary_room_still_serves_after_conflict
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 49684)=0.0.0.0:39581(pid=49684)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE second_launch_outcome=refused error=room server did not report 'Room is open' within 5000 ms; stdout tail:  ; stderr tail: [   0.000061] Network <Error> dedicated_room\yuzu_room.cpp:main:290: preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+[   0.000063] Network <Error> dedicated_room\yuzu_room.cpp:main:305: Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+[   0.000066] Network <Info> dedicated_room\yuzu_room.cpp:main:310: Token is empty: Hosting a private room
+[   0.001038] Network <Info> dedicated_room\yuzu_room.cpp:main:364: Failed to create room:
+NOTE wall_ms=5073
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-port_conflict --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39581(pid=49684)
+NOTE server_ready_via=ready-marker

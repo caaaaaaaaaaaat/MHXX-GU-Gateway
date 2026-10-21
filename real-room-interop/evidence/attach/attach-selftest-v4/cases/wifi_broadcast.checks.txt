@@ -1,0 +1,15 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS broadcast_reached_member_b :: count=1 hex=05 00 06 00 1f 32 61 c5 8f ff ff ff ff ff ff 00 00 00 20 7c 87 92 9d a8 b3 be c9 d4 df ea f5 00 0b 16 21 2c 37 42 4d 58 63 6e 79 84 8f 9a a5 b0 bb c6 d1
+PASS broadcast_reached_member_c :: count=1
+PASS broadcast_not_echoed_to_sender :: count=0
+NOTE broadcast = every member except the sender (citra room.cpp:863-875)
+NOTE wall_ms=372
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39812 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=three free member slots

@@ -1,0 +1,21 @@
+PASS connect
+PASS cross_family_version_server_frame_count :: count=1
+PASS cross_family_version_no_join_success
+PASS cross_family_version_bytes_exact :: actual=0a 00 00 00 01 expected=0a 00 00 00 01
+PASS cross_family_version_observed_decodes
+PASS cross_family_version_observed_is_server_error
+PASS cross_family_version_observed_id :: got VersionMismatch
+PASS cross_family_version_observed_server_version :: got 1
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 33104)=0.0.0.0:39582(pid=33104)
+PASS no_third_party_peer :: log_joined_lines=0 captured_join_success_frames=0 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE sent v1 JoinRequest with citra network_version=4; server_version in response must be the v1 value 1
+NOTE wall_ms=37
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-family_isolation --room-description real-room-interop --preferred-game RealRoomInterop --port 39582 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39582(pid=33104)
+NOTE server_ready_via=ready-marker

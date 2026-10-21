@@ -1,0 +1,12 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_unjoined_peer
+NOTE VERIFIED FACT (V-016): the room forwarded data from a peer that never joined (no sender validation); frame_bytes_exact=yes
+NOTE record-only case: the room neither validates sender membership nor that local_ip equals the sender's fake IP (room.cpp:815-871)
+NOTE wall_ms=397
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39811 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=two free member slots

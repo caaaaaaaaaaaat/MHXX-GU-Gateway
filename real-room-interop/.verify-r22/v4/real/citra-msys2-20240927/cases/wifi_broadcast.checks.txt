@@ -1,0 +1,23 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS broadcast_reached_member_b :: count=1 hex=05 00 06 00 1f 32 ab 30 30 ff ff ff ff ff ff 00 00 00 20 7c 87 92 9d a8 b3 be c9 d4 df ea f5 00 0b 16 21 2c 37 42 4d 58 63 6e 79 84 8f 9a a5 b0 bb c6 d1
+PASS broadcast_reached_member_c :: count=1
+PASS broadcast_not_echoed_to_sender :: count=0
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 2424)=0.0.0.0:39579(pid=2424)
+PASS server_log_reports_member_join :: join_success_frames=3 log_joined_lines=3
+PASS no_third_party_peer :: log_joined_lines=3 captured_join_success_frames=3 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE broadcast = every member except the sender (citra room.cpp:863-875)
+NOTE wall_ms=401
+NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-wifi_broadcast_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39579(pid=2424)
+NOTE server_ready_via=ready-marker

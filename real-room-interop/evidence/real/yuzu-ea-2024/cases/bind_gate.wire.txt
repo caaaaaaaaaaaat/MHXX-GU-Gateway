@@ -1,0 +1,2 @@
+# scenario=bind_gate protocol=v1 server=yuzu-ea-2024 ok=1 ms=7
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent

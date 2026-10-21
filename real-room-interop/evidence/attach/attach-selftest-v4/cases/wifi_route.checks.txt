@@ -1,0 +1,17 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS destination_member_received_exactly_one_frame :: count=1
+PASS destination_member_bytes_exact :: actual=05 01 06 00 1f 32 ca fe 1a 00 1f 32 3f 10 24 00 00 00 14 46 51 5c 67 72 7d 88 93 9e a9 b4 bf ca d5 e0 eb f6 01 0c 17
+PASS other_member_received_nothing :: count=0
+PASS sender_received_nothing :: count=0
+NOTE routing is by destination MAC only (citra room.cpp:876-892)
+NOTE dest_mac=00:1f:32:3f:10:24
+NOTE wall_ms=382
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39812 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=three free member slots

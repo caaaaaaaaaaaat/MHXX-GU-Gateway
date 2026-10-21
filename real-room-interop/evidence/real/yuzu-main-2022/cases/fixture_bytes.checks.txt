@@ -1,0 +1,34 @@
+PASS m2_fixture_loaded :: path=../room-client/fixtures/join-success.hex
+PASS m2_fixture_join_success_frame :: bytes=02 c0 a8 01 02
+PASS m2_fixture_room_information_frame :: bytes=75
+PASS m2_fixture_room_information_decodes
+PASS m2_fixture_room_information_fields :: slots=4 port=24872 preferred_game=GU members=1
+PASS connect
+PASS join_success_frame_captured :: server_frames=2
+PASS join_success_bytes_equal_m2_fixture :: observed=02 c0 a8 01 02 m2_fixture=02 c0 a8 01 02
+PASS join_success_assigned_ip_honours_preferred_ip :: observed=02 c0 a8 01 02
+PASS room_information_frame_captured
+PASS room_information_member_slots_matches_capacity :: got=4 capacity=4
+PASS room_information_has_self_with_preferred_ip :: port=39589
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 49372)=0.0.0.0:39589(pid=49372)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE m2_fixture_path=../room-client/fixtures/join-success.hex
+NOTE m2_fixture_frames=2
+NOTE m2_fixture_room_information_fields=name=R slots=4 port=24872 preferred_game=GU members=1 nickname=Test fake_ip=c0a80102
+NOTE m2_fixture_fake_ip=c0 a8 01 02
+NOTE observed_join_success=02 c0 a8 01 02
+NOTE observed_room_information=03 00 00 00 16 72 72 69 2d 72 65 61 6c 2d 66 69 78 74 75 72 65 5f 62 79 74 65 73 00 00 00 11 72 65 61 6c 2d 72 6f 6f 6d 2d 69 6e 74 65 72 6f 70 00 00 00 04 9a a5 00 00 00 0f 52 65 61 6c 52 6f 6f 6d 49 6e 74 65 72 6f 70 00 00 00 00 00 00 00 01 00 00 00 06 72 72 69 2d 74 31 c0 a8 01 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+NOTE room_information_first_difference_offset=4
+NOTE room_information_first_difference_reason=the M2 fixture room is named "R" (port 24872) and holds one synthetic member whose game info is already set, while this real room carries its own name (first differing byte is the room name length) and broadcasts RoomInformation before JoinSuccess, so no SetGameInfo can be reflected yet; JoinSuccess is pinned to the fixture instead by requesting the fixture's fake IP as the preferred IP
+NOTE comparison uses the bytes that crossed the wire and the bytes stored in the M2 fixture file; no frame is decoded and re-encoded before comparing
+NOTE wall_ms=47
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-real-fixture_bytes --room-description real-room-interop --preferred-game RealRoomInterop --port 39589 --max_members 4 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39589(pid=49372)
+NOTE server_ready_via=ready-marker

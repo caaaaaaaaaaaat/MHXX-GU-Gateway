@@ -1,0 +1,14 @@
+PASS connect
+PASS version_mismatch_server_frame_count :: count=1
+PASS version_mismatch_no_join_success
+PASS version_mismatch_bytes_exact :: actual=09 00 00 00 04 expected=09 00 00 00 04
+PASS version_mismatch_observed_decodes
+PASS version_mismatch_observed_is_server_error
+PASS version_mismatch_observed_id :: got VersionMismatch
+PASS version_mismatch_observed_server_version :: got 4
+NOTE sent v1 network_version=1 to the v4 room; the response carries server_version=4, so the two families do not share a version space
+NOTE wall_ms=0
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39812 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=room rejects the wrong network version

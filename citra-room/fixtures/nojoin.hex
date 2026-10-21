@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Offline replay fixture: a server greeting that stops before IdJoinSuccess.
+# Nickname must be "Nick" (see fixtures/join-replay.hex).
+# status_message_hex  room.h:82-88 IdMemberJoin, room.cpp:767-804
+0e 01 00000004 4e69636b 00000004 6e69636b
+# room_information_hex  room.cpp:806-834 (authoritative sender)
+03 00000004 526f6f6d 00000004 44657363 00000004 6128 00000004 47616d65 00000004 486f7374 00000001 00000004 4e69636b 001f32112233 00000004 47616d65 1122334455667788 00000004 686f7374 00000005 486f737479 00000001 75

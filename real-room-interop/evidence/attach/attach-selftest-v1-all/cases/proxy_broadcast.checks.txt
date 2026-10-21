@@ -1,0 +1,15 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS broadcast_reached_member_b :: count=1 hex=05 01 c0 a8 63 a1 13 88 01 c0 a8 63 63 13 89 03 01 00 00 00 18 7a 81 88 8f 96 9d a4 ab b2 b9 c0 c7 ce d5 dc e3 ea f1 f8 ff 06 0d 14 1b
+PASS broadcast_reached_member_c :: count=1
+PASS broadcast_not_echoed_to_sender :: count=0
+NOTE broadcast = every member except the sender (room.cpp:840-852)
+NOTE wall_ms=386
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39811 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=three free member slots

@@ -1,0 +1,15 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS name_collision_server_frame_count :: count=1
+PASS name_collision_no_join_success
+PASS name_collision_bytes_exact :: actual=08 expected=08
+PASS name_collision_observed_decodes
+PASS name_collision_observed_is_server_error
+PASS name_collision_observed_id :: got NameCollision
+PASS name_collision_observed_server_version :: got 0
+NOTE wall_ms=25
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39811 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=room refuses a duplicate nickname

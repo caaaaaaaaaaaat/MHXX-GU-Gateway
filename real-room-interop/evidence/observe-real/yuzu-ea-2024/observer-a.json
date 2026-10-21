@@ -1,0 +1,22 @@
+{
+  "tool": "real-room-interop",
+  "mode": "observe",
+  "run_id": "20261014T171937Z-44824",
+  "start_utc": "2026-10-14T17:19:37.598Z",
+  "end_utc": "2026-10-14T17:19:47.600Z",
+  "exe": {"path": "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe", "bytes": 20169061, "sha256": "c7cb8883a615ccebd79afdd802edce51768bfe97492f991ecc1b3c992c9a86a4"},
+  "command_line": "\"G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe\" observe --room 127.0.0.1 --room-port 24930 --password pw1 --nickname rri-obs-a --seconds 10 --out G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-a.json",
+  "protocol": "v1",
+  "via": "raw",
+  "room": {"address": "127.0.0.1", "port": 24930, "nickname": "rri-obs-a", "password_set": true, "loopback_only": true, "local_socket": "127.0.0.1:ephemeral (RawClient binds loopback)"},
+  "decode_failures": 0,
+  "events": [
+    {"t_ms":1,"via":"raw","raw_sha256":"d1fddad1c22eefbd49e343513bb9fe99758a64938b26ddcc45befe309a5bdfd1","kind":"room_information","room_name":"mhxg","description":"gc","member_slots":8,"room_port":24930,"preferred_game_name":"RealRoomInterop","host_username":"","member_count":1,"members":[{"nickname":"rri-obs-a","fake_ip":"192.168.104.224","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""}]},
+    {"t_ms":1,"via":"raw","raw_sha256":"f84ecb319002a989848877b38cd82b179538693475692f0229db2d914c2b5672","kind":"join_success","fake_ip":"192.168.104.224","moderator":false,"room_name":"mhxg","member_slots":8,"room_port":24930},
+    {"t_ms":1535,"via":"raw","raw_sha256":"60c5df48f8d01741efe65f0018d5c29f4e87e04be520214bf67c1d22b68d47f1","kind":"status","type":1,"type_name":"MemberJoin","nickname":"rri-obs-b","username":""},
+    {"t_ms":1535,"via":"raw","raw_sha256":"0d2f442d130f75983e75702d354ec561ac7965faf7c0e20056eb74f93b79bb1c","kind":"room_information","room_name":"mhxg","description":"gc","member_slots":8,"room_port":24930,"preferred_game_name":"RealRoomInterop","host_username":"","member_count":2,"members":[{"nickname":"rri-obs-a","fake_ip":"192.168.104.224","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""},{"nickname":"rri-obs-b","fake_ip":"192.168.70.36","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""}]},
+    {"t_ms":9537,"via":"raw","raw_sha256":"47e8bd05f4129655f70c8a493ba2b815a20e1cc1424475970108f3f7d6cc4b7f","kind":"status","type":2,"type_name":"MemberLeave","nickname":"rri-obs-b","username":""},
+    {"t_ms":9537,"via":"raw","raw_sha256":"d1fddad1c22eefbd49e343513bb9fe99758a64938b26ddcc45befe309a5bdfd1","kind":"room_information","room_name":"mhxg","description":"gc","member_slots":8,"room_port":24930,"preferred_game_name":"RealRoomInterop","host_username":"","member_count":1,"members":[{"nickname":"rri-obs-a","fake_ip":"192.168.104.224","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""}]}
+  ],
+  "summary": {"exit": 0, "seconds": 10, "events": 6, "join_success": 1, "room_information": 3, "errors": 0, "unknown": 0, "decode_failures": 0, "status": 2, "chat": 0, "proxy": 0, "ldn": 0, "other": 0, "joined": true, "saw_self": true, "self_fake_ip": "192.168.104.224", "max_member_count": 2, "members_seen": ["rri-obs-a", "rri-obs-b"]}
+}

@@ -1,0 +1,16 @@
+PASS connect
+PASS version_mismatch_server_frame_count :: count=1
+PASS version_mismatch_no_join_success
+PASS version_mismatch_bytes_exact :: actual=0a 00 00 00 01 expected=0a 00 00 00 01
+PASS version_mismatch_observed_decodes
+PASS version_mismatch_observed_is_server_error
+PASS version_mismatch_observed_id :: got VersionMismatch
+PASS version_mismatch_observed_server_version :: got 1
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 8620)=127.0.0.1:39574(pid=8620)
+PASS no_third_party_peer :: log_joined_lines=0 captured_join_success_frames=0 expected_extra=0
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE wall_ms=31
+NOTE command_line=build-mingw/real_room_self_server.exe --name rri-self-version_mismatch --description real-room-interop --port 39574 --password pw1 --slots 8 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes

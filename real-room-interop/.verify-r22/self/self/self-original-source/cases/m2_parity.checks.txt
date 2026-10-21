@@ -1,0 +1,17 @@
+PASS transport_state_joined :: state=Joined failure=
+PASS transport_room_information_present
+PASS transport_assigned_ip_present
+PASS transport_no_server_error
+PASS transport_room_name_matches :: got=rri-self-m2_parity
+PASS transport_host_live
+PASS transport_left :: state=Idle
+PASS transport_observes_wrong_password :: server_error=WrongPassword
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 32044)=127.0.0.1:39580(pid=32044)
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=0 expected_extra=1
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE m2_transport_does_not_expose_raw_wire_bytes; raw capture comes from the dedicated raw client in this harness
+NOTE wall_ms=37
+NOTE command_line=build-mingw/real_room_self_server.exe --name rri-self-m2_parity --description real-room-interop --port 39580 --password pw1 --slots 8 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=no

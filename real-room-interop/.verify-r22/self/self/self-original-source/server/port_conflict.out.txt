@@ -1,0 +1,2 @@
+SELF_SERVER_READY room=rri-self-port_conflict bind=127.0.0.1 port=39581 slots=8 password=(set)
+SELF_SERVER_STOPPED

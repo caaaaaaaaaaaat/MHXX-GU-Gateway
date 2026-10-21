@@ -1,0 +1,15 @@
+PASS port_reported_busy_while_room_runs :: port 39581 is present in the UDP endpoint table: 127.0.0.1:39581(pid=19568)
+PASS second_server_refused_on_busy_port :: room server did not report 'SELF_SERVER_READY' within 5000 ms; stdout tail:  ; stderr tail: SELF_SERVER_ERROR Room::Create failed for 127.0.0.1:39581
+PASS connect_a
+PASS join_success_a
+PASS primary_room_still_serves_after_conflict
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 19568)=127.0.0.1:39581(pid=19568)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE second_launch_outcome=refused error=room server did not report 'SELF_SERVER_READY' within 5000 ms; stdout tail:  ; stderr tail: SELF_SERVER_ERROR Room::Create failed for 127.0.0.1:39581
+NOTE wall_ms=5049
+NOTE command_line=build-mingw/real_room_self_server.exe --name rri-self-port_conflict --description real-room-interop --port 39581 --password pw1 --slots 8 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes

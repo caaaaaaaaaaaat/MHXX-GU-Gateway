@@ -1,0 +1,33 @@
+mode=attach
+attach_addr=127.0.0.1:39811
+protocol=v1
+server_is_inventory=false
+server_started_by_this_run=false
+not_distribution_evidence=true
+room_name=rri-attach-selftest
+slots=8
+endpoints_before=127.0.0.1:39811(pid=39688)
+endpoints_after=127.0.0.1:39811(pid=39688)
+cases_executed=13
+cases_failed=0
+cases_skipped=6
+executed_cases:
+join
+version_mismatch
+wrong_password
+name_collision
+ip_collision
+error_order
+family_isolation
+proxy_route
+proxy_broadcast
+dataplane_size
+chat_limit
+unjoined_source
+skipped_cases:
+room_full :: needs a room this run starts with a known small -slots and fills itself
+release :: needs capacity=2 and a slot table this run controls (leave/rejoin accounting)
+m2_parity :: uses the M2 room_transport client instead of the independent raw client and joins an extra member; not an independent reading of a foreign room
+port_conflict :: needs this run to start the server itself so a second bind attempt can be observed
+fixture_bytes :: expects a freshly started room with a known name/capacity and no other members
+bind_gate :: static bind-gate checks over the authorized binaries; attach authorizes no binary

@@ -1,0 +1,163 @@
+{
+    "produced_utc":  "2026-10-14T14:07:57.3627087Z",
+    "collector":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\Collect-EnvironmentManifest.ps1",
+    "tool_root":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest",
+    "run_root":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\probes\\run-01e505d7c89345e18fbd79b106573e2e",
+    "observations":  [
+                         {
+                             "id":  "P01-minimal-accepted",
+                             "status":  "PASS",
+                             "detail":  "status=recognized machine=0x8664"
+                         },
+                         {
+                             "id":  "P02-87byte-rejected",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_pe_header"
+                         },
+                         {
+                             "id":  "P03-optional-exact",
+                             "status":  "PASS",
+                             "detail":  "optional_magic=0x020B"
+                         },
+                         {
+                             "id":  "P04-optional-short",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_optional_header"
+                         },
+                         {
+                             "id":  "P05-sections-exact",
+                             "status":  "PASS",
+                             "detail":  "status=recognized"
+                         },
+                         {
+                             "id":  "P06-sections-short",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_section_table"
+                         },
+                         {
+                             "id":  "P07-opt0-recognized",
+                             "status":  "OBSERVE",
+                             "detail":  "status=recognized optional_magic=unknown"
+                         },
+                         {
+                             "id":  "P08-empty-exe",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_dos_header"
+                         },
+                         {
+                             "id":  "P09-exactly64",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_pe_header"
+                         },
+                         {
+                             "id":  "P10-garbage",
+                             "status":  "PASS",
+                             "detail":  "error_code=invalid_mz"
+                         },
+                         {
+                             "id":  "P11-uint32max-offset",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_pe_header"
+                         },
+                         {
+                             "id":  "P35-max-sections",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_section_table"
+                         },
+                         {
+                             "id":  "P36-huge-optional",
+                             "status":  "PASS",
+                             "detail":  "error_code=truncated_optional_header"
+                         },
+                         {
+                             "id":  "P12-canonical-inside",
+                             "status":  "PASS",
+                             "detail":  "created=G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\probes\\run-01e505d7c89345e18fbd79b106573e2e\\p12-inside.json"
+                         },
+                         {
+                             "id":  "P13-traversal-rejected",
+                             "status":  "PASS",
+                             "detail":  "err=OUTPUT_OUTSIDE_TOOL_TREE"
+                         },
+                         {
+                             "id":  "P14-force-clobbers-arbitrary-json",
+                             "status":  "FINDING",
+                             "detail":  "pre-existing canary.json overwritten; pre_len=34 post_len=9730"
+                         },
+                         {
+                             "id":  "P14b-default-no-clobber",
+                             "status":  "PASS",
+                             "detail":  "refused and hash unchanged"
+                         },
+                         {
+                             "id":  "P17-json-injection-escaped",
+                             "status":  "PASS",
+                             "detail":  "roundtrip exact; no injected top-level key"
+                         },
+                         {
+                             "id":  "P18-no-bom-trailing-newline",
+                             "status":  "PASS",
+                             "detail":  "len=9730 last=0x0A"
+                         },
+                         {
+                             "id":  "P20-sha256-crosscheck",
+                             "status":  "PASS",
+                             "detail":  "hash=929351ec9c272028..."
+                         },
+                         {
+                             "id":  "P21-single-new-file",
+                             "status":  "PASS",
+                             "detail":  "new=G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\probes\\run-01e505d7c89345e18fbd79b106573e2e\\nested\\a\\b\\p21.json"
+                         },
+                         {
+                             "id":  "P22-uppercase-exe",
+                             "status":  "PASS",
+                             "detail":  "status=read_ok_pe_headers"
+                         },
+                         {
+                             "id":  "P24-device-namespace",
+                             "status":  "PASS",
+                             "detail":  "both \\\\?\\ and \\\\.\\ rejected"
+                         },
+                         {
+                             "id":  "P25-single-leading-backslash",
+                             "status":  "OBSERVE",
+                             "detail":  "ok=True abs=G:\\env-manifest.invalid\\share\\not-read.exe status=missing"
+                         },
+                         {
+                             "id":  "P31-schema-allowlist",
+                             "status":  "PASS",
+                             "detail":  "all key sets match declared allowlist"
+                         },
+                         {
+                             "id":  "P32-ast-no-network-no-env",
+                             "status":  "PASS",
+                             "detail":  "commands=32 bannedFound=0 envReads=0"
+                         },
+                         {
+                             "id":  "P37-error-codes-populated",
+                             "status":  "PASS",
+                             "detail":  "error_codes=invalid_mz"
+                         },
+                         {
+                             "id":  "P28-empty-pdb",
+                             "status":  "PASS",
+                             "detail":  "sha256=e3b0...b855 size=0"
+                         },
+                         {
+                             "id":  "P29-garbage-pdb-not-parsed",
+                             "status":  "PASS",
+                             "detail":  "status=read_ok_pdb_unverified pe=not_applicable_pdb"
+                         },
+                         {
+                             "id":  "P30-optional-magic-not-validated",
+                             "status":  "OBSERVE",
+                             "detail":  "status=recognized optional_magic=0x0000 (recorded, not validated)"
+                         },
+                         {
+                             "id":  "P38-uppercase-root-prefix",
+                             "status":  "PASS",
+                             "detail":  "accepted=G:\\抛瓦饮料\\跨平台联机\\CROSSPLAY\\REVIEW-TOOLS\\ENV-MANIFEST\\p38-upper.json"
+                         }
+                     ]
+}

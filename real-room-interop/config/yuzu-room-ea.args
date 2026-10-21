@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# real-room-interop: server arguments for the early-access yuzu-room.exe (741AC5E9...).
+# Consumed by: real_room_interop.exe real -Protocol v1 -RoomArgsFile config/yuzu-room-ea.args
+# The EA build carries the "--bind-address" option (short -s), so this file pins the server
+# to 127.0.0.1 and the strict-loopback baseline needs no -AllowWildcardBind.
+# The EA source was NOT compared line by line; the report marks that limitation.
+* = --bind-address 127.0.0.1 --port {port} --room-name {room} --room-description real-room-interop --max_members {slots} --password {password} --preferred-game RealRoomInterop

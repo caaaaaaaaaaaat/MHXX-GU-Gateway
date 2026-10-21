@@ -1,0 +1,19 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_unjoined_peer
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 41772)=127.0.0.1:39587(pid=41772)
+PASS server_log_reports_member_join :: join_success_frames=2 log_joined_lines=2
+PASS no_third_party_peer :: log_joined_lines=2 captured_join_success_frames=2 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE VERIFIED FACT (V-016): the room forwarded data from a peer that never joined (no sender validation); frame_bytes_exact=yes
+NOTE record-only case: the room neither validates sender membership nor that local_ip equals the sender's fake IP (room.cpp:815-871)
+NOTE wall_ms=563
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39587 --room-name rri-real-unjoined_source --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE server_bind_endpoints=127.0.0.1:39587(pid=41772)
+NOTE server_ready_via=ready-marker

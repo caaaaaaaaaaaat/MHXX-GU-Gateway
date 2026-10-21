@@ -1,0 +1,257 @@
+{
+    "tool":  "real-room-interop",
+    "mode":  "observe-real",
+    "server":  {
+                   "tag":  "yuzu-ea-2024",
+                   "path":  "C:\\Users\\马光述\\AppData\\Local\\yuzu\\yuzu-windows-msvc-early-access\\yuzu-room.exe",
+                   "bytes":  786944,
+                   "sha256":  "741ac5e936d8ec03b71442ef2ccb1f336907afe20477b6bac5da68177e0a32cc",
+                   "supports_bind_option":  true,
+                   "command":  "--bind-address 127.0.0.1 --room-name mhxg --room-description gc --preferred-game RealRoomInterop --port 24930 --max_members 8 --password pw1",
+                   "bind":  "127.0.0.1 (explicit --bind-address)",
+                   "loopback_only":  true,
+                   "pid":  47908,
+                   "exit":  0,
+                   "endpoints_at_3s":  [
+                                           "127.0.0.1:24930"
+                                       ],
+                   "endpoints_after_exit":  [
+
+                                            ],
+                   "log_reports_private_room":  true
+               },
+    "observer_exe":  {
+                         "path":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe",
+                         "sha256":  "c7cb8883a615ccebd79afdd802edce51768bfe97492f991ecc1b3c992c9a86a4",
+                         "bytes":  20169061
+                     },
+    "room":  {
+                 "port":  24930,
+                 "slots":  8,
+                 "name":  "mhxg",
+                 "address":  "127.0.0.1",
+                 "password_set":  true
+             },
+    "observers":  [
+                      {
+                          "label":  "a",
+                          "nickname":  "rri-obs-a",
+                          "exit":  0,
+                          "seconds":  0,
+                          "json":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-a.json",
+                          "joined":  true,
+                          "saw_self":  true,
+                          "room_information":  3,
+                          "errors":  0,
+                          "decode_failures":  0,
+                          "max_member_count":  2,
+                          "members_seen":  [
+                                               "rri-obs-a",
+                                               "rri-obs-b"
+                                           ]
+                      },
+                      {
+                          "label":  "b",
+                          "nickname":  "rri-obs-b",
+                          "exit":  0,
+                          "seconds":  0,
+                          "json":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-b.json",
+                          "joined":  true,
+                          "saw_self":  true,
+                          "room_information":  1,
+                          "errors":  0,
+                          "decode_failures":  0,
+                          "max_member_count":  2,
+                          "members_seen":  [
+                                               "rri-obs-a",
+                                               "rri-obs-b"
+                                           ]
+                      },
+                      {
+                          "label":  "c",
+                          "nickname":  "rri-obs-c",
+                          "exit":  0,
+                          "seconds":  0,
+                          "json":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-c.json",
+                          "joined":  true,
+                          "saw_self":  true,
+                          "room_information":  1,
+                          "errors":  0,
+                          "decode_failures":  0,
+                          "max_member_count":  1,
+                          "members_seen":  "rri-obs-c"
+                      }
+                  ],
+    "checks_total":  33,
+    "checks_failed":  0,
+    "checks":  [
+                   {
+                       "name":  "server_identity_matches_authorized_table",
+                       "ok":  true,
+                       "detail":  "tag=yuzu-ea-2024 bytes=786944 sha256=741ac5e936d8ec03b71442ef2ccb1f336907afe20477b6bac5da68177e0a32cc"
+                   },
+                   {
+                       "name":  "port_free_before_start",
+                       "ok":  true,
+                       "detail":  "port=24930 endpoints=\u003cnone\u003e"
+                   },
+                   {
+                       "name":  "server_ready_by_endpoint",
+                       "ok":  true,
+                       "detail":  "pid=47908 port=24930"
+                   },
+                   {
+                       "name":  "server_bound_loopback_only",
+                       "ok":  true,
+                       "detail":  "endpoints=127.0.0.1:24930 (pid 47908)"
+                   },
+                   {
+                       "name":  "observer_a_exit0",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "observer_a_json_written",
+                       "ok":  true,
+                       "detail":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-a.json"
+                   },
+                   {
+                       "name":  "observer_b_exit0",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "observer_b_json_written",
+                       "ok":  true,
+                       "detail":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-b.json"
+                   },
+                   {
+                       "name":  "a_joined",
+                       "ok":  true,
+                       "detail":  "joined=True"
+                   },
+                   {
+                       "name":  "a_saw_self",
+                       "ok":  true,
+                       "detail":  "saw_self=True"
+                   },
+                   {
+                       "name":  "a_decode_failures_zero",
+                       "ok":  true,
+                       "detail":  "decode_failures=0"
+                   },
+                   {
+                       "name":  "a_max_member_count_two",
+                       "ok":  true,
+                       "detail":  "max_member_count=2"
+                   },
+                   {
+                       "name":  "a_two_member_table_has_both",
+                       "ok":  true,
+                       "detail":  "members=rri-obs-a,rri-obs-b"
+                   },
+                   {
+                       "name":  "a_room_name_matches",
+                       "ok":  true,
+                       "detail":  "room_name=mhxg"
+                   },
+                   {
+                       "name":  "a_fake_ip_matches_table",
+                       "ok":  true,
+                       "detail":  "join_success=192.168.104.224 table=192.168.104.224"
+                   },
+                   {
+                       "name":  "b_joined",
+                       "ok":  true,
+                       "detail":  "joined=True"
+                   },
+                   {
+                       "name":  "b_saw_self",
+                       "ok":  true,
+                       "detail":  "saw_self=True"
+                   },
+                   {
+                       "name":  "b_decode_failures_zero",
+                       "ok":  true,
+                       "detail":  "decode_failures=0"
+                   },
+                   {
+                       "name":  "b_max_member_count_two",
+                       "ok":  true,
+                       "detail":  "max_member_count=2"
+                   },
+                   {
+                       "name":  "b_two_member_table_has_both",
+                       "ok":  true,
+                       "detail":  "members=rri-obs-a,rri-obs-b"
+                   },
+                   {
+                       "name":  "b_room_name_matches",
+                       "ok":  true,
+                       "detail":  "room_name=mhxg"
+                   },
+                   {
+                       "name":  "b_fake_ip_matches_table",
+                       "ok":  true,
+                       "detail":  "join_success=192.168.70.36 table=192.168.70.36"
+                   },
+                   {
+                       "name":  "observer_c_exit0",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "observer_c_json_written",
+                       "ok":  true,
+                       "detail":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-real\\yuzu-ea-2024\\observer-c.json"
+                   },
+                   {
+                       "name":  "c_joined",
+                       "ok":  true,
+                       "detail":  "joined=True"
+                   },
+                   {
+                       "name":  "c_saw_self",
+                       "ok":  true,
+                       "detail":  "saw_self=True"
+                   },
+                   {
+                       "name":  "c_decode_failures_zero",
+                       "ok":  true,
+                       "detail":  "decode_failures=0"
+                   },
+                   {
+                       "name":  "c_sees_itself",
+                       "ok":  true,
+                       "detail":  "join_success=192.168.178.131 table=192.168.178.131"
+                   },
+                   {
+                       "name":  "c_member_count_one",
+                       "ok":  true,
+                       "detail":  "member_count=1"
+                   },
+                   {
+                       "name":  "server_log_reports_all_three_joins",
+                       "ok":  true,
+                       "detail":  "server log contains a/b/c has-joined lines"
+                   },
+                   {
+                       "name":  "server_private_room_no_external_service",
+                       "ok":  true,
+                       "detail":  "no --token/--web-api-url; private-room line present"
+                   },
+                   {
+                       "name":  "server_stopped",
+                       "ok":  true,
+                       "detail":  "exit=0"
+                   },
+                   {
+                       "name":  "port_released_after_exit",
+                       "ok":  true,
+                       "detail":  "port=24930 endpoints=\u003cnone\u003e"
+                   }
+               ],
+    "started_utc":  "2026-10-14T17:19:34.1474469Z",
+    "elapsed_ms":  23127,
+    "note":  "member-table oracle only; this does not connect the gateway and is not a G-c verdict"
+}

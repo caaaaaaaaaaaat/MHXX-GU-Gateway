@@ -1,0 +1,11 @@
+# scenario=error_order protocol=v1 server=yuzu-main-2022 ok=1 ms=2
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent
+A C2S t=1 ch=0 reliable len=36 01 00 00 00 06 72 72 69 2d 61 31 ff ff ff ff 00 00 00 02 00 00 00 09 70 77 31 2d 77 72 6f 6e 67 00 00 00 00
+A S2C t=1 ch=0 reliable len=1 0b
+B C2S t=0 ch=0 reliable len=26 01 00 00 00 02 72 72 ff ff ff ff 00 00 00 02 00 00 00 03 70 77 31 00 00 00 00
+B S2C t=0 ch=0 reliable len=1 08
+D C2S t=0 ch=0 reliable len=30 01 00 00 00 06 72 72 69 2d 64 31 c0 a8 de 40 00 00 00 02 00 00 00 03 70 77 31 00 00 00 00
+D S2C t=0 ch=0 reliable len=1 09
+C C2S t=1 ch=0 reliable len=30 01 00 00 00 06 72 72 69 2d 63 31 ff ff ff ff 00 00 00 01 00 00 00 03 70 77 31 00 00 00 00
+C S2C t=1 ch=0 reliable len=121 03 00 00 00 14 72 72 69 2d 72 65 61 6c 2d 65 72 72 6f 72 5f 6f 72 64 65 72 00 00 00 11 72 65 61 6c 2d 72 6f 6f 6d 2d 69 6e 74 65 72 6f 70 00 00 00 08 9a a4 00 00 00 0f 52 65 61 6c 52 6f 6f 6d 49 6e 74 65 72 6f 70 00 00 00 00 00 00 00 01 00 00 00 06 72 72 69 2d 63 31 c0 a8 de 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+C S2C t=1 ch=0 reliable len=5 02 c0 a8 de 40

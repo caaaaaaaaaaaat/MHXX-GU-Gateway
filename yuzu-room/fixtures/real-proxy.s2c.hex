@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Real yuzu-room.exe replies, copied byte-for-byte from
+# crossplay/real-room-interop/evidence/real/yuzu-ea-2024/cases/proxy_route.s2c.hex
+# (client A): RoomInformation, JoinSuccess, then the room's byte-for-byte
+# ProxyPacket relay whose local endpoint is our assigned 192.168.41.33.
+# Nickname must be "rri-a1".
+03000000147272692d7265616c2d70726f78795f726f757465000000117265616c2d726f6f6d2d696e7465726f70000000089a9f0000000f5265616c526f6f6d496e7465726f700000000000000001000000067272692d6131c0a8292100000000000000000000000000000000000000000000000000000000
+02c0a82921
+0501c0a82921138801c0a8200d1389030000000010444b525960676e757c838a91989fa6ad

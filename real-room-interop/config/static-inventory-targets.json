@@ -1,0 +1,50 @@
+{
+  "note": "Candidate dedicated-room binaries, from docs/INPUT-INVENTORY.md and the authorization identity table in docs/AUTHORIZATIONS.md. Read-only inventory input.",
+  "targets": [
+    {
+      "tag": "yuzu-main-2022",
+      "kind": "yuzu-room",
+      "role": "M2b primary",
+      "path": "C:\\Users\\马光述\\AppData\\Local\\yuzu\\yuzu-windows-msvc\\yuzu-room.exe",
+      "expected_bytes": 2017792,
+      "expected_sha256": "5175D6A108B022FE47C793FB3A57C2F26A7C1404A0F71827F464586963D8778A",
+      "note": "2022-09-24 main 7edc31be2; source compared line by line (VERIFICATION-LOG V-013)"
+    },
+    {
+      "tag": "yuzu-ea-2024",
+      "kind": "yuzu-room",
+      "role": "M2b spare",
+      "path": "C:\\Users\\马光述\\AppData\\Local\\yuzu\\yuzu-windows-msvc-early-access\\yuzu-room.exe",
+      "expected_bytes": 786944,
+      "expected_sha256": "741AC5E936D8EC03B71442EF2CCB1F336907AFE20477B6BAC5DA68177E0A32CC",
+      "note": "EA build; source NOT compared; carries the extra --bind-address option"
+    },
+    {
+      "tag": "citra-msys2-2024",
+      "kind": "citra-room",
+      "role": "G-a2 primary",
+      "path": "F:\\citra mul\\citra-windows-msys2-20240927-608383e\\citra-room.exe",
+      "expected_bytes": 5902336,
+      "expected_sha256": "15EB1D9D6C7423BD9F446828ABF49C1D82299339BC7BC80CABA292C3F826779D",
+      "note": "--version self-reports Libnetwork: 4"
+    },
+    {
+      "tag": "citra-canary",
+      "kind": "citra-room",
+      "role": "G-a2 spare",
+      "path": "F:\\citra2798\\canary\\citra-room.exe",
+      "expected_bytes": 2627072,
+      "expected_sha256": "035BDFBB56D2262C27C54B6A22876BC07E6F1FF5B0886B582B2541ABA89AA95A",
+      "note": "self-reports Libnetwork: 4"
+    },
+    {
+      "tag": "citra-game-bundle",
+      "kind": "citra-room",
+      "role": "G-a2 spare",
+      "path": "F:\\究极之月\\日月\\A1877\\Game\\citra-room.exe",
+      "expected_bytes": 24456528,
+      "expected_sha256": "43A4B8359648FA4BA44910036DD1C79D432D1524823104731FE861E8573752E9",
+      "note": "self-reports Libnetwork: 4"
+    }
+  ]
+}

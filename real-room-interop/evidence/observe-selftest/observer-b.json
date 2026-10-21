@@ -1,0 +1,18 @@
+{
+  "tool": "real-room-interop",
+  "mode": "observe",
+  "run_id": "20261014T171916Z-49360",
+  "start_utc": "2026-10-14T17:19:16.246Z",
+  "end_utc": "2026-10-14T17:19:20.250Z",
+  "exe": {"path": "G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe", "bytes": 20169061, "sha256": "c7cb8883a615ccebd79afdd802edce51768bfe97492f991ecc1b3c992c9a86a4"},
+  "command_line": "\"G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\build-attach\\real_room_interop.exe\" observe --room 127.0.0.1 --room-port 39690 --password pw1 --nickname rri-obs-b --seconds 4 --out G:\\抛瓦饮料\\跨平台联机\\crossplay\\real-room-interop\\evidence\\observe-selftest\\observer-b.json",
+  "protocol": "v1",
+  "via": "raw",
+  "room": {"address": "127.0.0.1", "port": 39690, "nickname": "rri-obs-b", "password_set": true, "loopback_only": true, "local_socket": "127.0.0.1:ephemeral (RawClient binds loopback)"},
+  "decode_failures": 0,
+  "events": [
+    {"t_ms":2,"via":"raw","raw_sha256":"7384367f297c57665af1acf037e707b676d52a45f76a4cff97fb29626cd18837","kind":"room_information","room_name":"rri-observe-self","description":"observe-self-test","member_slots":4,"room_port":39690,"preferred_game_name":"RealRoomInterop","host_username":"","member_count":2,"members":[{"nickname":"rri-obs-a","fake_ip":"192.168.132.40","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""},{"nickname":"rri-obs-b","fake_ip":"192.168.235.232","game_info_name":"","game_info_id":0,"game_info_version":"","username":"","display_name":"","avatar_url":""}]},
+    {"t_ms":2,"via":"raw","raw_sha256":"45c50f5e3075faaa903b1b029c51c88f6001f4eb62b5b5a0e459fd4816257c78","kind":"join_success","fake_ip":"192.168.235.232","moderator":false,"room_name":"rri-observe-self","member_slots":4,"room_port":39690}
+  ],
+  "summary": {"exit": 0, "seconds": 4, "events": 2, "join_success": 1, "room_information": 1, "errors": 0, "unknown": 0, "decode_failures": 0, "status": 0, "chat": 0, "proxy": 0, "ldn": 0, "other": 0, "joined": true, "saw_self": true, "self_fake_ip": "192.168.235.232", "max_member_count": 2, "members_seen": ["rri-obs-a", "rri-obs-b"]}
+}

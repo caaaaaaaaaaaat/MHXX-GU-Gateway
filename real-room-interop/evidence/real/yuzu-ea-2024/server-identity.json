@@ -1,0 +1,19 @@
+{
+  "tool": "real-room-interop",
+  "server_tag": "yuzu-ea-2024",
+  "server_exe": "C:\\Users\\马光述\\AppData\\Local\\yuzu\\yuzu-windows-msvc-early-access\\yuzu-room.exe",
+  "server_exe_bytes": 786944,
+  "server_exe_sha256": "741ac5e936d8ec03b71442ef2ccb1f336907afe20477b6bac5da68177e0a32cc",
+  "build_id": "2024 early access (source NOT compared: no PDB, no disassembly)",
+  "source_compared": false,
+  "protocol": "v1",
+  "loopback_only": true,
+  "allow_wildcard_bind": false,
+  "ready_marker": "Room is open",
+  "injected_bind_address": false,
+  "cases_total": 19,
+  "cases_failed": 0,
+  "elapsed_ms": 10606,
+  "loopback_only_observed": true,
+  "observed_bind_endpoints": ["127.0.0.1:39573 pid=45636", "127.0.0.1:39574 pid=40412", "127.0.0.1:39575 pid=46836", "127.0.0.1:39576 pid=45136", "127.0.0.1:39577 pid=49308", "127.0.0.1:39578 pid=46128", "127.0.0.1:39579 pid=40628", "127.0.0.1:39580 pid=13260", "127.0.0.1:39581 pid=45560", "127.0.0.1:39582 pid=43192", "127.0.0.1:39583 pid=47708", "127.0.0.1:39584 pid=46848", "127.0.0.1:39585 pid=7652", "127.0.0.1:39586 pid=36768", "127.0.0.1:39587 pid=50096", "127.0.0.1:39588 pid=19168", "127.0.0.1:39589 pid=49640"]
+}

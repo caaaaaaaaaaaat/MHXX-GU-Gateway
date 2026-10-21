@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# real-room-interop: server arguments for citra-room.exe (network_version 4).
+# Consumed by: real_room_interop.exe real -Protocol v4 -RoomArgsFile config/citra-room.args
+# citra-room has no bind option either (help text citra-room.cpp:44-62), so it also listens
+# on 0.0.0.0 and needs -AllowWildcardBind. --token/--web-api-url are never passed, which is
+# what keeps the room private ("Hosting a private room") and guarantees no external contact.
+* = --room-name {room} --room-description real-room-interop --preferred-game RealRoomInterop --port {port} --max_members {slots} --password {password}

@@ -1,0 +1,46 @@
+citra-control
+SPDX-License-Identifier: GPL-3.0-or-later
+
+Copyright (C) 2026 the citra-control authors
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <https://www.gnu.org/licenses/>.
+
+--------------------------------------------------------------------------
+PROVENANCE / 来源说明
+--------------------------------------------------------------------------
+
+citra-control 是控制面映射库，其字节布局、常量、枚举取值与行为契约派生自下面两个
+GPL 项目的公开源码（只读引用，未修改其任何文件）：
+
+  * Citra (https://github.com/citra-emu/citra), GPL-2.0-or-later
+      citra-master/src/core/hle/service/nwm/uds_beacon.h/.cpp
+      citra-master/src/core/hle/service/nwm/uds_data.h/.cpp
+      citra-master/src/core/hle/service/nwm/uds_connection.h/.cpp
+      citra-master/src/core/hle/service/nwm/nwm_uds.h/.cpp
+    用于：EAPoL / SecureData / NodeMap / Beacon 帧布局、802.11 固定参数与 Nintendo 私有
+    tag、guest NetworkInfo(0x108) / NodeInfo(0x28) 布局、AES-128-CTR Beacon 加密与
+    「密钥为 16 字节全零、CTR 为 BeaconDataCryptoCTR 原始字节」的契约（V-019）。
+
+  * yuzu (01052024 mirror), GPL-3.0-or-later
+      src/core/hle/service/ldn/ldn_types.h
+      src/core/hle/service/ldn/lan_discovery.cpp
+      src/core/hle/service/ldn/room_member.h
+    用于：LdnNetworkInfo / NetworkInfo(0x480) / NodeInfo(0x40) / Ssid / NetworkId 布局、
+    六类 LDN 包的体尺寸与 SendPacket / SendBroadcast 两种发送形态、以及接收侧
+    「不校验来源 IP、直接 memcpy sizeof(...)」的既有事实（据此把体尺寸做成内存安全门）。
+
+实现部分是独立重写的：MD5 (RFC 1321)、SHA-1 (FIPS 180-4)、AES-128 与 AES-128-CTR
+(FIPS 197 / NIST SP 800-38A) 均按公开规范从零实现，未复制任何第三方代码。
+
+本库不包含、也不允许包含任何 ROM、密钥、存档或真实抓包数据；fixtures/ 下的全部十六进制
+都是手写合成值或由 fixtures/beacon_oracle.py 用标准库现场生成的测试向量。

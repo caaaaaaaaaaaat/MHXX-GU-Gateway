@@ -1,0 +1,17 @@
+build-mingw/real_room_self_server.exe --name rri-self-join --description real-room-interop --port 39573 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-version_mismatch --description real-room-interop --port 39574 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-wrong_password --description real-room-interop --port 39575 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-name_collision --description real-room-interop --port 39576 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-ip_collision --description real-room-interop --port 39577 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-room_full --description real-room-interop --port 39578 --password pw1 --slots 2 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-release --description real-room-interop --port 39579 --password pw1 --slots 2 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-m2_parity --description real-room-interop --port 39580 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-port_conflict --description real-room-interop --port 39581 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-family_isolation --description real-room-interop --port 39582 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-proxy_route --description real-room-interop --port 39583 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-proxy_broadcast --description real-room-interop --port 39584 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-dataplane_size --description real-room-interop --port 39585 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-chat_limit --description real-room-interop --port 39586 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-unjoined_source --description real-room-interop --port 39587 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-error_order --description real-room-interop --port 39588 --password pw1 --slots 8 --preferred-game RealRoomInterop
+build-mingw/real_room_self_server.exe --name rri-self-fixture_bytes --description real-room-interop --port 39589 --password pw1 --slots 4 --preferred-game RealRoomInterop

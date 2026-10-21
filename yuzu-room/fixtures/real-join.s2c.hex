@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Real yuzu-room.exe replies, copied byte-for-byte from
+# crossplay/real-room-interop/evidence/real/yuzu-ea-2024/cases/join.s2c.hex
+# (client A): RoomInformation then JoinSuccess. Nickname must be "rri-a1".
+030000000d7272692d7265616c2d6a6f696e000000117265616c2d726f6f6d2d696e7465726f70000000089a950000000f5265616c526f6f6d496e7465726f700000000000000001000000067272692d6131c0a87c9100000000000000000000000000000000000000000000000000000000
+02c0a87c91

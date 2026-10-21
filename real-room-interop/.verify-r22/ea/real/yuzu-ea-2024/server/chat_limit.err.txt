@@ -1,0 +1,14 @@
+[   0.000046] Network <Error> dedicated_room\yuzu_room.cpp:main:297: preferred-game-id not set!
+This should get set to allow users to find your room.
+Set with --preferred-game-id id
+[   0.000048] Network <Error> dedicated_room\yuzu_room.cpp:main:315: Ban list file not set!
+This should get set to load and save room ban list.
+Set with --ban-list-file <file>
+[   0.000048] Network <Info> dedicated_room\yuzu_room.cpp:main:320: Token is empty: Hosting a private room
+[   0.004603] Network <Info> dedicated_room\yuzu_room.cpp:main:377: Room is open. Close with Q+Enter...
+[   0.006008] Network <Info> network\room.cpp:SendStatusMessage:755: [127.0.0.1] rri-a1 has joined.
+[   0.006328] Network <Info> network\room.cpp:SendStatusMessage:755: [127.0.0.1] rri-b1 has joined.
+[   0.120562] Network <Info> network\room.cpp:HandleChatPacket:970: rri-a1: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+[   0.257615] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-a1 has left.
+[   0.257655] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-b1 has left.
+[   0.257655] Network <Info> network\room.cpp:SendStatusMessage:758: [127.0.0.1] rri-b1 has left.

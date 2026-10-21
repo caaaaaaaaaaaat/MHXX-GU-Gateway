@@ -1,0 +1,97 @@
+﻿DRY RUN (NOT EXECUTED / 尚未执行)
+
+[yuzu-main-2022] C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe (v1, identity OK)
+  args file: config/yuzu-room.args
+  supports --bind-address: no
+  default gate: REFUSED (binary has no --bind-address option, so it would listen on 0.0.0.0; refusing without -AllowWildcardBind)
+  case join                   port=39572  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-join --room-description real-room-interop --preferred-game RealRoomInterop --port 39572 --max_members 8 --password pw1
+  case version_mismatch       port=39573  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-version_mismatch --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+  case wrong_password         port=39574  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-wrong_password --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1
+  case name_collision         port=39575  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-name_collision --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1
+  case ip_collision           port=39576  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-ip_collision --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 8 --password pw1
+  case room_full              port=39577  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-room_full --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 2 --password pw1
+  case release                port=39578  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-release --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 2 --password pw1
+  case m2_parity              port=39579  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-m2_parity --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1
+  case port_conflict          port=39580  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-port_conflict --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1
+  case family_isolation       port=39581  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-family_isolation --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+  case proxy_route            port=39582  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-proxy_route --room-description real-room-interop --preferred-game RealRoomInterop --port 39582 --max_members 8 --password pw1
+  case proxy_broadcast        port=39583  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-proxy_broadcast --room-description real-room-interop --preferred-game RealRoomInterop --port 39583 --max_members 8 --password pw1
+  case dataplane_size         port=39584  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-dataplane_size --room-description real-room-interop --preferred-game RealRoomInterop --port 39584 --max_members 8 --password pw1
+  case chat_limit             port=39585  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-chat_limit --room-description real-room-interop --preferred-game RealRoomInterop --port 39585 --max_members 8 --password pw1
+  case unjoined_source        port=39586  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-unjoined_source --room-description real-room-interop --preferred-game RealRoomInterop --port 39586 --max_members 8 --password pw1
+  case error_order            port=39587  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-error_order --room-description real-room-interop --preferred-game RealRoomInterop --port 39587 --max_members 8 --password pw1
+  case fixture_bytes          port=39588  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc\yuzu-room.exe --room-name rri-dryrun-fixture_bytes --room-description real-room-interop --preferred-game RealRoomInterop --port 39588 --max_members 4 --password pw1
+  (NOT EXECUTED / 尚未执行)
+
+[yuzu-ea-2024] C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe (v1, identity OK)
+  args file: config/yuzu-room.args
+  supports --bind-address: yes
+  default gate: ALLOWED (binary supports --bind-address: injecting --bind-address 127.0.0.1)
+  case join                   port=39572  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-join --room-description real-room-interop --preferred-game RealRoomInterop --port 39572 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case version_mismatch       port=39573  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-version_mismatch --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case wrong_password         port=39574  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-wrong_password --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case name_collision         port=39575  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-name_collision --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case ip_collision           port=39576  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-ip_collision --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case room_full              port=39577  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-room_full --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 2 --password pw1 --bind-address 127.0.0.1
+  case release                port=39578  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-release --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 2 --password pw1 --bind-address 127.0.0.1
+  case m2_parity              port=39579  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-m2_parity --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case port_conflict          port=39580  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-port_conflict --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case family_isolation       port=39581  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-family_isolation --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case proxy_route            port=39582  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-proxy_route --room-description real-room-interop --preferred-game RealRoomInterop --port 39582 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case proxy_broadcast        port=39583  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-proxy_broadcast --room-description real-room-interop --preferred-game RealRoomInterop --port 39583 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case dataplane_size         port=39584  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-dataplane_size --room-description real-room-interop --preferred-game RealRoomInterop --port 39584 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case chat_limit             port=39585  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-chat_limit --room-description real-room-interop --preferred-game RealRoomInterop --port 39585 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case unjoined_source        port=39586  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-unjoined_source --room-description real-room-interop --preferred-game RealRoomInterop --port 39586 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case error_order            port=39587  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-error_order --room-description real-room-interop --preferred-game RealRoomInterop --port 39587 --max_members 8 --password pw1 --bind-address 127.0.0.1
+  case fixture_bytes          port=39588  C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --room-name rri-dryrun-fixture_bytes --room-description real-room-interop --preferred-game RealRoomInterop --port 39588 --max_members 4 --password pw1 --bind-address 127.0.0.1
+  (NOT EXECUTED / 尚未执行)
+
+[citra-msys2-20240927] F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe (v4, identity OK)
+  args file: config/citra-room.args
+  supports --bind-address: no
+  default gate: REFUSED (binary has no --bind-address option, so it would listen on 0.0.0.0; refusing without -AllowWildcardBind)
+  case join_v4                port=39572  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-join_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39572 --max_members 8 --password pw1
+  case version_mismatch_v4    port=39573  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-version_mismatch_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+  case wrong_password_v4      port=39574  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-wrong_password_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1
+  case name_collision_v4      port=39575  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-name_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1
+  case room_full_v4           port=39576  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-room_full_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 2 --password pw1
+  case chat_v4                port=39577  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-chat_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 8 --password pw1
+  case wifi_route_v4          port=39578  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-wifi_route_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 8 --password pw1
+  case wifi_broadcast_v4      port=39579  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-wifi_broadcast_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1
+  case console_id_collision_v4 port=39580  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-console_id_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1
+  case error_order_v4         port=39581  "F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-dryrun-error_order_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+  (NOT EXECUTED / 尚未执行)
+
+[citra-canary] F:\citra2798\canary\citra-room.exe (v4, identity OK)
+  args file: config/citra-room.args
+  supports --bind-address: no
+  default gate: REFUSED (binary has no --bind-address option, so it would listen on 0.0.0.0; refusing without -AllowWildcardBind)
+  case join_v4                port=39572  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-join_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39572 --max_members 8 --password pw1
+  case version_mismatch_v4    port=39573  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-version_mismatch_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+  case wrong_password_v4      port=39574  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-wrong_password_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1
+  case name_collision_v4      port=39575  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-name_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1
+  case room_full_v4           port=39576  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-room_full_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 2 --password pw1
+  case chat_v4                port=39577  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-chat_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 8 --password pw1
+  case wifi_route_v4          port=39578  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-wifi_route_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 8 --password pw1
+  case wifi_broadcast_v4      port=39579  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-wifi_broadcast_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1
+  case console_id_collision_v4 port=39580  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-console_id_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1
+  case error_order_v4         port=39581  F:\citra2798\canary\citra-room.exe --room-name rri-dryrun-error_order_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+  (NOT EXECUTED / 尚未执行)
+
+[citra-game-bundle] F:\究极之月\日月\A1877\Game\citra-room.exe (v4, identity OK)
+  args file: config/citra-room.args
+  supports --bind-address: no
+  default gate: REFUSED (binary has no --bind-address option, so it would listen on 0.0.0.0; refusing without -AllowWildcardBind)
+  case join_v4                port=39572  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-join_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39572 --max_members 8 --password pw1
+  case version_mismatch_v4    port=39573  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-version_mismatch_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39573 --max_members 8 --password pw1
+  case wrong_password_v4      port=39574  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-wrong_password_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39574 --max_members 8 --password pw1
+  case name_collision_v4      port=39575  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-name_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39575 --max_members 8 --password pw1
+  case room_full_v4           port=39576  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-room_full_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39576 --max_members 2 --password pw1
+  case chat_v4                port=39577  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-chat_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39577 --max_members 8 --password pw1
+  case wifi_route_v4          port=39578  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-wifi_route_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 8 --password pw1
+  case wifi_broadcast_v4      port=39579  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-wifi_broadcast_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39579 --max_members 8 --password pw1
+  case console_id_collision_v4 port=39580  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-console_id_collision_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39580 --max_members 8 --password pw1
+  case error_order_v4         port=39581  F:\究极之月\日月\A1877\Game\citra-room.exe --room-name rri-dryrun-error_order_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+  (NOT EXECUTED / 尚未执行)
+
+DRY RUN SUMMARY: 1 candidate(s) allowed by default, 4 need -AllowWildcardBind; nothing was executed.

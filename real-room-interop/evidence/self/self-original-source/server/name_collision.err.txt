@@ -1,0 +1,2 @@
+[INFO] [127.0.0.1] rri-a1 has joined.
+[INFO] [127.0.0.1] rri-a1 has left.

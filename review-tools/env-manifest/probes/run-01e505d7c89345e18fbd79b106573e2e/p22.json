@@ -1,0 +1,171 @@
+{
+    "schema_version":  "crossplay.env-manifest/1",
+    "generated_utc":  "2026-10-14T14:07:57.1061950Z",
+    "purpose":  "environment_inventory",
+    "collector":  {
+                      "name":  "offline-explicit-file-env-manifest",
+                      "version":  "1.0.0",
+                      "powershell_version":  "5.1.22621.5624",
+                      "platform":  "Windows",
+                      "input_policy":  "explicit_exe_pdb_only",
+                      "game_files_read":  false,
+                      "executable_started_loaded_or_injected":  false,
+                      "process_attached":  false,
+                      "network_used":  false,
+                      "registry_written":  false,
+                      "user_configuration_read":  false,
+                      "filesystem_scanned":  false
+                  },
+    "assessment":  {
+                       "g0_status":  "unverified",
+                       "m4_status":  "unverified",
+                       "emulator_identity":  "unverified",
+                       "same_platform_baseline":  "manual_only_unverified",
+                       "crossplay":  "not_tested",
+                       "is_emulator_validation":  false,
+                       "tool_test_is_not_emulator_validation":  true
+                   },
+    "citra":  {
+                  "executable":  {
+                                     "file_kind":  "exe",
+                                     "user_supplied":  true,
+                                     "supplied_path":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\probes\\run-01e505d7c89345e18fbd79b106573e2e\\UPPER.EXE",
+                                     "absolute_path":  "G:\\抛瓦饮料\\跨平台联机\\crossplay\\review-tools\\env-manifest\\probes\\run-01e505d7c89345e18fbd79b106573e2e\\UPPER.EXE",
+                                     "status":  "read_ok_pe_headers",
+                                     "size_bytes":  88,
+                                     "sha256":  "35d5646662452ed18dc44992677ad50c1ca1fd3cd778213ba50f4aaa7c163e9e",
+                                     "last_write_utc":  "2026-10-14T14:07:56.2731990Z",
+                                     "file_version":  "unknown",
+                                     "product_version":  "unknown",
+                                     "pe":  {
+                                                "status":  "recognized",
+                                                "machine":  "0x8664",
+                                                "architecture":  "x64",
+                                                "optional_magic":  "unknown",
+                                                "is_dll_header":  false,
+                                                "validation":  "headers_only_not_loader_validated",
+                                                "error_code":  "none"
+                                            },
+                                     "error_codes":  [
+
+                                                     ],
+                                     "read_error_type":  "unknown",
+                                     "read_error_reason":  "unknown",
+                                     "identity":  "unverified_user_supplied",
+                                     "runtime":  "not_executed"
+                                 },
+                  "pdb":  {
+                              "file_kind":  "pdb",
+                              "user_supplied":  false,
+                              "supplied_path":  "unknown",
+                              "absolute_path":  "unknown",
+                              "status":  "not_provided",
+                              "size_bytes":  "unknown",
+                              "sha256":  "unknown",
+                              "last_write_utc":  "unknown",
+                              "file_version":  "unknown",
+                              "product_version":  "unknown",
+                              "pe":  {
+                                         "status":  "not_provided",
+                                         "machine":  "unknown",
+                                         "architecture":  "unknown",
+                                         "optional_magic":  "unknown",
+                                         "is_dll_header":  "unknown",
+                                         "validation":  "not_run",
+                                         "error_code":  "unknown"
+                                     },
+                              "error_codes":  [
+
+                                              ],
+                              "read_error_type":  "unknown",
+                              "read_error_reason":  "unknown",
+                              "identity":  "unverified_user_supplied",
+                              "runtime":  "not_executed"
+                          },
+                  "manual":  {
+                                 "source":  "user_entered_not_verified",
+                                 "version_label":  "unknown",
+                                 "game_label":  "unknown",
+                                 "region":  "unknown",
+                                 "update_label":  "unknown",
+                                 "patch_label":  "unknown",
+                                 "same_platform_local_baseline":  "unknown",
+                                 "baseline_notes":  "unknown"
+                             }
+              },
+    "yuzu":  {
+                 "executable":  {
+                                    "file_kind":  "exe",
+                                    "user_supplied":  false,
+                                    "supplied_path":  "unknown",
+                                    "absolute_path":  "unknown",
+                                    "status":  "not_provided",
+                                    "size_bytes":  "unknown",
+                                    "sha256":  "unknown",
+                                    "last_write_utc":  "unknown",
+                                    "file_version":  "unknown",
+                                    "product_version":  "unknown",
+                                    "pe":  {
+                                               "status":  "not_provided",
+                                               "machine":  "unknown",
+                                               "architecture":  "unknown",
+                                               "optional_magic":  "unknown",
+                                               "is_dll_header":  "unknown",
+                                               "validation":  "not_run",
+                                               "error_code":  "unknown"
+                                           },
+                                    "error_codes":  [
+
+                                                    ],
+                                    "read_error_type":  "unknown",
+                                    "read_error_reason":  "unknown",
+                                    "identity":  "unverified_user_supplied",
+                                    "runtime":  "not_executed"
+                                },
+                 "pdb":  {
+                             "file_kind":  "pdb",
+                             "user_supplied":  false,
+                             "supplied_path":  "unknown",
+                             "absolute_path":  "unknown",
+                             "status":  "not_provided",
+                             "size_bytes":  "unknown",
+                             "sha256":  "unknown",
+                             "last_write_utc":  "unknown",
+                             "file_version":  "unknown",
+                             "product_version":  "unknown",
+                             "pe":  {
+                                        "status":  "not_provided",
+                                        "machine":  "unknown",
+                                        "architecture":  "unknown",
+                                        "optional_magic":  "unknown",
+                                        "is_dll_header":  "unknown",
+                                        "validation":  "not_run",
+                                        "error_code":  "unknown"
+                                    },
+                             "error_codes":  [
+
+                                             ],
+                             "read_error_type":  "unknown",
+                             "read_error_reason":  "unknown",
+                             "identity":  "unverified_user_supplied",
+                             "runtime":  "not_executed"
+                         },
+                 "manual":  {
+                                "source":  "user_entered_not_verified",
+                                "version_label":  "unknown",
+                                "game_label":  "unknown",
+                                "region":  "unknown",
+                                "update_label":  "unknown",
+                                "patch_label":  "unknown",
+                                "same_platform_local_baseline":  "unknown",
+                                "baseline_notes":  "unknown"
+                            }
+             },
+    "limitations":  [
+                        "No emulator was executed, loaded, attached to, or injected.",
+                        "PE recognition is a bounded header check, not a loader-validity or emulator-identity proof.",
+                        "PDB identity and RSDS GUID/age matching are not checked; only explicitly supplied PDB bytes are hashed.",
+                        "Version resources and user labels are not trusted emulator fingerprints or game compatibility evidence.",
+                        "Unknown is explicit; manual baseline labels do not verify G0/M4 or crossplay."
+                    ]
+}

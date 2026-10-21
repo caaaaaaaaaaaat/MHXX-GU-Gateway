@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# citra-control hand-written synthetic golden - NOT a capture, ROM dump or save file.
+#
+# node_info: Yuzu LdnNodeInfo (0x40).
+#   ipv4_address 10.83.0.1 | mac_address 02:00:00:00:00:01 | node_id 1
+#   is_connected 1 | user_name "PLAYER1" + 26 NUL | pad | version 1 | pad 0x10
+# total length 64 bytes (0x40)
+node_info = 0a 53 00 01 02 00 00 00 00 01 01 01 50 4c 41 59 45 52 31 0000000000000000000000000000000000000000000000000000 00 01 00 00000000000000000000000000000000

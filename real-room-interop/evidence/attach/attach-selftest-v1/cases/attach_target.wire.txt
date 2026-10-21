@@ -1,0 +1,2 @@
+# scenario=attach_target protocol=v1 server=attach-selftest-v1 ok=1 ms=0
+# role C2S = bytes this harness put on the wire; role S2C = bytes the room sent

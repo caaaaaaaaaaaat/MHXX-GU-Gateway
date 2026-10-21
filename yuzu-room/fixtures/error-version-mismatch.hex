@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Real yuzu-room.exe reply, copied byte-for-byte from
+# crossplay/real-room-interop/evidence/real/yuzu-ea-2024/cases/version_mismatch.s2c.hex:
+# VersionMismatch carrying the server network_version 1. A replay of this file
+# ends Failed, so the CLI exits 1 (expected rejection).
+0a00000001

@@ -1,0 +1,35 @@
+yuzu-main-2022 kind=yuzu-room bytes=2017792 sha256=5175D6A108B022FE47C793FB3A57C2F26A7C1404A0F71827F464586963D8778A identity_match=True
+  pe_machine=34404 is64=True timestamp=2022-09-23T20:32:49Z imports=api-ms-win-crt-convert-l1-1-0.dll,api-ms-win-crt-environment-l1-1-0.dll,api-ms-win-crt-filesystem-l1-1-0.dll,api-ms-win-crt-heap-l1-1-0.dll,api-ms-win-crt-locale-l1-1-0.dll,api-ms-win-crt-math-l1-1-0.dll,api-ms-win-crt-runtime-l1-1-0.dll,api-ms-win-crt-stdio-l1-1-0.dll,api-ms-win-crt-string-l1-1-0.dll,api-ms-win-crt-time-l1-1-0.dll,api-ms-win-crt-utility-l1-1-0.dll,bcrypt.dll,CRYPT32.dll,fmt.dll,KERNEL32.dll,MSVCP140.dll,MSVCP140_ATOMIC_WAIT.dll,ole32.dll,SHELL32.dll,VCRUNTIME140.dll,VCRUNTIME140_1.dll,WINMM.dll,WS2_32.dll
+  symbols: RoomMember, dedicated_room, yuzu_room.cpp, room.cpp
+  options: room-name, room-description, max_members, password, preferred-game, preferred-game-id, username, token, web-api-url, ban-list-file, log-file, enable-yuzu-mods
+  markers: Room is open | Close with Q+Enter | has joined | Failed to create room | max_members needs to be in the range | Token is empty | Attempting to send to unknown
+  getopt: n:d:p:m:w:g:u:t:a:i:l:hv
+  supports_bind_address=False ready_marker=Room is open
+yuzu-ea-2024 kind=yuzu-room bytes=786944 sha256=741AC5E936D8EC03B71442EF2CCB1F336907AFE20477B6BAC5DA68177E0A32CC identity_match=True
+  pe_machine=34404 is64=True timestamp=2024-03-01T16:32:57Z imports=api-ms-win-crt-convert-l1-1-0.dll,api-ms-win-crt-environment-l1-1-0.dll,api-ms-win-crt-filesystem-l1-1-0.dll,api-ms-win-crt-heap-l1-1-0.dll,api-ms-win-crt-locale-l1-1-0.dll,api-ms-win-crt-math-l1-1-0.dll,api-ms-win-crt-runtime-l1-1-0.dll,api-ms-win-crt-stdio-l1-1-0.dll,api-ms-win-crt-string-l1-1-0.dll,api-ms-win-crt-utility-l1-1-0.dll,CRYPT32.dll,fmt.dll,KERNEL32.dll,libcrypto-3-x64.dll,libssl-3-x64.dll,MSVCP140.dll,MSVCP140_ATOMIC_WAIT.dll,ntdll.dll,ole32.dll,SHELL32.dll,VCRUNTIME140.dll,VCRUNTIME140_1.dll,WINMM.dll,WS2_32.dll,zlib1.dll
+  symbols: RoomMember, dedicated_room, yuzu_room.cpp, room.cpp
+  options: room-name, room-description, bind-address, max_members, password, preferred-game, preferred-game-id, username, token, web-api-url, ban-list-file, log-file, enable-yuzu-mods
+  markers: Room is open | Close with Q+Enter | has joined | Failed to create room | max_members needs to be in the range | Token is empty | Bind address is empty | Attempting to send to unknown
+  getopt: n:d:s:p:m:w:g:u:t:a:i:l:hv
+  supports_bind_address=True ready_marker=Room is open
+citra-msys2-2024 kind=citra-room bytes=5902336 sha256=15EB1D9D6C7423BD9F446828ABF49C1D82299339BC7BC80CABA292C3F826779D identity_match=True
+  pe_machine=34404 is64=True timestamp=2024-09-28T07:09:17Z imports=ADVAPI32.dll,api-ms-win-crt-convert-l1-1-0.dll,api-ms-win-crt-environment-l1-1-0.dll,api-ms-win-crt-filesystem-l1-1-0.dll,api-ms-win-crt-heap-l1-1-0.dll,api-ms-win-crt-locale-l1-1-0.dll,api-ms-win-crt-math-l1-1-0.dll,api-ms-win-crt-private-l1-1-0.dll,api-ms-win-crt-runtime-l1-1-0.dll,api-ms-win-crt-stdio-l1-1-0.dll,api-ms-win-crt-string-l1-1-0.dll,api-ms-win-crt-time-l1-1-0.dll,api-ms-win-crt-utility-l1-1-0.dll,bcrypt.dll,CRYPT32.dll,KERNEL32.dll,libc++.dll,ole32.dll,SHELL32.dll,WINMM.dll,WS2_32.dll
+  symbols: RoomMember, room.cpp, BanListMagic, N7Network4RoomE
+  options: room-name, room-description, max_members, password, preferred-game, preferred-game-id, username, token, web-api-url, ban-list-file, log-file, enable-citra-mods
+  markers: Room is open | Close with Q+Enter | has joined | Failed to create room | max_members needs to be in the range | Attempting to send to unknown
+  getopt: n:d:p:m:w:g:u:t:a:i:l:hv
+  supports_bind_address=False ready_marker=Room is open
+citra-canary kind=citra-room bytes=2627072 sha256=035BDFBB56D2262C27C54B6A22876BC07E6F1FF5B0886B582B2541ABA89AA95A identity_match=True
+  pe_machine=34404 is64=True timestamp=2024-03-04T08:40:51Z imports=api-ms-win-crt-convert-l1-1-0.dll,api-ms-win-crt-environment-l1-1-0.dll,api-ms-win-crt-filesystem-l1-1-0.dll,api-ms-win-crt-heap-l1-1-0.dll,api-ms-win-crt-locale-l1-1-0.dll,api-ms-win-crt-math-l1-1-0.dll,api-ms-win-crt-runtime-l1-1-0.dll,api-ms-win-crt-stdio-l1-1-0.dll,api-ms-win-crt-string-l1-1-0.dll,api-ms-win-crt-time-l1-1-0.dll,api-ms-win-crt-utility-l1-1-0.dll,bcrypt.dll,CRYPT32.dll,KERNEL32.dll,MSVCP140.dll,MSVCP140_ATOMIC_WAIT.dll,ole32.dll,SHELL32.dll,VCRUNTIME140.dll,VCRUNTIME140_1.dll,WINMM.dll,WS2_32.dll
+  symbols: Network::Room, RoomMember, WebService::RoomJson, room.cpp
+  options: room-name, room-description, max_members, password, preferred-game, preferred-game-id, username, token, web-api-url, ban-list-file, log-file, enable-citra-mods
+  markers: Room is open | Close with Q+Enter | has joined | Failed to create room | max_members needs to be in the range | Attempting to send to unknown
+  getopt: n:d:p:m:w:g:u:t:a:i:l:hv
+  supports_bind_address=False ready_marker=Room is open
+citra-game-bundle kind=citra-room bytes=24456528 sha256=43A4B8359648FA4BA44910036DD1C79D432D1524823104731FE861E8573752E9 identity_match=True
+  pe_machine=34404 is64=True timestamp=2019-09-22T17:07:21Z imports=ADVAPI32.dll,avcodec-58.dll,avformat-58.dll,AVRT.dll,avutil-56.dll,KERNEL32.dll,libgcc_s_seh-1.dll,libstdc++-6.dll,libwinpthread-1.dll,MF.dll,MFPlat.DLL,msvcrt.dll,ole32.dll,SDL2.dll,SHELL32.dll,swresample-3.dll,swscale-5.dll,USER32.dll,WINMM.dll,WS2_32.dll
+  symbols: RoomMember, citra-room.cpp, room.cpp, HandleJoinRequest, BanListMagic, N7Network4RoomE
+  options: room-name, room-description, max_members, password, preferred-game, preferred-game-id, username, token, web-api-url, ban-list-file, enable-citra-mods
+  markers: Room is open | Close with Q+Enter | Failed to create room | max_members needs to be in the range | Attempting to send to unknown
+  getopt: 
+  supports_bind_address=False ready_marker=Room is open

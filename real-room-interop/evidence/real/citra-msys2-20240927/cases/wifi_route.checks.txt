@@ -1,0 +1,25 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS destination_member_received_exactly_one_frame :: count=1
+PASS destination_member_bytes_exact :: actual=05 01 06 00 1f 32 69 6e 16 00 1f 32 fb aa 80 00 00 00 14 46 51 5c 67 72 7d 88 93 9e a9 b4 bf ca d5 e0 eb f6 01 0c 17
+PASS other_member_received_nothing :: count=0
+PASS sender_received_nothing :: count=0
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 50080)=0.0.0.0:39578(pid=50080)
+PASS server_log_reports_member_join :: join_success_frames=3 log_joined_lines=3
+PASS no_third_party_peer :: log_joined_lines=3 captured_join_success_frames=3 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE routing is by destination MAC only (citra room.cpp:876-892)
+NOTE dest_mac=00:1f:32:fb:aa:80
+NOTE wall_ms=441
+NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-wifi_route_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39578 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39578(pid=50080)
+NOTE server_ready_via=ready-marker

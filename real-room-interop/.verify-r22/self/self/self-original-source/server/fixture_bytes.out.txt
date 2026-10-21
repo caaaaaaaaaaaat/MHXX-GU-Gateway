@@ -1,0 +1,2 @@
+SELF_SERVER_READY room=rri-self-fixture_bytes bind=127.0.0.1 port=39589 slots=4 password=(set)
+SELF_SERVER_STOPPED

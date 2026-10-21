@@ -1,0 +1,22 @@
+PASS connect_a
+PASS join_success_a
+PASS room_information_received
+PASS room_information_before_join_success :: room_information_at=0 join_success_at=1
+PASS room_name :: got=rri-attach-selftest
+PASS member_slots :: got=8
+PASS room_port :: got=39811
+PASS member_list_contains_a
+PASS assigned_fake_ip_not_no_preferred_ip :: ip=c0 a8 57 51
+PASS connect_b
+PASS join_success_b
+PASS second_joiner_room_information
+PASS second_joiner_sees_first_member :: members=2
+PASS second_joiner_list_includes_self
+PASS status_member_join_seen :: status_nickname=rri-b1
+NOTE assigned_fake_ip=c0 a8 57 51
+NOTE release_ms=0
+NOTE wall_ms=1632
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39811 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=room exists, password known, at least one free member slot

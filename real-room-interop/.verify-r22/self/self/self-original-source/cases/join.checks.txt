@@ -1,0 +1,26 @@
+PASS connect_a
+PASS join_success_a
+PASS room_information_received
+PASS room_information_before_join_success :: room_information_at=0 join_success_at=1
+PASS room_name :: got=rri-self-join
+PASS member_slots :: got=8
+PASS room_port :: got=39573
+PASS member_list_contains_a
+PASS assigned_fake_ip_not_no_preferred_ip :: ip=c0 a8 50 d1
+PASS connect_b
+PASS join_success_b
+PASS second_joiner_room_information
+PASS second_joiner_sees_first_member :: members=2
+PASS second_joiner_list_includes_self
+PASS status_member_join_seen :: status_nickname=rri-b1
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 34944)=127.0.0.1:39573(pid=34944)
+PASS server_log_reports_member_join :: join_success_frames=2 log_joined_lines=2
+PASS no_third_party_peer :: log_joined_lines=2 captured_join_success_frames=2 expected_extra=0
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE assigned_fake_ip=c0 a8 50 d1
+NOTE release_ms=0
+NOTE wall_ms=1994
+NOTE command_line=build-mingw/real_room_self_server.exe --name rri-self-join --description real-room-interop --port 39573 --password pw1 --slots 8 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes

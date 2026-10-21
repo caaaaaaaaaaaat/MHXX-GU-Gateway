@@ -1,0 +1,22 @@
+PASS connect_a
+PASS join_success_a
+PASS connect_b
+PASS join_success_b
+PASS connect_c
+PASS join_success_c
+PASS broadcast_reached_member_b :: count=1 hex=05 01 c0 a8 db fc 13 88 01 c0 a8 63 63 13 89 03 01 00 00 00 18 7a 81 88 8f 96 9d a4 ab b2 b9 c0 c7 ce d5 dc e3 ea f1 f8 ff 06 0d 14 1b
+PASS broadcast_reached_member_c :: count=1
+PASS broadcast_not_echoed_to_sender :: count=0
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 42784)=127.0.0.1:39584(pid=42784)
+PASS server_log_reports_member_join :: join_success_frames=3 log_joined_lines=3
+PASS no_third_party_peer :: log_joined_lines=3 captured_join_success_frames=3 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE broadcast = every member except the sender (room.cpp:840-852)
+NOTE wall_ms=414
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39584 --room-name rri-real-proxy_broadcast --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE server_bind_endpoints=127.0.0.1:39584(pid=42784)
+NOTE server_ready_via=ready-marker

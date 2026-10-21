@@ -1,0 +1,49 @@
+PASS connect_password
+PASS password_before_version_server_frame_count :: count=1
+PASS password_before_version_no_join_success
+PASS password_before_version_bytes_exact :: actual=0a expected=0a
+PASS password_before_version_observed_decodes
+PASS password_before_version_observed_is_server_error
+PASS password_before_version_observed_id :: got WrongPassword
+PASS password_before_version_observed_server_version :: got 0
+PASS connect_nickname
+PASS nickname_before_version_server_frame_count :: count=1
+PASS nickname_before_version_no_join_success
+PASS nickname_before_version_bytes_exact :: actual=07 expected=07
+PASS nickname_before_version_observed_decodes
+PASS nickname_before_version_observed_is_server_error
+PASS nickname_before_version_observed_id :: got NameCollision
+PASS nickname_before_version_observed_server_version :: got 0
+PASS connect_c
+PASS join_success_c
+PASS connect_mac
+PASS mac_before_version_server_frame_count :: count=1
+PASS mac_before_version_no_join_success
+PASS mac_before_version_bytes_exact :: actual=08 expected=08
+PASS mac_before_version_observed_decodes
+PASS mac_before_version_observed_is_server_error
+PASS mac_before_version_observed_id :: got MacCollision
+PASS mac_before_version_observed_server_version :: got 0
+PASS connect_console_id
+PASS console_id_before_version_server_frame_count :: count=1
+PASS console_id_before_version_no_join_success
+PASS console_id_before_version_bytes_exact :: actual=0d expected=0d
+PASS console_id_before_version_observed_decodes
+PASS console_id_before_version_observed_is_server_error
+PASS console_id_before_version_observed_id :: got ConsoleIdCollision
+PASS console_id_before_version_observed_server_version :: got 0
+PASS server_started
+PASS server_bound_expected_address :: wildcard-authorized run: loopback_only=false and -AllowWildcardBind was given, so 0.0.0.0 is expected; only 127.0.0.1 and 0.0.0.0 are accepted :: endpoints(pid 38300)=0.0.0.0:39581(pid=38300)
+PASS server_log_reports_member_join :: join_success_frames=1 log_joined_lines=1
+PASS no_third_party_peer :: log_joined_lines=1 captured_join_success_frames=1 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE contested_mac=00:1f:32:be:52:3f
+NOTE each client above breaks two rules at once; the observed byte is the highest-priority failing check, not the last one
+NOTE wall_ms=33
+NOTE command_line="F:\citra mul\citra-windows-msys2-20240927-608383e\citra-room.exe" --room-name rri-real-error_order_v4 --room-description real-room-interop --preferred-game RealRoomInterop --port 39581 --max_members 8 --password pw1
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE wildcard_bind_authorized=true loopback_only=false client_source_address=127.0.0.1 (RawClient binds the loopback address explicitly; no client packet was sent from another interface)
+NOTE server_bind_endpoints=0.0.0.0:39581(pid=38300)
+NOTE server_ready_via=ready-marker

@@ -1,0 +1,41 @@
+PASS connect_password
+PASS password_before_version_server_frame_count :: count=1
+PASS password_before_version_no_join_success
+PASS password_before_version_bytes_exact :: actual=0a expected=0a
+PASS password_before_version_observed_decodes
+PASS password_before_version_observed_is_server_error
+PASS password_before_version_observed_id :: got WrongPassword
+PASS password_before_version_observed_server_version :: got 0
+PASS connect_nickname
+PASS nickname_before_version_server_frame_count :: count=1
+PASS nickname_before_version_no_join_success
+PASS nickname_before_version_bytes_exact :: actual=07 expected=07
+PASS nickname_before_version_observed_decodes
+PASS nickname_before_version_observed_is_server_error
+PASS nickname_before_version_observed_id :: got NameCollision
+PASS nickname_before_version_observed_server_version :: got 0
+PASS connect_c
+PASS join_success_c
+PASS connect_mac
+PASS mac_before_version_server_frame_count :: count=1
+PASS mac_before_version_no_join_success
+PASS mac_before_version_bytes_exact :: actual=08 expected=08
+PASS mac_before_version_observed_decodes
+PASS mac_before_version_observed_is_server_error
+PASS mac_before_version_observed_id :: got MacCollision
+PASS mac_before_version_observed_server_version :: got 0
+PASS connect_console_id
+PASS console_id_before_version_server_frame_count :: count=1
+PASS console_id_before_version_no_join_success
+PASS console_id_before_version_bytes_exact :: actual=0d expected=0d
+PASS console_id_before_version_observed_decodes
+PASS console_id_before_version_observed_is_server_error
+PASS console_id_before_version_observed_id :: got ConsoleIdCollision
+PASS console_id_before_version_observed_server_version :: got 0
+NOTE contested_mac=00:1f:32:3f:3d:6c
+NOTE each client above breaks two rules at once; the observed byte is the highest-priority failing check, not the last one
+NOTE wall_ms=3
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39812 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=room is password protected and has a free slot

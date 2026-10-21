@@ -1,0 +1,14 @@
+PASS connect
+PASS cross_family_version_server_frame_count :: count=1
+PASS cross_family_version_no_join_success
+PASS cross_family_version_bytes_exact :: actual=0a 00 00 00 01 expected=0a 00 00 00 01
+PASS cross_family_version_observed_decodes
+PASS cross_family_version_observed_is_server_error
+PASS cross_family_version_observed_id :: got VersionMismatch
+PASS cross_family_version_observed_server_version :: got 1
+NOTE sent v1 JoinRequest with citra network_version=4; server_version in response must be the v1 value 1
+NOTE wall_ms=8
+NOTE command_line=
+NOTE attach_target=127.0.0.1:39811 (no server process was started by this run)
+NOTE server_is_inventory=false (the V-017 inventory check is skipped on purpose)
+NOTE attach_needs=a free member slot

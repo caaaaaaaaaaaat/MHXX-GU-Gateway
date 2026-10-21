@@ -1,0 +1,29 @@
+PASS connect_a
+PASS join_success_a
+PASS room_information_received
+PASS room_information_before_join_success :: room_information_at=0 join_success_at=1
+PASS room_name :: got=rri-real-join
+PASS member_slots :: got=8
+PASS room_port :: got=39573
+PASS member_list_contains_a
+PASS assigned_fake_ip_not_no_preferred_ip :: ip=c0 a8 27 81
+PASS connect_b
+PASS join_success_b
+PASS second_joiner_room_information
+PASS second_joiner_sees_first_member :: members=2
+PASS second_joiner_list_includes_self
+PASS status_member_join_seen :: status_nickname=rri-b1
+PASS server_started
+PASS server_bound_loopback_only :: endpoints(pid 41424)=127.0.0.1:39573(pid=41424)
+PASS server_log_reports_member_join :: join_success_frames=2 log_joined_lines=2
+PASS no_third_party_peer :: log_joined_lines=2 captured_join_success_frames=2 expected_extra=0
+PASS no_announce_private_room_line :: expected 'Hosting a private room' (no --token/--web-api-url)
+PASS server_stopped_within_grace :: exit_code=0
+PASS port_released_after_exit :: endpoints_after_stop=<none>
+NOTE assigned_fake_ip=c0 a8 27 81
+NOTE release_ms=0
+NOTE wall_ms=1666
+NOTE command_line=C:\Users\马光述\AppData\Local\yuzu\yuzu-windows-msvc-early-access\yuzu-room.exe --bind-address 127.0.0.1 --port 39573 --room-name rri-real-join --room-description real-room-interop --max_members 8 --password pw1 --preferred-game RealRoomInterop
+NOTE server_ready=yes ready_via_endpoint=no ready_via_marker=yes client_connected_and_sent=yes
+NOTE server_bind_endpoints=127.0.0.1:39573(pid=41424)
+NOTE server_ready_via=ready-marker
