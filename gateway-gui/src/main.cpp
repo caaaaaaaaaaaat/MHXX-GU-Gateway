@@ -21,7 +21,8 @@ HWND main_window, server_edit, remote_edit, local_edit, password_edit, button;
 HWND heading, subtitle, state_text, count_text, endpoint_text, help_text;
 std::vector<HWND> fields;
 HWND about_window = nullptr, about_title, about_version, about_author,
-    about_qq, about_group, about_github, about_hint, about_button;
+    about_qq_label, about_qq, about_group_label, about_group,
+    about_github_label, about_github, about_button;
 int about_copied_id = 0;
 HFONT font, title_font, state_font, link_font;
 HBRUSH background;
@@ -143,14 +144,17 @@ void about_place(HWND h, int x, int y, int w, int ht) { MoveWindow(h, px(x), px(
 void about_layout(HWND window) {
     RECT r{}; GetClientRect(window, &r);
     const int w = MulDiv(r.right, 96, scale);
-    about_place(about_title, 28, 22, w - 56, 36);
-    about_place(about_version, 28, 64, w - 56, 22);
-    about_place(about_author, 28, 100, w - 56, 22);
-    about_place(about_qq, 28, 132, w - 56, 26);
-    about_place(about_group, 28, 162, w - 56, 26);
-    about_place(about_github, 28, 192, w - 56, 26);
-    about_place(about_hint, 28, 240, w - 56, 44);
-    about_place(about_button, w / 2 - 60, 296, 120, 34);
+    const int value_x = 130, value_w = w - 28 - value_x;
+    about_place(about_title, 28, 24, w - 56, 36);
+    about_place(about_version, 28, 68, w - 56, 22);
+    about_place(about_author, 28, 104, w - 56, 22);
+    about_place(about_qq_label, 28, 138, 60, 26);
+    about_place(about_qq, value_x, 138, value_w, 26);
+    about_place(about_group_label, 28, 170, 100, 26);
+    about_place(about_group, value_x, 170, value_w, 26);
+    about_place(about_github_label, 28, 202, 75, 26);
+    about_place(about_github, value_x, 202, value_w, 26);
+    about_place(about_button, w / 2 - 60, 248, 120, 34);
 }
 LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
     switch (message) {
@@ -166,10 +170,12 @@ LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         about_title = make(L"STATIC", L"MHXX/GU-Gateway", 0, 0, title_font);
         about_version = make(L"STATIC", (std::wstring(L"网关版本 ") + AppVersion).c_str(), 0, 0, font);
         about_author = make(L"STATIC", L"作者：小忆", 0, 0, font);
-        about_qq = make(L"STATIC", (std::wstring(L"QQ：") + QQNumber).c_str(), SS_NOTIFY, LnkQQ, link_font);
-        about_group = make(L"STATIC", (std::wstring(L"交流QQ群：") + QQGroup).c_str(), SS_NOTIFY, LnkGroup, link_font);
-        about_github = make(L"STATIC", (std::wstring(L"GitHub：") + GitHubUrl).c_str(), SS_NOTIFY, LnkGithub, link_font);
-        about_hint = make(L"STATIC", L"点击 QQ 号 / QQ 群号即可复制；点击 GitHub 地址可打开项目主页。", 0, 0, font);
+        about_qq_label = make(L"STATIC", L"QQ：", 0, 0, font);
+        about_qq = make(L"STATIC", QQNumber, SS_NOTIFY, LnkQQ, link_font);
+        about_group_label = make(L"STATIC", L"交流QQ群：", 0, 0, font);
+        about_group = make(L"STATIC", QQGroup, SS_NOTIFY, LnkGroup, link_font);
+        about_github_label = make(L"STATIC", L"GitHub：", 0, 0, font);
+        about_github = make(L"STATIC", GitHubUrl, SS_NOTIFY, LnkGithub, link_font);
         about_button = make(L"BUTTON", L"关闭", WS_TABSTOP | BS_DEFPUSHBUTTON, AboutClose, font);
         about_layout(h);
         return 0;
@@ -181,8 +187,6 @@ LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         SetBkMode(dc, TRANSPARENT);
         if (source == about_qq || source == about_group || source == about_github)
             SetTextColor(dc, RGB(0, 102, 204));
-        else if (source == about_hint)
-            SetTextColor(dc, RGB(122, 134, 148));
         else
             SetTextColor(dc, RGB(35, 48, 65));
         return reinterpret_cast<LRESULT>(background);
@@ -200,11 +204,11 @@ LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         case LnkQQ:
         case LnkGroup: {
             const bool qq = LOWORD(wp) == LnkQQ;
-            const std::wstring label = qq ? std::wstring(L"QQ：") + QQNumber : std::wstring(L"交流QQ群：") + QQGroup;
             if (copy_clipboard(h, qq ? QQNumber : QQGroup)) {
                 about_copied_id = LOWORD(wp);
-                SetWindowTextW(qq ? about_qq : about_group, (label + L"（已复制）").c_str());
-                SetTimer(h, 1, 1200, nullptr);
+                SetWindowTextW(qq ? about_qq : about_group,
+                    (std::wstring(qq ? QQNumber : QQGroup) + L"（已复制）").c_str());
+                SetTimer(h, 1, 1000, nullptr);
             }
             return 0;
         }
@@ -218,8 +222,8 @@ LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         return 0;
     case WM_TIMER:
         KillTimer(h, 1);
-        if (about_copied_id == LnkQQ) SetWindowTextW(about_qq, (std::wstring(L"QQ：") + QQNumber).c_str());
-        else if (about_copied_id == LnkGroup) SetWindowTextW(about_group, (std::wstring(L"交流QQ群：") + QQGroup).c_str());
+        if (about_copied_id == LnkQQ) SetWindowTextW(about_qq, QQNumber);
+        else if (about_copied_id == LnkGroup) SetWindowTextW(about_group, QQGroup);
         about_copied_id = 0;
         return 0;
     case WM_CLOSE:
@@ -235,7 +239,7 @@ LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
 }
 void show_about() {
     if (about_window) { SetForegroundWindow(about_window); return; }
-    RECT frame{0, 0, px(440), px(344)};
+    RECT frame{0, 0, px(560), px(300)};
     AdjustWindowRectEx(&frame, WS_POPUP | WS_CAPTION | WS_SYSMENU, FALSE, WS_EX_CONTROLPARENT);
     const int width = frame.right - frame.left, height = frame.bottom - frame.top;
     RECT owner{}; GetWindowRect(main_window, &owner);
