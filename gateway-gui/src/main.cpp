@@ -239,7 +239,16 @@ LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
 }
 void show_about() {
     if (about_window) { SetForegroundWindow(about_window); return; }
-    RECT frame{0, 0, px(560), px(300)};
+    const HDC dc = GetDC(main_window);
+    const HFONT old_font = reinterpret_cast<HFONT>(SelectObject(dc, link_font));
+    SIZE url_size{};
+    GetTextExtentPoint32W(dc, GitHubUrl, static_cast<int>(wcslen(GitHubUrl)), &url_size);
+    SelectObject(dc, old_font);
+    ReleaseDC(main_window, dc);
+    const int url_logical = MulDiv(url_size.cx, 96, scale);
+    const int wanted = 28 + 130 + url_logical + 28;
+    const int client_w = wanted > 560 ? wanted : 560;
+    RECT frame{0, 0, px(client_w), px(300)};
     AdjustWindowRectEx(&frame, WS_POPUP | WS_CAPTION | WS_SYSMENU, FALSE, WS_EX_CONTROLPARENT);
     const int width = frame.right - frame.left, height = frame.bottom - frame.top;
     RECT owner{}; GetWindowRect(main_window, &owner);
