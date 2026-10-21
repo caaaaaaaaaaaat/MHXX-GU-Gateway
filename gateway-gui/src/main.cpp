@@ -18,7 +18,9 @@ constexpr wchar_t QQNumber[] = L"1726956536";
 constexpr wchar_t QQGroup[] = L"741115244";
 gateway_gui::Backend backend;
 HWND main_window, server_edit, remote_edit, local_edit, password_edit, button;
-HWND heading, subtitle, state_text, count_text, endpoint_text, help_text;
+HWND heading, subtitle, state_text, count_text, endpoint_text, help_text, meme;
+int meme_w = 0, meme_h = 0;
+HBITMAP meme_image = nullptr;
 std::vector<HWND> fields;
 HWND about_window = nullptr, about_title, about_version, about_author,
     about_qq_label, about_qq, about_group_label, about_group,
@@ -83,6 +85,31 @@ HWND control(const wchar_t* cls, const wchar_t* label, DWORD style, int id = 0) 
     SendMessageW(h, WM_SETFONT, reinterpret_cast<WPARAM>(font), TRUE);
     return h;
 }
+HBITMAP scaled_bitmap(HBITMAP source, int width, int height) {
+    BITMAP info{}; GetObjectW(source, sizeof(info), &info);
+    HDC screen = GetDC(main_window);
+    BITMAPINFO header{};
+    header.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    header.bmiHeader.biWidth = width;
+    header.bmiHeader.biHeight = -height;
+    header.bmiHeader.biPlanes = 1;
+    header.bmiHeader.biBitCount = 32;
+    header.bmiHeader.biCompression = BI_RGB;
+    void* bits = nullptr;
+    HBITMAP scaled = CreateDIBSection(screen, &header, DIB_RGB_COLORS, &bits, nullptr, 0);
+    if (scaled) {
+        HDC source_dc = CreateCompatibleDC(screen);
+        HDC target_dc = CreateCompatibleDC(screen);
+        SelectObject(source_dc, source);
+        SelectObject(target_dc, scaled);
+        SetStretchBltMode(target_dc, HALFTONE);
+        SetBrushOrgEx(target_dc, 0, 0, nullptr);
+        StretchBlt(target_dc, 0, 0, width, height, source_dc, 0, 0, info.bmWidth, info.bmHeight, SRCCOPY);
+        DeleteDC(target_dc); DeleteDC(source_dc);
+    }
+    ReleaseDC(main_window, screen);
+    return scaled;
+}
 void place(HWND h, int x, int y, int w, int ht) { MoveWindow(h, px(x), px(y), px(w), px(ht), TRUE); }
 void layout() {
     RECT r{}; GetClientRect(main_window, &r);
@@ -100,9 +127,12 @@ void layout() {
     place(password_edit, 40 + (inner / 2), 218, (inner - 16) / 2, 32);
     place(button, 32, 276, 144, 38);
     place(count_text, 195, 281, inner - 163, 32);
-    place(state_text, 32, 343, inner, 62);
-    place(endpoint_text, 32, 413, inner, 32);
-    place(help_text, 32, 463, inner, 98);
+    place(state_text, 32, 343, 430, 62);
+    place(endpoint_text, 32, 413, 430, 32);
+    place(help_text, 32, 463, 430, 98);
+    if (meme_w > 0)
+        MoveWindow(meme, px(w - 32 - MulDiv(meme_w, 96, scale)), px(568 - MulDiv(meme_h, 96, scale)),
+            meme_w, meme_h, TRUE);
 }
 void update() {
     const auto v = backend.view();
@@ -296,6 +326,20 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         SendMessageW(state_text, WM_SETFONT, reinterpret_cast<WPARAM>(state_font), TRUE);
         endpoint_text = control(L"STATIC", L"Citra 连接地址：启动后显示", 0);
         help_text = control(L"STATIC", L"1. 填写 Yuzu 房间服务器地址、端口及密码，启动网关。\r\n2. Citra 直连上方本机地址，并填写同一个房间密码。\r\n3. Yuzu 直接加入服务器；多台本机 Citra 可共用此网关。\r\n请在联机期间保持此窗口开启。", 0);
+        meme = control(L"STATIC", L"", SS_BITMAP);
+        HBITMAP raw_meme = reinterpret_cast<HBITMAP>(LoadImageW(GetModuleHandleW(nullptr),
+            MAKEINTRESOURCEW(2), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION));
+        if (raw_meme) {
+            BITMAP meme_info{}; GetObjectW(raw_meme, sizeof(meme_info), &meme_info);
+            const double by_w = static_cast<double>(px(322)) / meme_info.bmWidth;
+            const double by_h = static_cast<double>(px(238)) / meme_info.bmHeight;
+            const double ratio = by_w < by_h ? by_w : by_h;
+            meme_w = static_cast<int>(meme_info.bmWidth * ratio);
+            meme_h = static_cast<int>(meme_info.bmHeight * ratio);
+            meme_image = scaled_bitmap(raw_meme, meme_w, meme_h);
+            DeleteObject(raw_meme);
+            SendMessageW(meme, STM_SETIMAGE, IMAGE_BITMAP, reinterpret_cast<LPARAM>(meme_image));
+        }
         SetTimer(h, 1, 200, nullptr);
         layout();
         smoke_log("WM_CREATE complete");
@@ -304,7 +348,7 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
     case WM_SIZE: layout(); return 0;
     case WM_GETMINMAXINFO: {
         auto* info = reinterpret_cast<MINMAXINFO*>(lp);
-        info->ptMinTrackSize = {px(640), px(630) + GetSystemMetrics(SM_CYMENU)}; return 0;
+        info->ptMinTrackSize = {px(800), px(600) + GetSystemMetrics(SM_CYMENU)}; return 0;
     }
     case WM_CTLCOLORSTATIC: {
         SetBkMode(reinterpret_cast<HDC>(wp), TRANSPARENT);
@@ -327,6 +371,7 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         smoke_log("WM_DESTROY");
         KillTimer(h, 1);
         DeleteObject(font); DeleteObject(title_font); DeleteObject(state_font); DeleteObject(link_font);
+        if (meme_image) { DeleteObject(meme_image); meme_image = nullptr; }
         PostQuitMessage(0); return 0;
     }
     return DefWindowProcW(h, message, wp, lp);
@@ -355,9 +400,9 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR command, int show) {
     HWND h = CreateWindowExW(WS_EX_CONTROLPARENT, cls.lpszClassName,
         (std::wstring(L"XXGU 联机网关 · ") + AppVersion).c_str(),
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_THICKFRAME,
-        CW_USEDEFAULT, CW_USEDEFAULT, 740, 670, nullptr, bar, instance, nullptr);
+        CW_USEDEFAULT, CW_USEDEFAULT, 840, 680, nullptr, bar, instance, nullptr);
     if (!h) return 2;
-    RECT desired{0, 0, px(700), px(590)};
+    RECT desired{0, 0, px(800), px(600)};
     AdjustWindowRectEx(&desired, static_cast<DWORD>(GetWindowLongPtrW(h, GWL_STYLE)), FALSE, WS_EX_CONTROLPARENT);
     desired.bottom += GetSystemMetrics(SM_CYMENU);
     SetWindowPos(h, nullptr, 0, 0, desired.right - desired.left, desired.bottom - desired.top, SWP_NOMOVE | SWP_NOZORDER);

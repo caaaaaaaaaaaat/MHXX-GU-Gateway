@@ -1,3 +1,4 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 // Application icon: the lowest icon ID becomes the executable's Explorer icon.
 1 ICON "app.ico"
+2 BITMAP "meme.bmp"
