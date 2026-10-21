@@ -339,14 +339,16 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR command, int show) {
     SetProcessDPIAware();
     INITCOMMONCONTROLSEX controls{sizeof(controls), ICC_STANDARD_CLASSES}; InitCommonControlsEx(&controls);
     background = CreateSolidBrush(RGB(247, 249, 252));
+    const HICON app_icon = LoadIconW(instance, MAKEINTRESOURCEW(1));
     WNDCLASSEXW cls{}; cls.cbSize = sizeof(cls); cls.hInstance = instance;
     cls.lpfnWndProc = proc; cls.lpszClassName = L"XXGUGatewayDesktop";
     cls.hCursor = LoadCursorW(nullptr, IDC_ARROW);
-    cls.hIcon = LoadIconW(nullptr, IDI_APPLICATION); cls.hbrBackground = background;
+    cls.hIcon = app_icon; cls.hIconSm = app_icon; cls.hbrBackground = background;
     if (!RegisterClassExW(&cls)) return 1;
     WNDCLASSEXW about_cls{}; about_cls.cbSize = sizeof(about_cls); about_cls.hInstance = instance;
     about_cls.lpfnWndProc = about_proc; about_cls.lpszClassName = L"XXGUAboutBox";
-    about_cls.hCursor = LoadCursorW(nullptr, IDC_ARROW); about_cls.hbrBackground = background;
+    about_cls.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+    about_cls.hIcon = app_icon; about_cls.hIconSm = app_icon; about_cls.hbrBackground = background;
     if (!RegisterClassExW(&about_cls)) return 1;
     HMENU bar = CreateMenu();
     AppendMenuW(bar, MF_STRING, MenuAbout, L"关于");

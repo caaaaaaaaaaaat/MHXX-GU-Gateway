@@ -45,9 +45,11 @@ try {
         $core += $obj
     }
     Compile $cxx ($flags + @('-c','src/main.cpp','-o',"$out/main.o"))
+    & 'G:/msys64/mingw64/bin/windres.exe' --include=res res/app.rc -O coff -o "$out/app_res.o"
+    if ($LASTEXITCODE -ne 0) { throw 'windres failed' }
     $package = "$out/XXGU-Gateway"
     New-Item -ItemType Directory -Force -Path $package | Out-Null
-    Compile $cxx ($link + @('-mwindows','-municode',"$out/main.o") + $core + $tail + @('-lcomctl32','-lgdi32','-lshell32','-o',"$package/XXGU-Gateway.exe"))
+    Compile $cxx ($link + @('-mwindows','-municode',"$out/main.o","$out/app_res.o") + $core + $tail + @('-lcomctl32','-lgdi32','-lshell32','-o',"$package/XXGU-Gateway.exe"))
     Copy-Item -LiteralPath 'USER-GUIDE.md' -Destination "$package/USER-GUIDE.md"
     Copy-Item -LiteralPath '../../01052024-yuzu-mirror-master/LICENSE.txt' -Destination "$package/LICENSE-GPL.txt"
     Copy-Item -LiteralPath '../room-transport/LICENSE.txt' -Destination "$package/LICENSE-GPL3.txt"
