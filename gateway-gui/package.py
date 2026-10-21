@@ -33,13 +33,13 @@ with ZipFile(package / 'SOURCE-CODE.zip', 'w', ZIP_DEFLATED) as archive:
     for file in sorted(source_files):
         archive.write(file, file.relative_to(root).as_posix())
 manifest = {
-    'version': 'V334',
+    'version': 'V335',
     'executable_sha256': sha256((package / 'XXGU-Gateway.exe').read_bytes()).hexdigest(),
     'sources': {file.relative_to(root).as_posix(): sha256(file.read_bytes()).hexdigest()
                 for file in sorted(source_files)},
 }
 (package / 'BUILD-MANIFEST.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())
-target = out / 'XXGU-Gateway-V334-win64.zip'
+target = out / 'XXGU-Gateway-V335-win64.zip'
 with ZipFile(target, 'w', ZIP_DEFLATED) as archive:
     for file in sorted(package.iterdir()):
         if file.is_file() and file.suffix.lower() != '.log':

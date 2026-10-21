@@ -3,6 +3,7 @@
 #define _UNICODE
 #include <windows.h>
 #include <commctrl.h>
+#include <shellapi.h>
 #include "gateway_gui/backend.hpp"
 #include <limits>
 #include <string>
@@ -10,11 +11,19 @@
 
 namespace {
 constexpr int Connect = 101, Server = 102, RemotePort = 103, LocalPort = 104, Password = 105;
+constexpr int MenuAbout = 200, LnkQQ = 201, LnkGroup = 202, LnkGithub = 203, AboutClose = 204;
+constexpr wchar_t AppVersion[] = L"V335";
+constexpr wchar_t GitHubUrl[] = L"https://github.com/caaaaaaaaaaaat/MHXX-GU-Gateway";
+constexpr wchar_t QQNumber[] = L"1726956536";
+constexpr wchar_t QQGroup[] = L"741115244";
 gateway_gui::Backend backend;
 HWND main_window, server_edit, remote_edit, local_edit, password_edit, button;
 HWND heading, subtitle, state_text, count_text, endpoint_text, help_text;
 std::vector<HWND> fields;
-HFONT font, title_font, state_font;
+HWND about_window = nullptr, about_title, about_version, about_author,
+    about_qq, about_group, about_github, about_hint, about_button;
+int about_copied_id = 0;
+HFONT font, title_font, state_font, link_font;
 HBRUSH background;
 bool closing = false;
 bool smoke = false;
@@ -118,6 +127,129 @@ void connect() {
     catch (const std::exception& e) { MessageBoxW(main_window, wide(e.what()).c_str(), L"无法启动网关", MB_OK | MB_ICONWARNING); }
     update();
 }
+bool copy_clipboard(HWND owner, const std::wstring& value) {
+    if (!OpenClipboard(owner)) return false;
+    EmptyClipboard();
+    const SIZE_T bytes = (value.size() + 1) * sizeof(wchar_t);
+    HGLOBAL memory = GlobalAlloc(GMEM_MOVEABLE, bytes);
+    if (!memory) { CloseClipboard(); return false; }
+    memcpy(GlobalLock(memory), value.c_str(), bytes);
+    GlobalUnlock(memory);
+    SetClipboardData(CF_UNICODETEXT, memory);
+    CloseClipboard();
+    return true;
+}
+void about_place(HWND h, int x, int y, int w, int ht) { MoveWindow(h, px(x), px(y), px(w), px(ht), TRUE); }
+void about_layout(HWND window) {
+    RECT r{}; GetClientRect(window, &r);
+    const int w = MulDiv(r.right, 96, scale);
+    about_place(about_title, 28, 22, w - 56, 36);
+    about_place(about_version, 28, 64, w - 56, 22);
+    about_place(about_author, 28, 100, w - 56, 22);
+    about_place(about_qq, 28, 132, w - 56, 26);
+    about_place(about_group, 28, 162, w - 56, 26);
+    about_place(about_github, 28, 192, w - 56, 26);
+    about_place(about_hint, 28, 240, w - 56, 44);
+    about_place(about_button, w / 2 - 60, 296, 120, 34);
+}
+LRESULT CALLBACK about_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
+    switch (message) {
+    case WM_CREATE: {
+        const HINSTANCE instance = GetModuleHandleW(nullptr);
+        const auto make = [&h, &instance](const wchar_t* cls, const wchar_t* label, DWORD style,
+                                          int id, HFONT f) {
+            HWND control = CreateWindowExW(0, cls, label, WS_CHILD | WS_VISIBLE | style, 0, 0, 0, 0,
+                h, id ? reinterpret_cast<HMENU>(static_cast<INT_PTR>(id)) : nullptr, instance, nullptr);
+            SendMessageW(control, WM_SETFONT, reinterpret_cast<WPARAM>(f), TRUE);
+            return control;
+        };
+        about_title = make(L"STATIC", L"MHXX/GU-Gateway", 0, 0, title_font);
+        about_version = make(L"STATIC", (std::wstring(L"网关版本 ") + AppVersion).c_str(), 0, 0, font);
+        about_author = make(L"STATIC", L"作者：小忆", 0, 0, font);
+        about_qq = make(L"STATIC", (std::wstring(L"QQ：") + QQNumber).c_str(), SS_NOTIFY, LnkQQ, link_font);
+        about_group = make(L"STATIC", (std::wstring(L"交流QQ群：") + QQGroup).c_str(), SS_NOTIFY, LnkGroup, link_font);
+        about_github = make(L"STATIC", (std::wstring(L"GitHub：") + GitHubUrl).c_str(), SS_NOTIFY, LnkGithub, link_font);
+        about_hint = make(L"STATIC", L"点击 QQ 号 / QQ 群号即可复制；点击 GitHub 地址可打开项目主页。", 0, 0, font);
+        about_button = make(L"BUTTON", L"关闭", WS_TABSTOP | BS_DEFPUSHBUTTON, AboutClose, font);
+        about_layout(h);
+        return 0;
+    }
+    case WM_SIZE: about_layout(h); return 0;
+    case WM_CTLCOLORSTATIC: {
+        const HDC dc = reinterpret_cast<HDC>(wp);
+        const HWND source = reinterpret_cast<HWND>(lp);
+        SetBkMode(dc, TRANSPARENT);
+        if (source == about_qq || source == about_group || source == about_github)
+            SetTextColor(dc, RGB(0, 102, 204));
+        else if (source == about_hint)
+            SetTextColor(dc, RGB(122, 134, 148));
+        else
+            SetTextColor(dc, RGB(35, 48, 65));
+        return reinterpret_cast<LRESULT>(background);
+    }
+    case WM_SETCURSOR: {
+        const HWND source = reinterpret_cast<HWND>(wp);
+        if ((source == about_qq || source == about_group || source == about_github) && LOWORD(lp) == HTCLIENT) {
+            SetCursor(LoadCursorW(nullptr, IDC_HAND));
+            return TRUE;
+        }
+        break;
+    }
+    case WM_COMMAND:
+        switch (LOWORD(wp)) {
+        case LnkQQ:
+        case LnkGroup: {
+            const bool qq = LOWORD(wp) == LnkQQ;
+            const std::wstring label = qq ? std::wstring(L"QQ：") + QQNumber : std::wstring(L"交流QQ群：") + QQGroup;
+            if (copy_clipboard(h, qq ? QQNumber : QQGroup)) {
+                about_copied_id = LOWORD(wp);
+                SetWindowTextW(qq ? about_qq : about_group, (label + L"（已复制）").c_str());
+                SetTimer(h, 1, 1200, nullptr);
+            }
+            return 0;
+        }
+        case LnkGithub:
+            ShellExecuteW(nullptr, L"open", GitHubUrl, nullptr, nullptr, SW_SHOWNORMAL);
+            return 0;
+        case AboutClose:
+            DestroyWindow(h);
+            return 0;
+        }
+        return 0;
+    case WM_TIMER:
+        KillTimer(h, 1);
+        if (about_copied_id == LnkQQ) SetWindowTextW(about_qq, (std::wstring(L"QQ：") + QQNumber).c_str());
+        else if (about_copied_id == LnkGroup) SetWindowTextW(about_group, (std::wstring(L"交流QQ群：") + QQGroup).c_str());
+        about_copied_id = 0;
+        return 0;
+    case WM_CLOSE:
+        DestroyWindow(h);
+        return 0;
+    case WM_DESTROY:
+        about_window = nullptr;
+        EnableWindow(main_window, TRUE);
+        SetForegroundWindow(main_window);
+        return 0;
+    }
+    return DefWindowProcW(h, message, wp, lp);
+}
+void show_about() {
+    if (about_window) { SetForegroundWindow(about_window); return; }
+    RECT frame{0, 0, px(440), px(344)};
+    AdjustWindowRectEx(&frame, WS_POPUP | WS_CAPTION | WS_SYSMENU, FALSE, WS_EX_CONTROLPARENT);
+    const int width = frame.right - frame.left, height = frame.bottom - frame.top;
+    RECT owner{}; GetWindowRect(main_window, &owner);
+    int x = owner.left + ((owner.right - owner.left) - width) / 2;
+    int y = owner.top + ((owner.bottom - owner.top) - height) / 2;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    EnableWindow(main_window, FALSE);
+    about_window = CreateWindowExW(WS_EX_CONTROLPARENT, L"XXGUAboutBox", L"关于 XXGU 联机网关",
+        WS_POPUP | WS_CAPTION | WS_SYSMENU, x, y, width, height, main_window, nullptr,
+        GetModuleHandleW(nullptr), nullptr);
+    ShowWindow(about_window, SW_SHOW);
+    UpdateWindow(about_window);
+}
 LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
     switch (message) {
     case WM_CREATE: {
@@ -129,6 +261,8 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         title_font = CreateFontW(-px(25), 0, 0, 0, FW_SEMIBOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET,
             OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Microsoft YaHei UI");
         state_font = CreateFontW(-px(18), 0, 0, 0, FW_SEMIBOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Microsoft YaHei UI");
+        link_font = CreateFontW(-px(15), 0, 0, 0, FW_SEMIBOLD, FALSE, TRUE, FALSE, DEFAULT_CHARSET,
             OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Microsoft YaHei UI");
         heading = control(L"STATIC", L"XXGU 联机网关", 0);
         SendMessageW(heading, WM_SETFONT, reinterpret_cast<WPARAM>(title_font), TRUE);
@@ -157,7 +291,7 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
     case WM_SIZE: layout(); return 0;
     case WM_GETMINMAXINFO: {
         auto* info = reinterpret_cast<MINMAXINFO*>(lp);
-        info->ptMinTrackSize = {px(640), px(630)}; return 0;
+        info->ptMinTrackSize = {px(640), px(630) + GetSystemMetrics(SM_CYMENU)}; return 0;
     }
     case WM_CTLCOLORSTATIC: {
         SetBkMode(reinterpret_cast<HDC>(wp), TRANSPARENT);
@@ -165,6 +299,7 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         return reinterpret_cast<LRESULT>(background);
     }
     case WM_COMMAND:
+        if (LOWORD(wp) == MenuAbout) show_about();
         if (LOWORD(wp) == Connect && HIWORD(wp) == BN_CLICKED) connect();
         return 0;
     case WM_TIMER:
@@ -178,7 +313,7 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
     case WM_DESTROY:
         smoke_log("WM_DESTROY");
         KillTimer(h, 1);
-        DeleteObject(font); DeleteObject(title_font); DeleteObject(state_font);
+        DeleteObject(font); DeleteObject(title_font); DeleteObject(state_font); DeleteObject(link_font);
         PostQuitMessage(0); return 0;
     }
     return DefWindowProcW(h, message, wp, lp);
@@ -196,18 +331,26 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR command, int show) {
     cls.hCursor = LoadCursorW(nullptr, IDC_ARROW);
     cls.hIcon = LoadIconW(nullptr, IDI_APPLICATION); cls.hbrBackground = background;
     if (!RegisterClassExW(&cls)) return 1;
-    HWND h = CreateWindowExW(WS_EX_CONTROLPARENT, cls.lpszClassName, L"XXGU 联机网关 · V334",
+    WNDCLASSEXW about_cls{}; about_cls.cbSize = sizeof(about_cls); about_cls.hInstance = instance;
+    about_cls.lpfnWndProc = about_proc; about_cls.lpszClassName = L"XXGUAboutBox";
+    about_cls.hCursor = LoadCursorW(nullptr, IDC_ARROW); about_cls.hbrBackground = background;
+    if (!RegisterClassExW(&about_cls)) return 1;
+    HMENU bar = CreateMenu();
+    AppendMenuW(bar, MF_STRING, MenuAbout, L"关于");
+    HWND h = CreateWindowExW(WS_EX_CONTROLPARENT, cls.lpszClassName,
+        (std::wstring(L"XXGU 联机网关 · ") + AppVersion).c_str(),
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_THICKFRAME,
-        CW_USEDEFAULT, CW_USEDEFAULT, 740, 670, nullptr, nullptr, instance, nullptr);
+        CW_USEDEFAULT, CW_USEDEFAULT, 740, 670, nullptr, bar, instance, nullptr);
     if (!h) return 2;
     RECT desired{0, 0, px(700), px(590)};
     AdjustWindowRectEx(&desired, static_cast<DWORD>(GetWindowLongPtrW(h, GWL_STYLE)), FALSE, WS_EX_CONTROLPARENT);
+    desired.bottom += GetSystemMetrics(SM_CYMENU);
     SetWindowPos(h, nullptr, 0, 0, desired.right - desired.left, desired.bottom - desired.top, SWP_NOMOVE | SWP_NOZORDER);
     smoke_log("window created");
     if (!smoke) ShowWindow(h, show);
     MSG msg{};
     while (GetMessageW(&msg, nullptr, 0, 0) > 0) {
-        if (!IsDialogMessageW(h, &msg)) { TranslateMessage(&msg); DispatchMessageW(&msg); }
+        if (!IsDialogMessageW(about_window ? about_window : h, &msg)) { TranslateMessage(&msg); DispatchMessageW(&msg); }
     }
     DeleteObject(background);
     smoke_log("message loop complete");

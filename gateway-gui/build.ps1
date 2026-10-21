@@ -47,7 +47,7 @@ try {
     Compile $cxx ($flags + @('-c','src/main.cpp','-o',"$out/main.o"))
     $package = "$out/XXGU-Gateway"
     New-Item -ItemType Directory -Force -Path $package | Out-Null
-    Compile $cxx ($link + @('-mwindows','-municode',"$out/main.o") + $core + $tail + @('-lcomctl32','-lgdi32','-o',"$package/XXGU-Gateway.exe"))
+    Compile $cxx ($link + @('-mwindows','-municode',"$out/main.o") + $core + $tail + @('-lcomctl32','-lgdi32','-lshell32','-o',"$package/XXGU-Gateway.exe"))
     Copy-Item -LiteralPath 'USER-GUIDE.md' -Destination "$package/USER-GUIDE.md"
     Copy-Item -LiteralPath '../../01052024-yuzu-mirror-master/LICENSE.txt' -Destination "$package/LICENSE-GPL.txt"
     Copy-Item -LiteralPath '../room-transport/LICENSE.txt' -Destination "$package/LICENSE-GPL3.txt"
@@ -64,7 +64,7 @@ try {
     }
     $inputs = @('src/backend.cpp','src/main.cpp','include/gateway_gui/backend.hpp','build.ps1','USER-GUIDE.md') + @($units | ForEach-Object { $_[1] })
     $hashes = @($inputs | Sort-Object -Unique | ForEach-Object { [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash.ToLower()} })
-    [pscustomobject]@{version='V334';executable_sha256=(Get-FileHash -LiteralPath "$package/XXGU-Gateway.exe").Hash.ToLower();inputs=$hashes} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$out/artifacts.json" -Encoding UTF8
+    [pscustomobject]@{version='V335';executable_sha256=(Get-FileHash -LiteralPath "$package/XXGU-Gateway.exe").Hash.ToLower();inputs=$hashes} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$out/artifacts.json" -Encoding UTF8
     python package.py
     if ($LASTEXITCODE) { throw 'Packaging failed' }
     Write-Output "READY: $PSScriptRoot/$package/XXGU-Gateway.exe"
