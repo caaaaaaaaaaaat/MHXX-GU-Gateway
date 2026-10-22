@@ -4,6 +4,8 @@ Standalone C++ gateway between Citra room protocol v4 and Yuzu room protocol v1,
 
 ## Current status (2026-10-22)
 
+**双向接纳已实测通过：Citra（MHXX）房主接纳 Yuzu（MHGU）客人，以及 Yuzu（MHGU）房主接纳 Citra（MHXX）客人均通过；两台 Yuzu + 两台 Citra 混合联机也已通过。双向接纳不再处于暂停或待验收状态。**
+
 The gateway core is V333; the desktop application is V335. On 2026-10-21 the user confirmed three-player entry with each host type (Citra host and Yuzu host), then confirmed normal operation with two Yuzu and two Citra clients. The project has entered desktop packaging. The four-player report did not specify host, join order, duration or quest stages. Extended retention, reconnects, quest loading/area transitions/results, every join order and independent simultaneous halls do not have complete acceptance coverage.
 
 Earlier V274/V320/V322 statements that live interoperability was pending are superseded by this feedback. The recorded V333 automated baseline was 1845 checks / 46 groups / zero failures and CLI 25/25. These are historical results, not tests rerun for this documentation update. Automated protocol tests and live game acceptance remain distinct evidence.
