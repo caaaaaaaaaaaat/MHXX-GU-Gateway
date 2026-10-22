@@ -25,7 +25,7 @@ Requires Windows PowerShell 5.1, GCC/G++/windres under `G:/msys64/mingw64`, inst
 
 The driver also needs original upstream sources at `../01052024-yuzu-mirror-master/src` and the upstream license. This snapshot is outside the GitHub source repository. In the full workspace this repository is named `crossplay`, beside the upstream tree. The driver rebuilds production sources, runs selected checks and packages the result without operating emulators.
 
-Outputs are under `gateway-gui/.build-desktop/`: `XXGU-Gateway/XXGU-Gateway.exe`, portable ZIP, matching source archive and `artifacts.json`. See [package.py](package.py) for archive names. `--smoke-test` creates the real window hidden, services its timer and closes without network connections. Backend regression uses an isolated original room and synthetic Citra ENet clients.
+Outputs are under `gateway-gui/.build-desktop/`: `XXGU-Gateway-V336-release-win64.zip` (exactly EXE + `使用说明.md`, licenses embedded), `XXGU-Gateway-V336-source.zip` (matching sources), and `release-V336/发布说明.md` (Release body). Version comes from `AppVersion`; the build packages and verifies both ZIPs and runs hidden-window smoke checks. Follow [RELEASE-WORKFLOW.md](RELEASE-WORKFLOW.md) for all future builds and releases; [releases/V336.md](releases/V336.md) contains this version's release notes. `artifacts.json` and `XXGU-Gateway/` are internal build artifacts. Backend regression uses an isolated original room and synthetic Citra ENet clients.
 
 ## Acceptance scope
 

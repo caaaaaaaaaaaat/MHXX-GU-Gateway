@@ -64,10 +64,15 @@ try {
     if ($RunTests) {
         & './tests/verify.ps1'
     }
-    $inputs = @('src/backend.cpp','src/main.cpp','include/gateway_gui/backend.hpp','include/gateway_gui/settings.hpp','build.ps1','USER-GUIDE.md') + @($units | ForEach-Object { $_[1] })
+    $version = [regex]::Match((Get-Content -Raw -Encoding UTF8 'src/main.cpp'), 'AppVersion\[\] = L"(V\d+)"').Groups[1].Value
+    if (-not $version) { throw 'Missing desktop version' }
+    $inputs = @('src/backend.cpp','src/main.cpp','include/gateway_gui/backend.hpp','include/gateway_gui/settings.hpp','build.ps1','package.py','USER-GUIDE.md',"releases/$version.md") + @($units | ForEach-Object { $_[1] })
     $hashes = @($inputs | Sort-Object -Unique | ForEach-Object { [pscustomobject]@{path=$_;sha256=(Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash.ToLower()} })
-    [pscustomobject]@{version='V336';executable_sha256=(Get-FileHash -LiteralPath "$package/XXGU-Gateway.exe").Hash.ToLower();inputs=$hashes} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$out/artifacts.json" -Encoding UTF8
+    [pscustomobject]@{version=$version;executable_sha256=(Get-FileHash -LiteralPath "$package/XXGU-Gateway.exe").Hash.ToLower();inputs=$hashes} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$out/artifacts.json" -Encoding UTF8
     python package.py
     if ($LASTEXITCODE) { throw 'Packaging failed' }
+    python tests/check-package.py
+    if ($LASTEXITCODE) { throw 'Release package verification failed' }
+    & './tests/ui-smoke.ps1'
     Write-Output "READY: $PSScriptRoot/$package/XXGU-Gateway.exe"
 } finally { Pop-Location }
