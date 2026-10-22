@@ -313,7 +313,7 @@ LRESULT CALLBACK config_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         listen_edit = make(L"EDIT", listen_address.c_str(), WS_TABSTOP | ES_AUTOHSCROLL,
                            ListenAddress, 28, 56, 440, 32);
         SendMessageW(listen_edit, EM_SETLIMITTEXT, 15, 0);
-        make(L"STATIC", L"127.0.0.1：仅本机，只有这台电脑上的 Citra 能连接（默认）。\r\n\r\n0.0.0.0：接受所有网卡上的连接，其他电脑也可接入。其他电脑请填写本电脑的实际 IP 地址和接入端口，不能填写 0.0.0.0；还需允许防火墙放行该 UDP 端口。\r\n\r\n也可填写本电脑某张网卡的 IPv4 地址，仅通过该地址接入。保存后，下次启动网关生效，下次打开程序也会保留。",
+        make(L"STATIC", L"127.0.0.1：仅本机\r\n0.0.0.0：接受所有网卡连接",
              0, 0, 28, 106, 440, 260);
         make(L"BUTTON", L"保存", WS_TABSTOP | BS_DEFPUSHBUTTON, ConfigSave, 348, 394, 120, 34);
         return 0;
