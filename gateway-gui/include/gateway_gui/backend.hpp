@@ -11,6 +11,7 @@ struct Config {
     unsigned server_port = 24872;
     unsigned local_port = 24875;
     std::string password;
+    std::string listen_address = "127.0.0.1";
 };
 enum class Phase { Disconnected, Starting, Listening, Connecting, Connected, Stopping, Failed };
 struct View {

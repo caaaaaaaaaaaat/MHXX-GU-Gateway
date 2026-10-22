@@ -1,4 +1,4 @@
-# XXGU-Gateway Windows GUI (V335)
+# XXGU-Gateway Windows GUI (V336)
 
 Native Win32 desktop application around the V333 gateway core. Start with the [user guide](USER-GUIDE.md): enter a Yuzu room server IPv4 address or hostname, UDP port, local Citra port and password. Connect same-machine Citra clients to the displayed endpoint; Yuzu connects directly to the original room server.
 
@@ -8,10 +8,10 @@ Native Win32 desktop application around the V333 gateway core. Start with the [u
 - MHXX/MHGU control-plane and dual-host discovery/admission are configured automatically. Each Citra uses one upstream member; an idle gateway adds no room member or observer connection.
 - First-run server and remote port are blank; the local port defaults to 8888. Normal window close saves all four fields, including explicitly cleared values, and the next launch restores them.
 - Settings live at `%LOCALAPPDATA%/XXGU-Gateway/settings.ini`; Windows current-user DPAPI encrypts the password. Smoke mode does not read or write user settings.
-- The About menu shows V335, author/contact information, copyable QQ/group entries and a GitHub link. The application uses the MHXX icon and displays the hunting-dog image at the bottom right.
+- The Configuration menu precedes About and saves the listener IPv4 address for future sessions. About shows V336, author/contact information, copyable QQ/group entries and a GitHub link. The application uses the MHXX icon and displays the hunting-dog image at the bottom right.
 - Stop/close waits asynchronously for gateway cleanup. There is no fixed session lifetime and no raw packet trace is enabled.
 
-The local listener stays on `127.0.0.1`; remote rooms must offer reachable IPv4. Hostnames resolve in the worker. Run a gateway on each Citra computer when using multiple machines. IPv6, public-lobby account authentication and automatic reconnect are not supported; rejoin in Citra after disconnecting.
+The listener defaults to `127.0.0.1`. Configuration accepts `0.0.0.0` for all interfaces or a local interface IPv4 address; other computers connect to the gateway computer's actual IP and UDP port, subject to firewall/network reachability. Saved changes apply on the next gateway start and persist across application restarts, including migration from older settings. The CLI retains its loopback guard. Remote rooms must offer reachable IPv4; hostnames resolve in the worker. IPv6, public-lobby account authentication and automatic reconnect are not supported; rejoin in Citra after disconnecting.
 
 ## Build and verification
 

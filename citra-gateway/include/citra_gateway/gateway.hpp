@@ -36,7 +36,8 @@ enum class ClientPhase { Framing, Joining, Joined, Closing, Closed };
 std::string phase_name(ClientPhase phase);
 
 struct Options {
-    // Loopback only; open() refuses any non 127.x.x.x listen address.
+    // Desktop may explicitly enable other IPv4 bindings; CLI stays loopback-only.
+    bool allow_remote_listen = false;
     std::string listen_address = "127.0.0.1";
     std::uint16_t listen_port = 24873;
     std::string room_address = "127.0.0.1";
@@ -467,10 +468,10 @@ public:
     Gateway(const Gateway&) = delete;
     Gateway& operator=(const Gateway&) = delete;
 
-    // Binds the loopback Citra-side listener: an ENet/UDP host (the deliverable
+    // Binds the Citra-side listener (loopback unless explicitly enabled): an ENet/UDP host (the deliverable
     // transport, one channel) or, with the harness-only
     // Options::citra_tcp_test_transport, the legacy TCP listener. Throws
-    // std::runtime_error when the address is not loopback or the port cannot be
+    // std::runtime_error when a non-loopback address is not enabled or the port cannot be
     // bound (explicit port conflict failure, never a silent fallback).
     void open();
     // Non-blocking, bounded work: accept, per-client I/O, per-client room poll.

@@ -9,6 +9,7 @@
 namespace gateway_gui {
 struct Settings {
     std::wstring server, server_port, local_port = L"8888", password;
+    std::wstring listen_address = L"127.0.0.1";
 };
 inline std::wstring settings_path() {
     wchar_t base[MAX_PATH]{};
@@ -28,6 +29,7 @@ inline Settings load_settings(const std::wstring& path) {
         return std::wstring(buffer.data());
     };
     result.server = read(L"Server", L"");
+    result.listen_address = read(L"ListenAddress", L"127.0.0.1");
     result.server_port = read(L"ServerPort", L"");
     result.local_port = read(L"LocalPort", L"8888");
     const auto encrypted = read(L"PasswordEncrypted", L"");
@@ -82,6 +84,7 @@ inline bool save_settings(const std::wstring& path, const Settings& settings) {
     bool ok = true;
     for (const auto& pair : std::vector<std::pair<const wchar_t*, std::wstring>>{
         {L"Server", settings.server}, {L"ServerPort", settings.server_port},
+        {L"ListenAddress", settings.listen_address},
         {L"LocalPort", settings.local_port}, {L"PasswordEncrypted", password}})
         ok = WritePrivateProfileStringW(L"Connection", pair.first, pair.second.c_str(), path.c_str()) && ok;
     WritePrivateProfileStringW(nullptr, nullptr, nullptr, path.c_str());

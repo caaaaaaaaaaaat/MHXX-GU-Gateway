@@ -89,6 +89,17 @@ int main() {
         room_transport::Runtime runtime;
         gateway_gui::Config config;
         check(gateway_gui::validate(config).empty(), "default configuration valid");
+        for (const auto address : {"", "localhost", "999.1.1.1", "224.0.0.1", "::1"}) {
+            config.listen_address = address;
+            check(!gateway_gui::validate(config).empty(), "invalid listener rejected");
+        }
+        config.listen_address = "0.0.0.0";
+        check(gateway_gui::validate(config).empty(), "wildcard listener valid");
+        auto options = gateway_gui::bridge_options(config, "127.0.0.1");
+        options.listen_port = 0;
+        { citra_gateway::Gateway listener(options); listener.open();
+          check(listener.port() != 0, "desktop wildcard listener binds"); }
+        config.listen_address = "127.0.0.1";
         config.server = "http://localhost:1234";
         check(!gateway_gui::validate(config).empty(), "URL rejected instead of misconnecting");
         config.server = "localhost"; config.local_port = 65536;
@@ -143,9 +154,11 @@ int main() {
             std::make_unique<Network::VerifyUser::NullBackend>(), {}, false), "hostname target room started");
         guard.active = true;
         config.server = "localhost";
+        config.listen_address = "0.0.0.0";
         backend.start(config);
         check(wait([&] { return backend.view().phase == gateway_gui::Phase::Listening; }), "restart and hostname resolution work");
         Client third(config.local_port, "GuiCitraC", 3);
+        check(backend.view().endpoint == "127.0.0.1:" + std::to_string(config.local_port), "wildcard advertises usable local endpoint");
         check(wait([&] { third.pump(); return third.joined && backend.view().upstream_count == 1; }), "hostname connection joins original server");
         room.Destroy();
         guard.active = false;

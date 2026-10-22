@@ -302,7 +302,7 @@ public:
                                      options_.listen_address);
         }
         const std::uint32_t host_order = ntohl(parsed.s_addr);
-        if ((host_order >> 24) != 127U) {
+        if ((host_order >> 24) != 127U && !options_.allow_remote_listen) {
             throw std::runtime_error("refusing to listen on a non loopback address: " +
                                      options_.listen_address);
         }

@@ -13,7 +13,8 @@
 namespace {
 constexpr int Connect = 101, Server = 102, RemotePort = 103, LocalPort = 104, Password = 105;
 constexpr int MenuAbout = 200, LnkQQ = 201, LnkGroup = 202, LnkGithub = 203, AboutClose = 204;
-constexpr wchar_t AppVersion[] = L"V335";
+constexpr int MenuConfig = 205, ConfigSave = 206, ListenAddress = 207;
+constexpr wchar_t AppVersion[] = L"V336";
 constexpr wchar_t GitHubUrl[] = L"https://github.com/caaaaaaaaaaaat/MHXX-GU-Gateway";
 constexpr wchar_t QQNumber[] = L"1726956536";
 constexpr wchar_t QQGroup[] = L"741115244";
@@ -30,6 +31,8 @@ int about_copied_id = 0;
 HFONT font, title_font, state_font, link_font;
 HBRUSH background;
 bool closing = false;
+HWND config_window = nullptr, listen_edit;
+std::wstring listen_address = L"127.0.0.1";
 bool smoke = false;
 int scale = 96;
 void smoke_log(const char* stage) {
@@ -151,6 +154,7 @@ void update() {
 void connect() {
     if (backend.running()) { backend.stop(); update(); return; }
     gateway_gui::Config config;
+    config.listen_address = utf8(listen_address);
     config.server = utf8(text(server_edit));
     config.server_port = port(remote_edit);
     config.local_port = port(local_edit);
@@ -294,6 +298,71 @@ void show_about() {
     ShowWindow(about_window, SW_SHOW);
     UpdateWindow(about_window);
 }
+LRESULT CALLBACK config_proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
+    switch (message) {
+    case WM_CREATE: {
+        const auto make = [h](const wchar_t* cls, const wchar_t* label, DWORD style, int id,
+                              int x, int y, int w, int ht) {
+            HWND item = CreateWindowExW(wcscmp(cls, L"EDIT") == 0 ? WS_EX_CLIENTEDGE : 0,
+                cls, label, WS_CHILD | WS_VISIBLE | style, px(x), px(y), px(w), px(ht), h,
+                reinterpret_cast<HMENU>(static_cast<INT_PTR>(id)), GetModuleHandleW(nullptr), nullptr);
+            SendMessageW(item, WM_SETFONT, reinterpret_cast<WPARAM>(font), TRUE);
+            return item;
+        };
+        make(L"STATIC", L"监听地址", 0, 0, 28, 24, 440, 24);
+        listen_edit = make(L"EDIT", listen_address.c_str(), WS_TABSTOP | ES_AUTOHSCROLL,
+                           ListenAddress, 28, 56, 440, 32);
+        SendMessageW(listen_edit, EM_SETLIMITTEXT, 15, 0);
+        make(L"STATIC", L"127.0.0.1：仅本机，只有这台电脑上的 Citra 能连接（默认）。\r\n\r\n0.0.0.0：接受所有网卡上的连接，其他电脑也可接入。其他电脑请填写本电脑的实际 IP 地址和接入端口，不能填写 0.0.0.0；还需允许防火墙放行该 UDP 端口。\r\n\r\n也可填写本电脑某张网卡的 IPv4 地址，仅通过该地址接入。保存后，下次启动网关生效，下次打开程序也会保留。",
+             0, 0, 28, 106, 440, 260);
+        make(L"BUTTON", L"保存", WS_TABSTOP | BS_DEFPUSHBUTTON, ConfigSave, 348, 394, 120, 34);
+        return 0;
+    }
+    case WM_COMMAND:
+        if (LOWORD(wp) == ConfigSave) {
+            gateway_gui::Config candidate;
+            candidate.listen_address = utf8(text(listen_edit));
+            const auto error = gateway_gui::validate(candidate);
+            if (!error.empty()) {
+                MessageBoxW(h, wide(error).c_str(), L"监听地址无效", MB_OK | MB_ICONWARNING);
+                return 0;
+            }
+            const auto address = text(listen_edit);
+            if (!smoke && !gateway_gui::save_settings(gateway_gui::settings_path(),
+                {text(server_edit), text(remote_edit), text(local_edit), text(password_edit), address})) {
+                MessageBoxW(h, L"无法保存配置，请检查用户配置目录的写入权限。", L"配置未保存", MB_OK | MB_ICONWARNING);
+                return 0;
+            }
+            listen_address = address;
+            DestroyWindow(h);
+        }
+        return 0;
+    case WM_CTLCOLORSTATIC:
+        SetBkMode(reinterpret_cast<HDC>(wp), TRANSPARENT);
+        SetTextColor(reinterpret_cast<HDC>(wp), RGB(35, 48, 65));
+        return reinterpret_cast<LRESULT>(background);
+    case WM_CLOSE: DestroyWindow(h); return 0;
+    case WM_DESTROY:
+        config_window = nullptr;
+        EnableWindow(main_window, TRUE);
+        SetForegroundWindow(main_window);
+        return 0;
+    }
+    return DefWindowProcW(h, message, wp, lp);
+}
+void show_config() {
+    if (config_window) { SetForegroundWindow(config_window); return; }
+    RECT rect{0, 0, px(496), px(450)};
+    AdjustWindowRectEx(&rect, WS_CAPTION | WS_SYSMENU, FALSE, WS_EX_CONTROLPARENT);
+    config_window = CreateWindowExW(WS_EX_CONTROLPARENT, L"XXGUConfigBox", L"配置",
+        WS_CAPTION | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT,
+        rect.right - rect.left, rect.bottom - rect.top, main_window, nullptr, GetModuleHandleW(nullptr), nullptr);
+    if (config_window) {
+        EnableWindow(main_window, FALSE);
+        if (!smoke) ShowWindow(config_window, SW_SHOW);
+        SetFocus(listen_edit);
+    }
+}
 LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
     switch (message) {
     case WM_CREATE: {
@@ -323,6 +392,7 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         SendMessageW(password_edit, EM_SETLIMITTEXT, 4096, 0);
         if (!smoke) {
             const auto saved = gateway_gui::load_settings(gateway_gui::settings_path());
+            listen_address = saved.listen_address;
             SetWindowTextW(server_edit, saved.server.c_str());
             SetWindowTextW(remote_edit, saved.server_port.c_str());
             SetWindowTextW(local_edit, saved.local_port.c_str());
@@ -364,18 +434,29 @@ LRESULT CALLBACK proc(HWND h, UINT message, WPARAM wp, LPARAM lp) {
         return reinterpret_cast<LRESULT>(background);
     }
     case WM_COMMAND:
+        if (LOWORD(wp) == MenuConfig) show_config();
         if (LOWORD(wp) == MenuAbout) show_about();
         if (LOWORD(wp) == Connect && HIWORD(wp) == BN_CLICKED) connect();
         return 0;
     case WM_TIMER:
         smoke_log("WM_TIMER");
         update();
-        if (smoke) PostMessageW(h, WM_CLOSE, 0, 0);
+        if (smoke) {
+            show_config();
+            if (!config_window) { PostQuitMessage(3); return 0; }
+            SetWindowTextW(listen_edit, L"0.0.0.0");
+            SendMessageW(config_window, WM_COMMAND, ConfigSave, 0);
+            show_config();
+            if (!config_window || text(listen_edit) != L"0.0.0.0") { PostQuitMessage(4); return 0; }
+            DestroyWindow(config_window);
+            smoke_log("configuration save/reopen PASS");
+            PostMessageW(h, WM_CLOSE, 0, 0);
+        }
         return 0;
     case WM_CLOSE:
         smoke_log("WM_CLOSE");
         if (!smoke && !closing && !gateway_gui::save_settings(gateway_gui::settings_path(),
-            {text(server_edit), text(remote_edit), text(local_edit), text(password_edit)}))
+            {text(server_edit), text(remote_edit), text(local_edit), text(password_edit), listen_address}))
             MessageBoxW(h, L"无法保存输入设置，请检查本机用户配置目录的写入权限。", L"设置未保存", MB_OK | MB_ICONWARNING);
         closing = true; backend.stop(); update(); return 0;
     case WM_DESTROY:
@@ -406,7 +487,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR command, int show) {
     about_cls.hCursor = LoadCursorW(nullptr, IDC_ARROW);
     about_cls.hIcon = app_icon; about_cls.hIconSm = app_icon; about_cls.hbrBackground = background;
     if (!RegisterClassExW(&about_cls)) return 1;
+    auto config_cls = about_cls;
+    config_cls.lpfnWndProc = config_proc; config_cls.lpszClassName = L"XXGUConfigBox";
+    if (!RegisterClassExW(&config_cls)) return 1;
     HMENU bar = CreateMenu();
+    AppendMenuW(bar, MF_STRING, MenuConfig, L"配置");
     AppendMenuW(bar, MF_STRING, MenuAbout, L"关于");
     HWND h = CreateWindowExW(WS_EX_CONTROLPARENT, cls.lpszClassName,
         (std::wstring(L"XXGU 联机网关 · ") + AppVersion).c_str(),
@@ -421,7 +506,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR command, int show) {
     if (!smoke) ShowWindow(h, show);
     MSG msg{};
     while (GetMessageW(&msg, nullptr, 0, 0) > 0) {
-        if (!IsDialogMessageW(about_window ? about_window : h, &msg)) { TranslateMessage(&msg); DispatchMessageW(&msg); }
+        if (!IsDialogMessageW(config_window ? config_window : (about_window ? about_window : h), &msg)) { TranslateMessage(&msg); DispatchMessageW(&msg); }
     }
     DeleteObject(background);
     smoke_log("message loop complete");

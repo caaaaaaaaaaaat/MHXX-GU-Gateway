@@ -7,6 +7,10 @@
 
 namespace gateway_gui {
 std::string validate(const Config& c) {
+    in_addr address{};
+    if (inet_pton(AF_INET, c.listen_address.c_str(), &address) != 1 ||
+        (ntohl(address.s_addr) >> 24) >= 224U)
+        return "请输入有效的监听 IPv4 地址，例如 127.0.0.1 或 0.0.0.0。";
     if (c.server.empty() || c.server.size() > 253 ||
         c.server.find_first_of(" /\\\t\r\n:") != std::string::npos)
         return "请输入 IPv4 地址或域名，不要包含协议、端口或路径。";
@@ -17,6 +21,8 @@ std::string validate(const Config& c) {
 }
 citra_gateway::Options bridge_options(const Config& c, const std::string& ipv4) {
     citra_gateway::Options o;
+    o.listen_address = c.listen_address;
+    o.allow_remote_listen = true;
     o.listen_port = static_cast<std::uint16_t>(c.local_port);
     o.room_address = ipv4;
     o.room_port = static_cast<std::uint16_t>(c.server_port);
@@ -98,7 +104,8 @@ void Backend::run(Config config) {
             }
             {
                 std::lock_guard lock(mutex_);
-                view_.endpoint = "127.0.0.1:" + std::to_string(config.local_port);
+                view_.endpoint = (config.listen_address == "0.0.0.0" ? "127.0.0.1" : config.listen_address)
+                    + ":" + std::to_string(config.local_port);
             }
             auto last_update = std::chrono::steady_clock::time_point{};
             std::uint64_t last_event = 0;
