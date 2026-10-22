@@ -1,5 +1,19 @@
 # room-client M1：离线 room 协议核心
 
+## Current role and entry point (2026-10-22)
+
+Offline Yuzu v1 codec and bounded session foundation. Networking is implemented by the sibling room-transport module, now used by the gateway. A fixture reaching Joined is an offline result.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./room-client/build.ps1
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 **目前不能连接任何房间。** 此目录仅为 M1 基础设施：标准 C++20 codec、同步有界状态机及离线 fixture CLI。
 不含 ENet、socket、假 ENet/server、模拟器 Hook、UDS→LDN 转换、游戏 payload translator 或 ZSTD 解压器。
 真实 ENet 客户端与原版 room 互操作留给独立 M2；本工具打印 Joined 只是离线 fixture 的状态，不是联网成功。
@@ -12,7 +26,7 @@
 - [main.cpp](<src/main.cpp>)：room-fixture 离线 CLI。
 - [golden.hpp](<tests/golden.hpp>)、[test_protocol.cpp](<tests/test_protocol.cpp>)：人工从源码推导的独立固定 hex 与异常/状态测试。
 - [CMakeLists.txt](<CMakeLists.txt>)：独立入口；[build.ps1](<build.ps1>)：本机已实测的直接 MinGW 构建/测试替代入口。
-- [M1 实测报告](<../../docs/room-client-m1-report.md>)、[协议审计](<../../docs/yuzu-protocol-audit.md>)、[验收矩阵](<../../docs/ACCEPTANCE.md>)。
+- M1 实测报告 (`../../docs/room-client-m1-report.md`; full workspace)、协议审计 (`../../docs/yuzu-protocol-audit.md`; full workspace)、验收矩阵 (`../../docs/ACCEPTANCE.md`; full workspace)。
 
 公开 API 已冻结。M2 不应修改此目录。Session 无 transport、线程或队列；宿主须串行调用，并提供不倒退的单调毫秒时间。
 M2 收到真实 ENet CONNECT 后调用 begin_join 并发送返回 bytes；每个真实 channel0 RECEIVE 调用 receive；周期调用 advance；实际断线调用 disconnected。
@@ -72,17 +86,17 @@ exit0=fixture 操作成功，exit1=协议/状态/文件错误或未完成加入�
 
 整数 u16/u32/u64 为 BE；IPv4 是四个原始 octet，**不是 u32，不进行端序反转**。
 字符串/数据为 u32BE **字节数** + 原始字节，保留内嵌 NUL，不做 Unicode 转码。
-证据：[packet.cpp](<../../01052024-yuzu-mirror-master/src/network/packet.cpp#L172-L259>)、[packet.h](<../../01052024-yuzu-mirror-master/src/network/packet.h#L146-L162>)。
+证据：packet.cpp (`../../01052024-yuzu-mirror-master/src/network/packet.cpp#L172-L259`; full workspace)、packet.h (`../../01052024-yuzu-mirror-master/src/network/packet.h#L146-L162`; full workspace)。
 
 | payload ID | 支持内容 | 证据 |
 |---|---|---|
-| 1 | nickname, IP4, version, password, token；Test 空凭据为25bytes | [room_member.cpp:284–295](<../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L284-L295>) |
-| 2 / 24 | 成功/Moderator + IP4；恰好5bytes | [room.cpp:641–658](<../../01052024-yuzu-mirror-master/src/network/room.cpp#L641-L658>) |
-| 3 | 完整 RoomInformation；成员含 nickname/IP/game name/u64 id/version/username/display/avatar | [room.cpp:772–794](<../../01052024-yuzu-mirror-master/src/network/room.cpp#L772-L794>) |
-| 4 / 7 / 14 | SetGameInfo、双向不同布局 chat、status | [room_member.cpp:668–699](<../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L668-L699>) |
-| 5 | 两端 family/IP/port、socket protocol、bool、opaque data | [room_member.cpp:627–640](<../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L627-L640>) |
-| 6 | LDN type、local/remote IP、bool、opaque data | [room_member.cpp:643–658](<../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L643-L658>) |
-| 8–13 / 15–16 / 22–23 | 已审计 server error；仅10另含u32BE服务器版本 | [room.cpp:590–748](<../../01052024-yuzu-mirror-master/src/network/room.cpp#L590-L748>) |
+| 1 | nickname, IP4, version, password, token；Test 空凭据为25bytes | room_member.cpp:284–295 (`../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L284-L295`; full workspace) |
+| 2 / 24 | 成功/Moderator + IP4；恰好5bytes | room.cpp:641–658 (`../../01052024-yuzu-mirror-master/src/network/room.cpp#L641-L658`; full workspace) |
+| 3 | 完整 RoomInformation；成员含 nickname/IP/game name/u64 id/version/username/display/avatar | room.cpp:772–794 (`../../01052024-yuzu-mirror-master/src/network/room.cpp#L772-L794`; full workspace) |
+| 4 / 7 / 14 | SetGameInfo、双向不同布局 chat、status | room_member.cpp:668–699 (`../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L668-L699`; full workspace) |
+| 5 | 两端 family/IP/port、socket protocol、bool、opaque data | room_member.cpp:627–640 (`../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L627-L640`; full workspace) |
+| 6 | LDN type、local/remote IP、bool、opaque data | room_member.cpp:643–658 (`../../01052024-yuzu-mirror-master/src/network/room_member.cpp#L643-L658`; full workspace) |
+| 8–13 / 15–16 / 22–23 | 已审计 server error；仅10另含u32BE服务器版本 | room.cpp:590–748 (`../../01052024-yuzu-mirror-master/src/network/room.cpp#L590-L748`; full workspace) |
 
 IDs17–21（moderation 请求/banlist）明确 UnsupportedMessage；其余未知 ID 拒绝。M1 不是全协议/full room 客户端。
 LDN type 0…5 是控制面；Proxy ID5 是独立 socket 数据面，data 在源客户端经 ZSTD。
@@ -116,6 +130,6 @@ receive 错误不会修改成员身份/room/membership，但单调时钟可以�
 ## 已实测 / 未完成
 
 最终直接 GCC 构建：6/6 groups，1,432 checks，24 固定 golden，431 全部 codec 截断前缀，106 异常长度案例；CLI 4/4。
-详细命令、最终哈希及失败尝试见 [M1 报告](<../../docs/room-client-m1-report.md>)。
+详细命令、最终哈希及失败尝试见 M1 报告 (`../../docs/room-client-m1-report.md`; full workspace)。
 CMake/CTest 因工具缺失未执行；额外 UBSan 因缺 -lubsan 链接失败，未提供 sanitizer 通过证据。
 未连接真实 room、未构建/运行模拟器、未执行 M2–M6 游戏/传输验收。SPDX 标识 GPL-2.0-or-later。

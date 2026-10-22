@@ -1,5 +1,19 @@
 # crossplay/citra-room — offline Citra room codec foundation
 
+## Current role and entry point (2026-10-22)
+
+Offline Citra v4 codec/session foundation used by citra-gateway. This is not the executable Citra room server. Its tests remain offline even though the complete gateway has subsequent live acceptance.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./citra-room/build.ps1
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 An offline, standard-library-only C++20 library and synthetic harness for the
 **Citra room protocol, `network_version` 4**
 (`citra-master/src/network/room.h:16`).
@@ -26,7 +40,7 @@ state-machine foundation and is **not** evidence of game interoperability.
 
 The full wire specification, decisions, test inventory, evidence and the
 explicit untested list are in
-[`docs/citra-room-report.md`](../../docs/citra-room-report.md).
+`docs/citra-room-report.md` (`../../docs/citra-room-report.md`; full workspace).
 
 ## Build and test (Windows, MinGW GCC)
 

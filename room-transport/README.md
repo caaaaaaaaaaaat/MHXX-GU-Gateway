@@ -1,8 +1,22 @@
 # M2a native ENet / original Room source interoperability
 
-**Not a MHXX↔MHGU gameplay bridge. M2b (the user's complete unmodified Yuzu / room distribution binary) is untested. M4–M6 are not completed.**
+## Current role and entry point (2026-10-22)
 
-This standalone GPL-2.0-or-later project adds a native ENet transport over the sibling M1 bounded codec/session. Its harness compiles the **unchanged** original [Room implementation](../../01052024-yuzu-mirror-master/src/network/room.cpp), [Packet implementation](../../01052024-yuzu-mirror-master/src/network/packet.cpp), and [verification implementation](../../01052024-yuzu-mirror-master/src/network/verify_user.cpp). It calls the original Room::Create with the original VerifyUser::NullBackend: a source-provided self-hosted mode without web validation, not a bypass of any real service or paid authentication. No emulator, plugin, or M1 source is edited. No public/official room is contacted.
+Native ENet transport used by the current gateway. The default remains numeric loopback; remote IPv4 is explicitly enabled by the desktop backend. This module tests room transport, while live MHXX/MHGU translation and acceptance belong to citra-gateway.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./room-transport/build.ps1 -RunTests
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
+**Module scope: room transport only. Historical M2 milestone boundaries below do not describe the current gateway project status.**
+
+This standalone GPL-2.0-or-later project adds a native ENet transport over the sibling M1 bounded codec/session. Its harness compiles the **unchanged** original Room implementation (`../../01052024-yuzu-mirror-master/src/network/room.cpp`; full workspace), Packet implementation (`../../01052024-yuzu-mirror-master/src/network/packet.cpp`; full workspace), and verification implementation (`../../01052024-yuzu-mirror-master/src/network/verify_user.cpp`; full workspace). It calls the original Room::Create with the original VerifyUser::NullBackend: a source-provided self-hosted mode without web validation, not a bypass of any real service or paid authentication. No emulator, plugin, or M1 source is edited. No public/official room is contacted.
 
 ## Offline rebuild / bounded test
 
@@ -27,7 +41,7 @@ Outputs under build-mingw: commands.txt, toolchain.txt, test.stdout.log, test.st
 - Default packet cap 65536, data 60000, string 4096, members 254; receive queue 128 messages / 262144 bytes; ENet maximumWaitingData 262144; outstanding outgoing 64 packets / 262144 bytes. Each configurable queue has a hard maximum 1024 packets / 4194304 bytes.
 - Outgoing budget covers native ENet packets **until ACK or reset**, not merely until host_flush. Packet freeCallback releases the ticket; the ticket shares its budget lifetime safely. Backpressure returns false rather than growing memory indefinitely. Inbound overflow fails closed and clears identity/data.
 - Snapshot contains core identity/room, last server error and native resource counters. Failure clears data queues/identity, destroys host, and retains error diagnostics. stop is idempotent and services graceful disconnect until its bounded deadline, then destroys ENet resources. Root Runtime initializes/deinitializes ENet with a serialized reference count. Each Transport owns a Runtime.
-- This milestone intentionally rejects any address other than numeric 127.0.0.1. It is a test/library foundation, not a general public-room client CLI.
+- The default transport restricts addresses to numeric 127.0.0.1. The current API also supports explicitly opted-in remote IPv4 for the desktop backend; it is not a general room-browser CLI.
 
 ## Original-source support boundary
 
@@ -45,4 +59,4 @@ Room membership and transport routing do not establish Citra UDS↔LDN control t
 
 ## Dependency provenance
 
-See [vendor provenance](vendor/PROVENANCE.md) and [file integrity manifest](vendor/manifest.json). Only open-source code was downloaded, under this project's vendor directory; no global packages were installed. Test result/evidence is recorded in [M2 report](../../docs/room-transport-m2-report.md).
+See [vendor provenance](vendor/manifest.json) and [file integrity manifest](vendor/manifest.json). Only open-source code was downloaded, under this project's vendor directory; no global packages were installed. Test result/evidence is recorded in M2 report (`../../docs/room-transport-m2-report.md`; full workspace).

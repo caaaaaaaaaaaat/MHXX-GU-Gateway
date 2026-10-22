@@ -4,6 +4,14 @@
 
 > 本项目仅供网络协议学习与技术研究。仓库不包含任何游戏 ROM、密钥、存档;联机请使用自建房间服务器,请遵守相关法律法规与用户协议。
 
+## 当前版本（2026-10-22）
+
+联机核心为 V333，Windows GUI 为 V335。GUI 首次启动时服务器地址与端口留空，本机 Citra 接入端口默认 `8888`；正常关闭时记住输入，密码通过当前 Windows 用户 DPAPI 加密。界面包含关于菜单、MHXX 图标及狩猎犬图片。
+
+现场确认覆盖两种房主的三人入厅及“两台 Yuzu + 两台 Citra 正常联机”。长时间稳定性、断线重连、任务加载/换区/结算、全部加入顺序与独立多厅尚无完整验收结论。
+
+本仓库根目录直接包含各模块，下文构建命令从此目录执行。各模块历史参考中带 `crossplay/` 前缀的命令以完整工程工作区为起点。完整工程中的 `docs/`、上游源码镜像和私密证据未随此源码仓库分发。
+
 ## 功能介绍
 
 - **跨模拟器联机**:Citra 上的 MHXX 与 Yuzu 上的 MHGU 加入同一场集会所,混合组队狩猎。2026-10 已完成"两台 Yuzu + 两台 Citra"四人混编与两种房主(XX 房主 / GU 房主)配置的现场验收。
@@ -24,12 +32,12 @@
 | [room-client](room-client/README.md) | M1 离线房间协议核心(C++20 codec + 有界状态机) |
 | [room-transport](room-transport/README.md) | M2 原生 ENet 传输,与未修改的原版 Room 源码互操作 |
 | [real-room-interop](real-room-interop/README.md) | 真实 yuzu-room / citra-room 互操作测试框架 |
-| [yuzu-room](yuzu-room/README.md) / [citra-room](citra-room) | Yuzu(LDN v1)/ Citra(v4) 房间协议离线 codec 基础库 |
-| [lan-codecs](lan-codecs) | 局域网帧格式 codec(UDS 帧、NetworkInfo/NodeInfo、zstd) |
+| [yuzu-room](yuzu-room/README.md) / [citra-room](citra-room/README.md) | Yuzu(LDN v1)/ Citra(v4) 房间协议离线 codec 基础库 |
+| [lan-codecs](lan-codecs/README.md) | 局域网帧格式 codec(UDS 帧、NetworkInfo/NodeInfo、zstd) |
 | [yuzu-capture](yuzu-capture/README.md) | 回环录制中继:录制真实 Yuzu 客户端与房间服务器之间的全部帧,用于协议逆向 |
 | [dll-probe](dll-probe/README.md) | DLL 生命周期探针(早期注入路线的可行性验证,当前主路线不注入) |
 | [tools](tools/README.md) | Node.js 追踪审计、数据流预览等研究工具 |
-| [env-manifest](env-manifest) / [review-tools](review-tools) | 环境清单与代码评审工具 |
+| [env-manifest](env-manifest/README.md) / [review-tools](review-tools/README.md) | 环境清单与代码评审工具 |
 | `reference/`(不入库) | 上游 Yuzu/Citra 源码只读快照,协议事实的引用出处,见下文"构建依赖" |
 
 ## 原理

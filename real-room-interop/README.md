@@ -1,5 +1,19 @@
 # real-room-interop — real room-server interoperability harness
 
+## Current role and entry point (2026-10-22)
+
+Research and regression harness for room-layer interoperability. It is separate from the production gateway. Self/attach/observe results do not establish complete game compatibility; real/probe modes retain their executable identity and AllowRun gates.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./real-room-interop/build.ps1
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 **This is a room-layer test harness, not a gameplay bridge.** Self mode proves that the
 harness (M2 client + this project's raw capture clients) works against the *unmodified
 original room source*; it is **not** real-distribution interoperability. Real mode drives a

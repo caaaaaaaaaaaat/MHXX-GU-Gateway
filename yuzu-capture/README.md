@@ -1,5 +1,19 @@
 # Yuzu v1 回环采集前端
 
+## Current role and entry point (2026-10-22)
+
+Optional loopback capture relay for research and regression. It forwards room bytes and does not perform game translation. The desktop gateway runs without this relay. Raw capture remains an explicit opt-in; private runtime files are not part of this source distribution.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./yuzu-capture/build.ps1 -RunTests
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 独立 ENet 观察前端：每个下游 peer 对应一条独立上游连接，连接原版自建房间。
 保留房间帧字节，不做 MHXX/MHGU 转换，不修改模拟器。只绑定与连接 127.0.0.1。
 

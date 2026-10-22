@@ -1,15 +1,34 @@
-# Gateway Desktop
+# XXGU-Gateway Windows GUI (V335)
 
-Windows native Win32 GUI around the verified V333 gateway core. No web server, shell subprocesses, observer member, room-browser connection or runtime GUI dependency. All network and DNS work runs on a worker thread. UI polls a mutex-protected status snapshot. Stop/close waits asynchronously for graceful gateway cleanup. The worker has no fixed session lifetime.
+Native Win32 desktop application around the V333 gateway core. Start with the [user guide](USER-GUIDE.md): enter a Yuzu room server IPv4 address or hostname, UDP port, local Citra port and password. Connect same-machine Citra clients to the displayed endpoint; Yuzu connects directly to the original room server.
 
-Build from the workspace root:
+## Current features (2026-10-22)
+
+- DNS and network work run on a worker thread. The window reports attached Citra count and actual upstream join progress separately. Closing/closed sessions are excluded; listening alone never counts as a successful server connection.
+- MHXX/MHGU control-plane and dual-host discovery/admission are configured automatically. Each Citra uses one upstream member; an idle gateway adds no room member or observer connection.
+- First-run server and remote port are blank; the local port defaults to 8888. Normal window close saves all four fields, including explicitly cleared values, and the next launch restores them.
+- Settings live at `%LOCALAPPDATA%/XXGU-Gateway/settings.ini`; Windows current-user DPAPI encrypts the password. Smoke mode does not read or write user settings.
+- The About menu shows V335, author/contact information, copyable QQ/group entries and a GitHub link. The application uses the MHXX icon and displays the hunting-dog image at the bottom right.
+- Stop/close waits asynchronously for gateway cleanup. There is no fixed session lifetime and no raw packet trace is enabled.
+
+The local listener stays on `127.0.0.1`; remote rooms must offer reachable IPv4. Hostnames resolve in the worker. Run a gateway on each Citra computer when using multiple machines. IPv6, public-lobby account authentication and automatic reconnect are not supported; rejoin in Citra after disconnecting.
+
+## Build and verification
+
+From this source repository root:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File crossplay/gateway-gui/build.ps1 -RunTests
+powershell -NoProfile -ExecutionPolicy Bypass -File ./gateway-gui/build.ps1 -RunTests
 ```
 
-Output: `.build-desktop/XXGU-Gateway/XXGU-Gateway.exe` and accompanying user guide/licenses. Build compiles production sources afresh and leaves previous V333 artifacts and live services untouched. Toolchain matches the existing MinGW gateway build. The remote transport is an explicit opt-in; legacy CLI and tests remain loopback-only by default. The application resolves IPv4/DNS in its worker and passes numeric IPv4 to the existing transport. The Citra listener remains loopback-only.
+Requires Windows PowerShell 5.1, GCC/G++/windres under `G:/msys64/mingw64`, installed static zstd, and Python 3 for packaging. ENet/fmt come from [room-transport/vendor](../room-transport/vendor/manifest.json).
 
-Connection fields are restored from `%LOCALAPPDATA%/XXGU-Gateway/settings.ini` and saved on normal window close. First-run server/remote port are blank and local port is 8888. The password is encrypted with Windows DPAPI for the current user. Smoke mode neither reads nor writes user settings. No raw packet trace is enabled. Attached count excludes closing/closed Citra sessions; upstream joined count is reported separately. No speculative successful connection is shown without an actual Citra-to-room join.
+The driver also needs original upstream sources at `../01052024-yuzu-mirror-master/src` and the upstream license. This snapshot is outside the GitHub source repository. In the full workspace this repository is named `crossplay`, beside the upstream tree. The driver rebuilds production sources, runs selected checks and packages the result without operating emulators.
 
-`--smoke-test` creates the real window hidden, services its timer and closes it without starting network connections. Backend tests use an isolated original Yuzu room and synthetic ENet Citra clients; they do not operate emulators. Additional gateway regression is logged under `.build-desktop`.
+Outputs are under `gateway-gui/.build-desktop/`: `XXGU-Gateway/XXGU-Gateway.exe`, portable ZIP, matching source archive and `artifacts.json`. See [package.py](package.py) for archive names. `--smoke-test` creates the real window hidden, services its timer and closes without network connections. Backend regression uses an isolated original room and synthetic Citra ENet clients.
+
+## Acceptance scope
+
+On 2026-10-21 the user confirmed V333 three-player hall entry with both host types, followed by normal operation with two Yuzu and two Citra clients. GUI automated checks cover counts, member slots, failures, stop/restart and hidden-window lifecycle. Core live acceptance and desktop automation are separate results. Extended stability, quest loading/area transitions/results, every join order and independent simultaneous halls do not have complete acceptance coverage.
+
+See [citra-gateway](../citra-gateway/README.md) for the core and CLI. GPL and third-party notices accompany the packaged application.

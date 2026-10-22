@@ -1,5 +1,19 @@
 # crossplay/yuzu-room — offline Yuzu room codec foundation
 
+## Current role and entry point (2026-10-22)
+
+Offline Yuzu v1 codec/session and replay CLI. This is not a runnable network room server. It remains an independent foundation/research module; the production transport uses room-client. Subsequent gateway live acceptance does not change this module's offline test boundary.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./yuzu-room/build.ps1
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 An offline (no ENet, no sockets, no threads) C++20 codec and synchronous client
 session for the Yuzu / Nintendo-LDN room protocol, network_version 1, as
 implemented by the official read-only reference tree:

@@ -1,5 +1,19 @@
 # M3 第一阶段：独立 Windows x64 DLL 生命周期探针
 
+## Current role and entry point (2026-10-22)
+
+Retained early DLL lifecycle experiment using its own loader host. The current production architecture is a standalone gateway with unmodified emulators; this probe is not required to run it.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./dll-probe/build.ps1
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 > **没有 Citra Hook、没有实际 Citra 注入、没有游戏联机。** 本目录只在自有测试 EXE 中显式加载独立 DLL，复制、校验并计数合成 UDS-like fixture。没有 detour、远程进程注入、符号/地址扫描、guest memory、socket/ENet 或宿主私有接口。合成字段与 256-byte 上限不是 Citra UDS wire format，也不是游戏兼容证据。
 
 ## 快速复现（已实测）
@@ -12,11 +26,11 @@
 # & './crossplay/dll-probe/build.ps1' -Compiler 'G:\msys64\mingw64\bin\g++.exe'
 ~~~
 
-[build.ps1](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build.ps1>) 不安装工具、不改 PATH/TEMP/TMP、不修改模拟器。默认绝对编译器是 [g++.exe](<G:/msys64/mingw64/bin/g++.exe>)；同目录调用 [gcc.exe](<G:/msys64/mingw64/bin/gcc.exe>)、[objdump.exe](<G:/msys64/mingw64/bin/objdump.exe>)。源码 C++17/C11，启用 -Wall -Wextra -Werror。脚本先切到自己的目录，用 -pipe 和相对路径显式编译 .o，再单独链接，避免本机非 ASCII 用户临时目录使 assembler 失败。结束恢复调用者目录。
+[build.ps1](build.ps1) 不安装工具、不改 PATH/TEMP/TMP、不修改模拟器。默认绝对编译器是 g++.exe (`G:/msys64/mingw64/bin/g++.exe`)；同目录调用 gcc.exe (`G:/msys64/mingw64/bin/gcc.exe`)、objdump.exe (`G:/msys64/mingw64/bin/objdump.exe`)。源码 C++17/C11，启用 -Wall -Wextra -Werror。脚本先切到自己的目录，用 -pipe 和相对路径显式编译 .o，再单独链接，避免本机非 ASCII 用户临时目录使 assembler 失败。结束恢复调用者目录。
 
-产物与源码隔离：[DLL](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build-mingw/dll_probe.dll>)、[自有宿主 EXE](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build-mingw/loader_host.exe>)、[构建日志](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build-mingw/build.log>)、[测试日志](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build-mingw/tests.log>)、[SHA-256](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build-mingw/sha256.txt>)。默认每次重建并运行测试；-SkipTests 只跳过运行，不能据此声称测试通过。
+产物与源码隔离：[DLL](build-mingw/dll_probe.dll)、[自有宿主 EXE](build-mingw/loader_host.exe)、[构建日志](build-mingw/build.log)、[测试日志](build-mingw/tests.log)、[SHA-256](build-mingw/sha256.txt)。默认每次重建并运行测试；-SkipTests 只跳过运行，不能据此声称测试通过。
 
-已实测 [g++.exe](<G:/msys64/mingw64/bin/g++.exe>) (Rev5, Built by MSYS2 project) 16.1.0，target x86_64-w64-mingw32，Windows 10.0.22631.0，Windows PowerShell 5.1。CMake/Ninja 未运行；[CMakeLists.txt](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/CMakeLists.txt>) 仅供以后具备工具时验证，不承诺其他编译器/平台。
+已实测 g++.exe (`G:/msys64/mingw64/bin/g++.exe`) (Rev5, Built by MSYS2 project) 16.1.0，target x86_64-w64-mingw32，Windows 10.0.22631.0，Windows PowerShell 5.1。CMake/Ninja 未运行；[CMakeLists.txt](CMakeLists.txt) 仅供以后具备工具时验证，不承诺其他编译器/平台。
 
 ### 单独运行与核验
 
@@ -32,7 +46,7 @@ $LASTEXITCODE # 预期 0
 
 ## ABI 与限额
 
-规范见 [dll_probe.h](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/include/dll_probe.h>)；[C11 编译测试](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/tests/header_c_smoke.c>) 对大小/偏移做静态断言。Windows x64 默认 packing、固定宽度整数、__cdecl、C 链接；ABI_VERSION=1，所有结构（含输出）调用前置零，并填 struct_size=sizeof(T)、abi_version=1。大小必须精确一致，较小/较大均拒绝，不声称可追加字段兼容。不要使用自定义 pack。无 STL、C++ 对象、动态内存所有权或异常跨 ABI。
+规范见 [dll_probe.h](include/dll_probe.h)；[C11 编译测试](tests/header_c_smoke.c) 对大小/偏移做静态断言。Windows x64 默认 packing、固定宽度整数、__cdecl、C 链接；ABI_VERSION=1，所有结构（含输出）调用前置零，并填 struct_size=sizeof(T)、abi_version=1。大小必须精确一致，较小/较大均拒绝，不声称可追加字段兼容。不要使用自定义 pack。无 STL、C++ 对象、动态内存所有权或异常跨 ABI。
 
 | 精确导出名称 | 用途 |
 |---|---|
@@ -71,7 +85,7 @@ $LASTEXITCODE # 预期 0
 
 ## 已执行测试与边界
 
-[loader_host.cpp](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/tests/loader_host.cpp>) 每次 LoadLibraryW 后完整解析六个导出，在成功 stop 后才 FreeLibrary。一次完整运行输出：
+[loader_host.cpp](tests/loader_host.cpp) 每次 LoadLibraryW 后完整解析六个导出，在成功 stop 后才 FreeLibrary。一次完整运行输出：
 
 ~~~text
 PASS suite=loader-version-fresh checks=13
@@ -86,10 +100,10 @@ SUMMARY suites=6 checks=673 failed=0 loads=33 unloads=33
 
 673 是运行期断言数（含测试套件外的加载/卸载检查），不是 673 个独立测试用例；C11 静态断言不计入其中。32 是额外重复循环，另有 1 次综合加载，所以共 33 次加载/卸载。覆盖：加载失败/未知符号后恢复，null/精确大小/版本/保留字段/限额，未初始化读取与提交、重复 start/stop、重新 start 统计清零，复制后修改源 fixture、固定黄金校验和，排队满不覆盖，stop(0) 超时→STOPPING 拒绝提交/启动→重试排空 join，空闲无回调退出，反复模块移除与句柄无净增长。
 
-同一产物另外独立运行五次，均为 673 checks/33 loads/33 unloads/exit=0，记录在 [五次回放日志](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/build-mingw/replay-tests.log>)。包括默认构建测试共六次宿主执行、4038 次断言、198 对加载/卸载，不意味着新增测试种类或长时稳定性证明。
+同一产物另外独立运行五次，均为 673 checks/33 loads/33 unloads/exit=0，记录在 [五次回放日志](build-mingw/replay-tests.log)。包括默认构建测试共六次宿主执行、4038 次断言、198 对加载/卸载，不意味着新增测试种类或长时稳定性证明。
 
-未覆盖：强制资源分配/Win32 API 失败、实际 C++ 抛出异常、非法非空指针、恶意内存破坏、并发 public API/并发 stop/unload（明确不支持）、任意时刻安全卸载、32-bit/ARM/Linux/MSVC/CMake、多日压力与真实 Citra/游戏。时间窗口测试依赖本机能在 500 ms 合成延时内执行几条宿主调用，不是任意系统负载下的硬实时测试。完整实施证据见 [M3 报告](<G:/抛瓦饮料/跨平台联机/docs/dll-probe-m3-report.md>)。
+未覆盖：强制资源分配/Win32 API 失败、实际 C++ 抛出异常、非法非空指针、恶意内存破坏、并发 public API/并发 stop/unload（明确不支持）、任意时刻安全卸载、32-bit/ARM/Linux/MSVC/CMake、多日压力与真实 Citra/游戏。时间窗口测试依赖本机能在 500 ms 合成延时内执行几条宿主调用，不是任意系统负载下的硬实时测试。完整实施证据见 M3 报告 (`G:/抛瓦饮料/跨平台联机/docs/dll-probe-m3-report.md`)。
 
 ## 来源与许可证
 
-本目录头文件、DLL、宿主、C smoke、构建描述均为本任务原创，没有复制 Citra/Yuzu/Luma 代码；仅依据项目安全验收需求设计。源码均含 SPDX-License-Identifier: GPL-2.0-or-later，许可说明见 [LICENSE.md](<G:/抛瓦饮料/跨平台联机/crossplay/dll-probe/LICENSE.md>)。Win32 API 来自系统头/库，GCC 链接产物包含其工具链运行库；发布时应保留对应许可证/例外与可对应的源码，不把这里的运行验证当作第三方许可证审计或可直接分发的发布包。
+本目录头文件、DLL、宿主、C smoke、构建描述均为本任务原创，没有复制 Citra/Yuzu/Luma 代码；仅依据项目安全验收需求设计。源码均含 SPDX-License-Identifier: GPL-2.0-or-later，许可说明见 [LICENSE.md](LICENSE.md)。Win32 API 来自系统头/库，GCC 链接产物包含其工具链运行库；发布时应保留对应许可证/例外与可对应的源码，不把这里的运行验证当作第三方许可证审计或可直接分发的发布包。

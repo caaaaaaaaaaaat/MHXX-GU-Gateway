@@ -1,5 +1,20 @@
 # citra-control
 
+## Current role and entry point (2026-10-22)
+
+Offline UDS/LDN parsing, generation, mapping and state-machine library used by the production gateway. This library itself opens no sockets; live acceptance belongs to the gateway, not its synthetic fixtures.
+
+Run from this source repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ./citra-control/build.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ./citra-control/test.ps1
+```
+
+See the [gateway status](../citra-gateway/README.md) and [desktop user guide](../gateway-gui/USER-GUIDE.md) for current player-facing behavior. The detailed reference below retains original milestone names and historical test counts. Commands containing `crossplay/` assume the parent engineering workspace; in a standalone checkout, omit that prefix. References to `../../docs/`, upstream source snapshots and private evidence refer to that larger workspace and are not distributed in this Git repository. Build scripts are the source of truth for required upstream paths and toolchains.
+
+## Detailed module reference
+
 SPDX-License-Identifier: GPL-3.0-or-later
 
 Citra《怪物猎人XX》(3DS, UDS/802.11 管理面) 与 Yuzu《怪物猎人GU》(NS, LDN) 之间的
