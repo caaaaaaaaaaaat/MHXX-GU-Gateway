@@ -63,6 +63,25 @@ struct Options {
     std::uint32_t leave_timeout_ms = 500;
     // Gateway-side watchdog for one join; must exceed the two transport timers.
     std::uint32_t join_watchdog_ms = 6000;
+    // V-338: the ENet peer timeout profile the upstream room link switches to
+    // once the ENet connect event arrives (room_transport only arms it from that
+    // event onward, so Connecting keeps the compact profile and an unreachable
+    // server still fails fast). 0/0 means "vendor defaults" (5000/30000), which
+    // is what a real Yuzu client and the Citra-facing listener already use.
+    // Filled from room_transport::Options defaults in transport_options() so the
+    // two libraries cannot drift; configurable for deterministic tests and for
+    // field tuning on lossy links.
+    std::uint32_t room_joined_timeout_minimum_ms = 5000;
+    std::uint32_t room_joined_timeout_limit_ms = 30000;
+    // V-338: queue overflow policy. The pre-V-338 gateway tore the Citra client
+    // down whenever a queue filled ("outbound queue limit" / "inbound queue
+    // limit"), so a burst of room traffic -- exactly what a 3-4 player hall
+    // produces, since room broadcasts scale with the member count -- could evict
+    // a player who was not experiencing any fault of their own. Under the
+    // default Drop policy the gateway counts the overflow and keeps the session
+    // alive; Close keeps the old fail-closed behaviour selectable.
+    enum class QueueOverflowPolicy { Drop, Close };
+    QueueOverflowPolicy queue_overflow_policy = QueueOverflowPolicy::Drop;
 
     std::size_t max_clients = 254;
     std::size_t max_frame_bytes = 65536;          // Citra frame hard cap (both transports)
@@ -84,6 +103,16 @@ struct Options {
     std::size_t room_outgoing_bytes = 262144;
     std::size_t proxy_compressed_bytes = 65536;
     std::size_t proxy_decompressed_bytes = 65536;
+    // V-338: ENet's per-peer reassembly cap on the Citra-facing host. The vendor
+    // default is 32 MiB (ENET_HOST_DEFAULT_MAXIMUM_WAITING_DATA, enet.h:218); the
+    // pre-V-338 gateway reused per_client_inbox_bytes (256 KiB) here, 128x below
+    // it. When enet_protocol_dispatch_incoming_commands sees
+    // totalWaitingData >= maximumWaitingData it takes notifyError, which resets
+    // that peer outright (vendor peer.c:956) -- a burst of room broadcasts held
+    // behind one lost packet could therefore hard-disconnect players who had no
+    // fault. The application inbox bound stays the real load guard (and now sheds
+    // instead of closing); this cap only needs to stop unbounded ENet growth.
+    std::size_t citra_enet_waiting_data_bytes = 4 * 1024 * 1024;
 
     std::uint32_t close_grace_ms = 500;
     std::size_t capture_limit = 64;
@@ -171,6 +200,14 @@ struct Options {
     bool ldn_gu_host_discovery = false;
     bool ldn_gu_host_admission = false;
     bool ldn_dual_host = false;
+    // V-337: dual-host mode retires the Citra-host role when the real MHXX host
+    // stops repeating its live beacon (Gateway::Impl::tick). The pre-V-337
+    // threshold reused kCitraAppdataMaxAgeMs (1500 ms), so an emulator hitch
+    // during quest loading or area transitions could demote the host role and
+    // deauth every local Citra guest. 3000 ms still fails over quickly (the
+    // Deauthentication frame remains the immediate path) while tolerating load
+    // pauses; configurable for deterministic tests.
+    std::uint32_t dual_host_beacon_timeout_ms = 3000;
     std::uint8_t uds_beacon_id = 0;
     bool have_uds_beacon_id = false;
     std::uint16_t uds_attributes = 0;
@@ -376,6 +413,12 @@ struct Counters {
     std::uint64_t queue_overflows = 0;
     std::uint64_t outbox_overflows = 0;
     std::uint64_t inbox_overflows = 0;
+    // V-338: frames discarded because a queue was full while the session stayed
+    // alive (QueueOverflowPolicy::Drop). The matching *_overflows counters still
+    // increment, so "the client was dropped" is now distinguishable from "the
+    // gateway shed load" without changing what a full session's counters mean.
+    std::uint64_t outbox_dropped = 0;
+    std::uint64_t inbox_dropped = 0;
 
     std::uint64_t mac_generated = 0;
     std::uint64_t ip_reassigned = 0;

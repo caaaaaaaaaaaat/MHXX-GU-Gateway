@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#include <timeapi.h>
 #include "gateway_gui/backend.hpp"
 #include <algorithm>
 #include <chrono>
@@ -31,6 +32,15 @@ citra_gateway::Options bridge_options(const Config& c, const std::string& ipv4) 
     o.connect_timeout_ms = 10000;
     o.join_timeout_ms = 10000;
     o.join_watchdog_ms = 25000;
+    // V-338: a full per-client queue must never disconnect a player who had no
+    // fault. The player-facing default is Drop; the reason is explained in
+    // releases/V338.md. The joined upstream profile is pinned here rather than
+    // left implicit so a future citra_gateway default change cannot silently
+    // tighten or loosen the desktop's network behavior.
+    o.queue_overflow_policy = citra_gateway::Options::QueueOverflowPolicy::Drop;
+    o.room_joined_timeout_minimum_ms = 5000;
+    o.room_joined_timeout_limit_ms = 30000;
+    o.citra_enet_waiting_data_bytes = 4 * 1024 * 1024;
     o.control_plane_enabled = true;
     o.ldn_dual_host = true;
     o.ldn_gu_host_discovery = true;
@@ -91,6 +101,12 @@ void Backend::stop() {
 }
 View Backend::view() const { std::lock_guard lock(mutex_); return view_; }
 void Backend::run(Config config) {
+    // V-337: the gateway loop is driven by Sleep(1). Without a timer-resolution
+    // request the Windows default (~15.6 ms) adds up to that much jitter to
+    // every tick, which widens every deadline window (transport timeouts, the
+    // dual-host beacon retirement). Matched by timeEndPeriod on every exit path
+    // below; winmm is already linked.
+    const bool timer_resolution = ::timeBeginPeriod(1) == TIMERR_NOERROR;
     try {
         room_transport::Runtime runtime;
         const auto ip = resolve(config.server);
@@ -158,5 +174,6 @@ void Backend::run(Config config) {
         view_.citra_count = view_.upstream_count = 0;
     }
     running_ = false;
+    if (timer_resolution) ::timeEndPeriod(1);
 }
 } // namespace gateway_gui

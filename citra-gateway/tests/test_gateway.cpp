@@ -5977,6 +5977,212 @@ void group_b323_dual_host_roles() {
     dump_documents(gateway,"b323_dual_host_roles");gateway.close();
 }
 
+// V-337: the dual-host beacon watchdog. The pre-V-337 threshold reused
+// kCitraAppdataMaxAgeMs (1500 ms), so an emulator hitch that paused the real
+// MHXX host's beacon cadence demoted the Citra-host role and deauthed every
+// local Citra guest. With Options::dual_host_beacon_timeout_ms the grace is
+// configurable; this group drives the promoted session through one watchdog
+// window and checks the former host resumes native GU discovery.
+void group_b337_dual_host_beacon_watchdog() {
+    RoomGuard room(take_port(),8);auto options=gateway_options(take_port(),room);
+    options.control_plane_enabled=true;options.ldn_dual_host=true;options.proxy_udp_port=12345;
+    options.ldn_comm_id_override=0x0100770008dd8000ULL;
+    options.have_uds_wlan_comm_id=true;options.uds_wlan_comm_id=0x00197110;
+    options.dual_host_beacon_timeout_ms=150;
+    citra_gateway::Gateway gateway(options);gateway.open();
+    RawRoomPeer native(room.port(),"native-337",room_client::network_version);
+    CitraPeer guest,host;guest.connect(gateway.port());
+    verify(join_peer(gateway,guest,"watch-guest","watch-guest-console"),"B337 lower-ID idle client joins");
+    host.connect(gateway.port());
+    verify(join_peer(gateway,host,"watch-host","watch-host-console",citra_room::no_preferred_mac,
+                     citra_room::network_version,"",{&guest,&host}),"B337 higher-ID host client joins");
+    verify(drive(gateway,{&guest,&host},[&]{native.pump(0);return native.message_of(room_client::MessageId::JoinSuccess).has_value();}),
+           "B337 native GU scanner joins");
+    const auto host_mac=*host.assigned_mac();
+    room_client::IPv4 host_ip{};
+    for(const auto& identity:gateway.identities())if(identity.mac==host_mac)host_ip=identity.fake_ip;
+    citra_control::BeaconParams params;params.source_mac=host_mac;
+    params.network_info.host_mac_address=host_mac;params.network_info.channel=11;
+    params.network_info.initialized=1;params.network_info.wlan_comm_id=options.uds_wlan_comm_id;
+    params.network_info.network_id=337;params.network_info.attributes=0x8000;
+    params.network_info.total_nodes=1;params.network_info.max_nodes=4;
+    params.appdata_size=200;params.appdata[0]=1;params.appdata[8]=1;
+    params.appdata[0x1c]=params.appdata[0x20]=1;params.appdata[52]='D';
+    params.nodes.resize(4);params.nodes[0].network_node_id=1;
+    params.nodes[0].friend_code_seed=0x3370000000000001ULL;params.bitmask=1;
+    citra_room::WifiPacket beacon;beacon.type=citra_room::FrameType::Beacon;beacon.channel=11;
+    beacon.transmitter=host_mac;beacon.destination=citra_room::broadcast_mac;
+    beacon.data=citra_control::build_beacon_frame(params).value;
+    const auto beacon_raw=citra_room::encode(beacon,citra_room::Direction::ClientToServer);
+    host.send(beacon_raw);
+    verify(drive(gateway,{&guest,&host},[&]{native.pump(0);
+        return std::find(guest.raw_frames().begin(),guest.raw_frames().end(),beacon_raw)!=guest.raw_frames().end();}),
+           "B337 valid real host beacon promotes the higher-ID session and reaches idle Citra");
+    // Drain everything the room has already delivered before taking the
+    // baseline. Native's ENet join completes in its constructor, BEFORE the
+    // Citra sessions join, so the host's join-time discovery Scan is broadcast
+    // to native and only absorbed here. Only a Scan past this drained baseline
+    // proves the watchdog — not the join-time discovery — retired the role.
+    while (native.pump(0)) {}
+    const auto scan_baseline = native.messages().size();
+    verify(drive(gateway,{&guest,&host},[&]{native.pump(0);
+        for(std::size_t n=scan_baseline;n<native.messages().size();++n) {
+            if(const auto* l=std::get_if<room_client::LdnPacket>(&native.messages()[n]);
+               l&&l->type==room_client::LdnType::Scan&&l->local_ip==host_ip) return true;
+        }
+        return false;}),
+           "B337 beacon watchdog retires the host role and resumes GU discovery");
+    bool promoted=false,resumed=false;
+    for(const auto& event:gateway.events()) {
+        if(event.kind!="dual.role")continue;
+        if(event.detail=="Citra host")promoted=true;
+        if(event.detail=="GU discovery")resumed=true;
+    }
+    check(promoted&&resumed,"B337 role ledger records promotion and the watchdog demotion");
+    dump_documents(gateway,"b337_dual_host_beacon_watchdog");gateway.close();
+}
+
+// V-338: the disconnect-stability revision. Three independent paths could tear a
+// Citra player off the gateway even though nothing was wrong with that player:
+//   1. a full per-client queue closed the session (queue_overflows + close),
+//   2. the Citra-facing ENet host reused the 256 KiB application inbox bound as
+//      its reassembly cap, 128x below the 32 MiB vendor default, and ENet resets
+//      a peer that exceeds it,
+//   3. the joined upstream timeout profile was not reachable from Options, so a
+//      field run could not widen the retransmit window.
+// This group drives each one. It must fail against the pre-V-338 code: (1)
+// closed the client, (2) was only observable through a forced reset, and (3) did
+// not exist as an option at all.
+void group_b338_disconnect_stability() {
+    // ---- 1. Queue overflow sheds the frame instead of evicting the player. ----
+    {
+        RoomGuard room(take_port(), 4);
+        auto options = gateway_options(take_port(), room);
+        // Deliberately smaller than one room frame: the bound trips on the very
+        // first outbound frame, which is the sharpest form of the pre-V-338 bug
+        // (that path closed the session immediately). Under Drop the session has
+        // to survive the drop instead, even though no frame fits.
+        options.per_client_outbox_bytes = 16;
+        options.per_client_outbox_frames = 1;
+        citra_gateway::Gateway gateway(options);
+        gateway.open();
+        CitraPeer player;
+        player.connect(gateway.port());
+        player.send(citra_join_bytes("shed-player", "shed-player-console",
+                                     citra_room::no_preferred_mac));
+        const bool tripped = drive(gateway, {&player},
+                                   [&] { return gateway.counters().outbox_overflows >= 1; }, 4000);
+        check(tripped, "B338 the outbound bound is still enforced and counted");
+        check(gateway.counters().outbox_dropped >= 1,
+              "B338 a shed outbound frame is counted as dropped, not as a disconnect");
+        check(gateway.counters().clients_closed_by_gateway == 0,
+              "B338 the default policy never closes the player for a full outbox");
+        bool drop_event = false, close_event = false;
+        for (const auto& event : gateway.events()) {
+            if (event.kind == "queue.drop") drop_event = true;
+            if (event.kind == "client.closed") close_event = true;
+        }
+        check(drop_event, "B338 the shed frame is visible as a queue.drop event");
+        check(!close_event, "B338 no client.closed event follows a shed frame");
+        // The session must survive: the client stays attached to the gateway even
+        // though its frames are being shed.
+        check(gateway.client_count() >= 1,
+              "B338 the shed session stays attached instead of being reaped");
+        check(!player.peer_closed(),
+              "B338 the shed player's transport is never closed by the gateway");
+        check(gateway.is_open(), "B338 the gateway stays open across the overflow");
+        dump_documents(gateway, "b338_queue_drop");
+        gateway.close();
+    }
+
+    // ---- 2. The explicit Close policy still fails closed, and is selectable. ----
+    {
+        RoomGuard room(take_port(), 4);
+        auto options = gateway_options(take_port(), room);
+        // Same deliberately too-small bound as case 1, so this is the exact
+        // scenario in which the old code tore the session down. With Close the
+        // teardown is still what happens, and the counters must say so instead of
+        // reporting a shed frame.
+        options.per_client_outbox_bytes = 16;
+        options.per_client_outbox_frames = 1;
+        options.queue_overflow_policy = citra_gateway::Options::QueueOverflowPolicy::Close;
+        citra_gateway::Gateway gateway(options);
+        gateway.open();
+        CitraPeer player;
+        player.connect(gateway.port());
+        player.send(citra_join_bytes("close-player", "close-player-console",
+                                     citra_room::no_preferred_mac));
+        const bool closed = drive(gateway, {&player},
+                                  [&] { return gateway.counters().clients_closed_by_gateway >= 1; },
+                                  4000);
+        check(closed, "B338 QueueOverflowPolicy::Close still tears a full session down");
+        check(gateway.counters().outbox_dropped == 0,
+              "B338 the Close policy aborts the session instead of shedding frames");
+        // close_after_flush sets the failure reason and, with an empty outbox,
+        // hard_closes at once, so the session is reaped rather than left in
+        // Closing. The observable difference from Drop is therefore: the session
+        // is gone and no frame was shed.
+        check(gateway.client_count() == 0,
+              "B338 the Close policy removes the offending session from the gateway");
+        check(gateway.is_open(), "B338 the Close policy tears down only the session, not the gateway");
+        dump_documents(gateway, "b338_queue_close");
+        gateway.close();
+    }
+
+    // ---- 3. The joined upstream timeout profile is a gateway option. ----
+    {
+        RoomGuard room(take_port(), 4);
+        auto options = enet_gateway_options(take_port(), room);
+        options.room_joined_timeout_minimum_ms = 4000;
+        options.room_joined_timeout_limit_ms = 45000;
+        citra_gateway::Gateway gateway(options);
+        gateway.open();
+        EnetCitraPeer client(gateway.port());
+        verify(connect_enet_peer(gateway, client), "B338 native Citra connects for the profile check");
+        client.send(citra_join_bytes("profile-player", "profile-console", citra_room::no_preferred_mac));
+        verify(until_enet(gateway, {&client},
+                          [&] { return gateway.counters().clients_joined >= 1; }, 4000),
+               "B338 the profile-carrying client joins the room");
+        // The transport arms the profile on the ENet connect event; the gateway
+        // only has to hand it down, so reaching Joined with these values proves
+        // the forward path (a bad pair would have thrown at construction).
+        check(gateway.counters().room_transport_failures == 0,
+              "B338 a widened joined profile does not fail the upstream link");
+        dump_documents(gateway, "b338_joined_profile");
+        gateway.close();
+    }
+
+    // ---- 4. Nonsense stability values are refused at construction. ----
+    {
+        RoomGuard room(take_port(), 2);
+        auto bad_min = gateway_options(take_port(), room);
+        bad_min.room_joined_timeout_minimum_ms = 0;
+        bool rejected_min = false;
+        try { citra_gateway::Gateway gateway(bad_min); }
+        catch (const std::invalid_argument&) { rejected_min = true; }
+        catch (const std::exception&) { }
+        check(rejected_min, "B338 a zero joined-timeout minimum is refused at construction");
+
+        auto bad_order = gateway_options(take_port(), room);
+        bad_order.room_joined_timeout_minimum_ms = 30000;
+        bad_order.room_joined_timeout_limit_ms = 5000;
+        bool rejected_order = false;
+        try { citra_gateway::Gateway gateway(bad_order); }
+        catch (const std::invalid_argument&) { rejected_order = true; }
+        catch (const std::exception&) { }
+        check(rejected_order, "B338 a minimum above the limit is refused at construction");
+
+        auto bad_wait = gateway_options(take_port(), room);
+        bad_wait.citra_enet_waiting_data_bytes = 1024; // below one maximal frame
+        bool rejected_wait = false;
+        try { citra_gateway::Gateway gateway(bad_wait); }
+        catch (const std::invalid_argument&) { rejected_wait = true; }
+        catch (const std::exception&) { }
+        check(rejected_wait,
+              "B338 a Citra ENet reassembly cap below one maximal frame is refused");
+    }
+}
+
 void group_b323_independent_halls() {
     RoomGuard room(take_port(),8);auto options=gateway_options(take_port(),room);
     options.control_plane_enabled=true;options.ldn_dual_host=true;options.proxy_udp_port=12345;
@@ -9725,6 +9931,8 @@ int main(int argc, char** argv) {
     run_group("B323_dual_reverse_mesh", [] { group_b322_gateway_peer_mesh(true); });
     run_group("B323_dual_host_roles", group_b323_dual_host_roles);
     run_group("B323_independent_halls", group_b323_independent_halls);
+    run_group("B337_dual_host_beacon_watchdog", group_b337_dual_host_beacon_watchdog);
+    run_group("B338_disconnect_stability", group_b338_disconnect_stability);
         run_group("B305_reverse_association", group_b305_reverse_association);
     run_group("B15_live_advertise", group_b15_live_advertise);
     run_group("B16_member_endpoints", group_b16_member_endpoints);

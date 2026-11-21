@@ -399,7 +399,10 @@ if ($RunTests) {
     Assert-Evidence 'a4.emitted' "$Out/evidence/a4_payload.counters.json" 'counters.proxy_frames_emitted' '2'
     Assert-Evidence 'a4.consumed' "$Out/evidence/a4_payload.counters.json" 'counters.proxy_frames_consumed' '2'
     Assert-Evidence 'a4.forwarded' "$Out/evidence/a4_payload.counters.json" 'counters.payload_forwarded' '4'
-    Assert-Evidence 'a4.unknown_categories' "$Out/evidence/a4_payload.counters.json" 'counters.payload_rejected_unknown_category' '6'
+    # V-337: five non-Data WifiPacket types, not six. ChatRequest left the
+    # unknown-category fallback when chat forwarding shipped, so the counter is
+    # 5 and this assertion had been stale against the committed behaviour.
+    Assert-Evidence 'a4.unknown_categories' "$Out/evidence/a4_payload.counters.json" 'counters.payload_rejected_unknown_category' '5'
     Assert-Evidence 'a5.unknown_source' "$Out/evidence/a5_fail_closed.counters.json" 'counters.unknown_source_rejections' '1'
     Assert-Evidence 'a5.self_echo' "$Out/evidence/a5_fail_closed.counters.json" 'counters.self_echo_rejections' '1'
     Assert-Evidence 'a5.sentinel' "$Out/evidence/a5_fail_closed.counters.json" 'counters.sentinel_mac_rejections' '1'
@@ -411,8 +414,16 @@ if ($RunTests) {
     Assert-Evidence 'a6.limit_exceeded' "$Out/evidence/a6_negative.counters.json" 'counters.limit_exceeded_rejections' '2'
     Assert-Evidence 'a6.large_payload_forwarded' "$Out/evidence/a6_negative.counters.json" 'counters.payload_forwarded' '4'
     Assert-Evidence 'a6.no_pre_decode_drop' "$Out/evidence/a6_negative.counters.json" 'counters.oversize_rejections' '1'
-    Assert-Evidence 'a8.outbox' "$Out/evidence/a8_bounds.counters.json" 'counters.outbox_overflows' '1'
+    # V-338: an outbound overflow no longer closes the client, so the 16-byte
+    # outbox in A8 sheds both of the frames that follow the join instead of
+    # tearing the session down after the first one. The bound is still counted
+    # (2 overflows), and the new outbox_dropped counter proves the frames were
+    # shed rather than the player disconnected; inbox keeps its single shed frame.
+    Assert-Evidence 'a8.outbox' "$Out/evidence/a8_bounds.counters.json" 'counters.outbox_overflows' '2'
+    Assert-Evidence 'a8.outbox_dropped' "$Out/evidence/a8_bounds.counters.json" 'counters.outbox_dropped' '2'
+    Assert-Evidence 'a8.outbox_no_client_close' "$Out/evidence/a8_bounds.counters.json" 'counters.clients_closed_by_gateway' '0'
     Assert-Evidence 'a8.inbox' "$Out/evidence/a8_bounds.counters.json" 'counters.inbox_overflows' '1'
+    Assert-Evidence 'a8.inbox_dropped' "$Out/evidence/a8_bounds.counters.json" 'counters.inbox_dropped' '1'
     Assert-Evidence 'a10.port_conflicts' "$Out/evidence/a10_port_conflict.counters.json" 'counters.port_conflicts' '1'
     Assert-Evidence 'a11.relay_emitted' "$Out/evidence/a11_peer_relay.counters.json" 'counters.peer_relay_frames_emitted' '2'
     Assert-Evidence 'a11.relay_consumed' "$Out/evidence/a11_peer_relay.counters.json" 'counters.peer_relay_frames_consumed' '2'

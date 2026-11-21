@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -155,6 +156,24 @@ void usage() {
         << "                       citra-room.exe relay instead of dropping non-Data frames.\n"
         << "                       Mutually exclusive with --control-plane.\n"
         << "  --emitted-limit <n>  cap on the G-b' emitted frame log (default 256)\n"
+        << "  --joined-timeout-min <ms>, --joined-timeout-max <ms>\n"
+        << "                       V-338: ENet retransmit profile for the upstream room\n"
+        << "                       link AFTER the connection is up (defaults 5000/30000,\n"
+        << "                       the ENet defaults; minimum <= limit, 1..60000).\n"
+        << "                       Connecting keeps its fast-fail profile, so an\n"
+        << "                       unreachable server still fails quickly. Raise these on\n"
+        << "                       a lossy link before blaming the game.\n"
+        << "  --queue-policy <drop|close>\n"
+        << "                       V-338: what a full per-client queue means. drop\n"
+        << "                       (default) sheds the frame and keeps the player;\n"
+        << "                       close restores the pre-V-338 teardown. Either way\n"
+        << "                       outbox_overflows/inbox_overflows count the event and\n"
+        << "                       outbox_dropped/inbox_dropped say a frame was shed.\n"
+        << "  --citra-enet-waiting-data <bytes>\n"
+        << "                       V-338: ENet reassembly budget per Citra peer on the\n"
+        << "                       listener (default 4 MiB). ENet resets a peer that\n"
+        << "                       exceeds it, so this must stay well above one maximal\n"
+        << "                       frame; must be >= --max-inbound-citra, <= 64 MiB.\n"
         << "  --uds-profile <name> V-111 UDS beacon identity profile for the synthesized\n"
         << "                       Citra Beacon. 'mhxx' = what a real MHXX host advertises:\n"
         << "                       wlan-comm-id 00197110, id 00, attributes 8000,\n"
@@ -1006,6 +1025,57 @@ int main(int argc, char** argv) {
             }
             continue;
         }
+        // V-338: stability knobs for real-network field tuning. They are refused
+        // when out of range instead of being clamped, so a typo can never quietly
+        // ship a 1 s upstream timeout to players again.
+        if (a == "--joined-timeout-min" || a == "--joined-timeout-max" ||
+            a == "--citra-enet-waiting-data") {
+            if (!take_value(args, i, a.c_str(), value)) {
+                return 2;
+            }
+            const std::uint64_t parsed = parse_u64(value, number_ok);
+            if (!number_ok) {
+                std::cerr << "not a number: " << value << "\n";
+                return 2;
+            }
+            if (a == "--joined-timeout-min") {
+                if (parsed == 0 || parsed > 60000) {
+                    std::cerr << "joined timeout minimum out of range (1..60000 ms): " << value
+                              << "\n";
+                    return 2;
+                }
+                options.room_joined_timeout_minimum_ms = static_cast<std::uint32_t>(parsed);
+            } else if (a == "--joined-timeout-max") {
+                if (parsed == 0 || parsed > 60000) {
+                    std::cerr << "joined timeout limit out of range (1..60000 ms): " << value
+                              << "\n";
+                    return 2;
+                }
+                options.room_joined_timeout_limit_ms = static_cast<std::uint32_t>(parsed);
+            } else {
+                if (parsed == 0 || parsed > 64ull * 1024 * 1024) {
+                    std::cerr << "citra ENet waiting data out of range (1..64 MiB): " << value
+                              << "\n";
+                    return 2;
+                }
+                options.citra_enet_waiting_data_bytes = static_cast<std::size_t>(parsed);
+            }
+            continue;
+        }
+        if (a == "--queue-policy") {
+            if (!take_value(args, i, a.c_str(), value)) {
+                return 2;
+            }
+            if (value == "drop") {
+                options.queue_overflow_policy = citra_gateway::Options::QueueOverflowPolicy::Drop;
+            } else if (value == "close") {
+                options.queue_overflow_policy = citra_gateway::Options::QueueOverflowPolicy::Close;
+            } else {
+                std::cerr << "--queue-policy must be drop or close\n";
+                return 2;
+            }
+            continue;
+        }
         std::cerr << "unknown argument: " << a << "\n";
         usage();
         return 2;
@@ -1114,7 +1184,17 @@ int main(int argc, char** argv) {
     std::signal(SIGINT, on_signal);
     std::signal(SIGTERM, on_signal);
 
-    citra_gateway::Gateway gateway(options);
+    // V-338: the constructor now validates the joined-link timeout profile and the
+    // Citra ENet reassembly cap, so a bad combination is a usage error (2) rather
+    // than an uncaught throw.
+    std::unique_ptr<citra_gateway::Gateway> gateway_holder;
+    try {
+        gateway_holder = std::make_unique<citra_gateway::Gateway>(options);
+    } catch (const std::exception& error) {
+        std::cerr << "usage-error: " << error.what() << "\n";
+        return 2;
+    }
+    citra_gateway::Gateway& gateway = *gateway_holder;
     try {
         gateway.open();
     } catch (const std::exception& error) {

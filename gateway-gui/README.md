@@ -1,14 +1,16 @@
-# XXGU-Gateway Windows GUI (V336)
+# XXGU-Gateway Windows GUI (V338)
 
-Native Win32 desktop application around the V333 gateway core. Start with the [user guide](USER-GUIDE.md): enter a Yuzu room server IPv4 address or hostname, UDP port, local Citra port and password. Connect same-machine Citra clients to the displayed endpoint; Yuzu connects directly to the original room server.
+Native Win32 desktop application around the V338 gateway core. Start with the [user guide](USER-GUIDE.md): enter a Yuzu room server IPv4 address or hostname, UDP port, local Citra port and password. Connect same-machine Citra clients to the displayed endpoint; Yuzu connects directly to the original room server.
 
-## Current features (2026-10-22)
+## Current features (2026-11-22)
 
 - DNS and network work run on a worker thread. The window reports attached Citra count and actual upstream join progress separately. Closing/closed sessions are excluded; listening alone never counts as a successful server connection.
 - MHXX/MHGU control-plane and dual-host discovery/admission are configured automatically. Each Citra uses one upstream member; an idle gateway adds no room member or observer connection.
+- V338 continues the disconnect work: a full per-client queue now sheds the frame instead of closing the session (a 3-4 player hall's broadcast volume could otherwise evict a player who had no fault), the Citra-facing ENet reassembly cap is a dedicated 4 MiB budget instead of the 256 KiB application inbox (ENet resets a peer that exceeds it, vendor default 32 MiB), and the joined upstream timeout profile is explicit and configurable. `outbox_dropped`/`inbox_dropped` now distinguish a shed frame from a disconnect.
+- V337 fixed the upstream room link (ENet default timeouts after connect, compact profile covers Connecting only), widened the dual-host beacon watchdog to 3000 ms, and requested a 1 ms Windows timer resolution so `Sleep(1)` ticks do not inherit the ~15.6 ms default jitter.
 - First-run server and remote port are blank; the local port defaults to 8888. Normal window close saves all four fields, including explicitly cleared values, and the next launch restores them.
 - Settings live at `%LOCALAPPDATA%/XXGU-Gateway/settings.ini`; Windows current-user DPAPI encrypts the password. Smoke mode does not read or write user settings.
-- The Configuration menu precedes About and saves the listener IPv4 address for future sessions. About shows V336, author/contact information, copyable QQ/group entries and a GitHub link. The application uses the MHXX icon and displays the hunting-dog image at the bottom right.
+- The Configuration menu precedes About and saves the listener IPv4 address for future sessions. About shows V338, author/contact information, copyable QQ/group entries and a GitHub link. The application uses the MHXX icon and displays the hunting-dog image at the bottom right.
 - Stop/close waits asynchronously for gateway cleanup. There is no fixed session lifetime and no raw packet trace is enabled.
 
 The listener defaults to `127.0.0.1`. Configuration accepts `0.0.0.0` for all interfaces or a local interface IPv4 address; other computers connect to the gateway computer's actual IP and UDP port, subject to firewall/network reachability. Saved changes apply on the next gateway start and persist across application restarts, including migration from older settings. The CLI retains its loopback guard. Remote rooms must offer reachable IPv4; hostnames resolve in the worker. IPv6, public-lobby account authentication and automatic reconnect are not supported; rejoin in Citra after disconnecting.
@@ -25,7 +27,7 @@ Requires Windows PowerShell 5.1, GCC/G++/windres under `G:/msys64/mingw64`, inst
 
 The driver also needs original upstream sources at `../01052024-yuzu-mirror-master/src` and the upstream license. This snapshot is outside the GitHub source repository. In the full workspace this repository is named `crossplay`, beside the upstream tree. The driver rebuilds production sources, runs selected checks and packages the result without operating emulators.
 
-Outputs are under `gateway-gui/.build-desktop/`: `XXGU-Gateway-V336-release-win64.zip` (exactly EXE + `使用说明.md`, licenses embedded), `XXGU-Gateway-V336-source.zip` (matching sources), and `release-V336/发布说明.md` (Release body). Version comes from `AppVersion`; the build packages and verifies both ZIPs and runs hidden-window smoke checks. Follow [RELEASE-WORKFLOW.md](RELEASE-WORKFLOW.md) for all future builds and releases; [releases/V336.md](releases/V336.md) contains this version's release notes. `artifacts.json` and `XXGU-Gateway/` are internal build artifacts. Backend regression uses an isolated original room and synthetic Citra ENet clients.
+Outputs are under `gateway-gui/.build-desktop/`: `XXGU-Gateway-V338-release-win64.zip` (exactly EXE + `使用说明.md`, licenses embedded), `XXGU-Gateway-V338-source.zip` (matching sources), and `release-V338/发布说明.md` (Release body). Version comes from `AppVersion`; the build packages and verifies both ZIPs and runs hidden-window smoke checks. Follow [RELEASE-WORKFLOW.md](RELEASE-WORKFLOW.md) for all future builds and releases; [releases/V337.md](releases/V337.md) contains the previous version's release notes. `artifacts.json` and `XXGU-Gateway/` are internal build artifacts. Backend regression uses an isolated original room and synthetic Citra ENet clients.
 
 ## Acceptance scope
 

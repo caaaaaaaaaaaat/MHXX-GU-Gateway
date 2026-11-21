@@ -22,6 +22,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -283,6 +284,24 @@ public:
             options_.ldn_require_live_hall = options_.ldn_announce_forward = true;
             options_.ldn_guest_inject = options_.ldn_game_return = true;
         }
+        // V-338: reject a nonsense joined-link profile at construction instead of
+        // letting room_transport throw while a Citra client is already joining
+        // (that path is a per-session disconnect with only an event line).
+        if (options_.room_joined_timeout_minimum_ms == 0 ||
+            options_.room_joined_timeout_minimum_ms > 60000 ||
+            options_.room_joined_timeout_limit_ms == 0 ||
+            options_.room_joined_timeout_limit_ms > 60000 ||
+            options_.room_joined_timeout_limit_ms < options_.room_joined_timeout_minimum_ms) {
+            throw std::invalid_argument(
+                "joined room timeout profile must satisfy 1..60000 with minimum <= limit");
+        }
+        // V-338: the Citra ENet reassembly cap must at least hold one maximal
+        // frame, otherwise every large frame would reset the peer.
+        if (options_.citra_enet_waiting_data_bytes < options_.max_inbound_citra_bytes ||
+            options_.citra_enet_waiting_data_bytes > static_cast<std::size_t>(64) * 1024 * 1024) {
+            throw std::invalid_argument(
+                "citra_enet_waiting_data_bytes must be >= max_inbound_citra_bytes and <= 64 MiB");
+        }
     }
     ~Impl() { close(); }
 
@@ -355,8 +374,12 @@ public:
         }
         enet_host_->maximumPacketSize =
             static_cast<enet_uint32>(options_.max_frame_bytes + 4096);
+        // V-338: this is ENet's reassembly budget, not the application inbox. The
+        // vendor default is 32 MiB; exceeding it makes ENet reset the peer
+        // (vendor peer.c:956), so saddling it with the 256 KiB application bound
+        // converted a temporary broadcast backlog into a forced disconnect.
         enet_host_->maximumWaitingData =
-            static_cast<enet_uint32>(options_.per_client_inbox_bytes);
+            static_cast<enet_uint32>(options_.citra_enet_waiting_data_bytes);
         bound_port_ = enet_host_->address.port;
     }
 
@@ -420,7 +443,7 @@ public:
                 continue;
             }
             if (options_.ldn_dual_host && client.phase == ClientPhase::Joined && client.dual_citra_host &&
-                now_ms() - client.dual_last_beacon_ms > kCitraAppdataMaxAgeMs) reset_dual_role(client);
+                now_ms() - client.dual_last_beacon_ms > options_.dual_host_beacon_timeout_ms) reset_dual_role(client);
             if (client.control && client.phase == ClientPhase::Joined) {
                 // Beacons are rate limited inside the bridge; emitting before
                 // pump_client lets the same tick flush them to the Citra socket.
@@ -765,6 +788,11 @@ public:
         add("queue_overflows", counters_.queue_overflows);
         add("outbox_overflows", counters_.outbox_overflows);
         add("inbox_overflows", counters_.inbox_overflows);
+        // V-338: shed-load counters. outbox_overflows/inbox_overflows keep their
+        // pre-V-338 meaning ("the bound was hit"); these two say whether the
+        // gateway actually dropped the client or only the frame.
+        add("outbox_dropped", counters_.outbox_dropped);
+        add("inbox_dropped", counters_.inbox_dropped);
         add("mac_generated", counters_.mac_generated);
         add("ip_reassigned", counters_.ip_reassigned);
         add("unmappable_room_members", counters_.unmappable_room_members);
@@ -1874,9 +1902,10 @@ private:
                 ++counters_.citra_enet_receives;
                 if (client->inbox_bytes + size > options_.per_client_inbox_bytes) {
                     ++counters_.inbox_overflows;
-                    ++counters_.queue_overflows;
-                    add_event("queue.overflow", client->id, "inbound");
-                    close_after_flush(*client, "inbound queue limit");
+                    // V-338: a paused emulator that resumes with a backlog is the
+                    // realistic trigger; the default policy sheds the frame and
+                    // keeps the session instead of evicting the player.
+                    (void)shed_on_overflow(*client, "inbound");
                 } else {
                     citra_room::Bytes frame(event.packet->data,
                                             event.packet->data + event.packet->dataLength);
@@ -1985,6 +2014,25 @@ private:
         hard_close(client);
     }
 
+    // V-338: one place decides what a full queue means, so the ENet listener, the
+    // test-only TCP listener and the outbound path can never disagree. Returns
+    // true when the session survives (the offending frame is shed).
+    bool shed_on_overflow(Client& client, const char* direction) {
+        ++counters_.queue_overflows;
+        add_event("queue.overflow", client.id, direction);
+        if (options_.queue_overflow_policy == Options::QueueOverflowPolicy::Drop) {
+            if (std::string_view(direction) == "inbound") {
+                ++counters_.inbox_dropped;
+            } else {
+                ++counters_.outbox_dropped;
+            }
+            add_event("queue.drop", client.id, direction);
+            return true;
+        }
+        close_after_flush(client, std::string(direction) + " queue limit");
+        return false;
+    }
+
     bool read_client(Client& client) {
         if (client.enet) {
             // ENet delivers whole frames as events; there is no byte stream to
@@ -1994,8 +2042,7 @@ private:
         for (;;) {
             if (client.inbox.size() >= options_.per_client_inbox_bytes) {
                 ++counters_.inbox_overflows;
-                ++counters_.queue_overflows;
-                close_after_flush(client, "inbound queue limit");
+                (void)shed_on_overflow(client, "inbound");
                 return true;
             }
             std::uint8_t buffer[8192];
@@ -2005,8 +2052,7 @@ private:
                 client.inbox.insert(client.inbox.end(), buffer, buffer + received);
                 if (client.inbox.size() > options_.per_client_inbox_bytes) {
                     ++counters_.inbox_overflows;
-                    ++counters_.queue_overflows;
-                    close_after_flush(client, "inbound queue limit");
+                    (void)shed_on_overflow(client, "inbound");
                     return true;
                 }
                 continue;
@@ -2436,6 +2482,12 @@ private:
         options.outgoing_bytes = options_.room_outgoing_bytes;
         options.proxy_compressed_bytes = options_.proxy_compressed_bytes;
         options.proxy_decompressed_bytes = options_.proxy_decompressed_bytes;
+        // V-338: the joined-link timeout profile is a gateway option now. The
+        // transport only arms it from the ENet connect event onward, so Connecting
+        // keeps its fast-fail profile; forwarding it here means a field run can
+        // widen the retransmit window for a lossy upstream without patching code.
+        options.joined_timeout_minimum_ms = options_.room_joined_timeout_minimum_ms;
+        options.joined_timeout_limit_ms = options_.room_joined_timeout_limit_ms;
         client.transport = std::make_unique<room_transport::Transport>(options);
 
         room_client::JoinRequest join;
@@ -2544,9 +2596,11 @@ private:
         if (client.outbox.size() >= options_.per_client_outbox_frames ||
             client.outbox_bytes + framed.size() > options_.per_client_outbox_bytes) {
             ++counters_.outbox_overflows;
-            ++counters_.queue_overflows;
-            add_event("queue.overflow", client.id, "outbound");
-            close_after_flush(client, "outbound queue limit");
+            // V-338: dropping the client here turned a burst of room traffic --
+            // exactly what a 3-4 player hall produces -- into an involuntary
+            // disconnect for a player who had no fault. shed_on_overflow keeps
+            // the session and only discards the frame under the default policy.
+            (void)shed_on_overflow(client, "outbound");
             return false;
         }
         client.outbox_bytes += framed.size();

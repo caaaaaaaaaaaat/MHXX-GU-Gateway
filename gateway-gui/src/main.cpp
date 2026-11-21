@@ -14,7 +14,7 @@ namespace {
 constexpr int Connect = 101, Server = 102, RemotePort = 103, LocalPort = 104, Password = 105;
 constexpr int MenuAbout = 200, LnkQQ = 201, LnkGroup = 202, LnkGithub = 203, AboutClose = 204;
 constexpr int MenuConfig = 205, ConfigSave = 206, ListenAddress = 207;
-constexpr wchar_t AppVersion[] = L"V336";
+constexpr wchar_t AppVersion[] = L"V338";
 constexpr wchar_t GitHubUrl[] = L"https://github.com/caaaaaaaaaaaat/MHXX-GU-Gateway";
 constexpr wchar_t QQNumber[] = L"1726956536";
 constexpr wchar_t QQGroup[] = L"741115244";
