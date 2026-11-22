@@ -320,11 +320,11 @@ public:
             throw std::runtime_error("listen address is not a numeric IPv4 literal: " +
                                      options_.listen_address);
         }
-        const std::uint32_t host_order = ntohl(parsed.s_addr);
-        if ((host_order >> 24) != 127U && !options_.allow_remote_listen) {
-            throw std::runtime_error("refusing to listen on a non loopback address: " +
-                                     options_.listen_address);
-        }
+        // Any IPv4 binding is allowed, including 0.0.0.0. A gateway whose whole purpose
+        // is to let other machines join cannot refuse to listen for them, and the
+        // caller (a batch console, a server deployment) has already decided the address
+        // it wants. Options::allow_remote_listen is kept for source compatibility with
+        // the desktop build but no longer gates anything.
         if (!options_.trace_path.empty()) {
             std::string trace_why;
             if (!trace_.open(options_.trace_path, options_.trace_raw, &trace_why)) {

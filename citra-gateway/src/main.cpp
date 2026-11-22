@@ -58,9 +58,10 @@ void usage() {
         << "  --capabilities       standalone offline build-capability JSON (not runtime proof)\n"
         << "  --application-mode <legacy-transport|mhxx-mhgu> (MH mode unavailable)\n"
         << "  --proxy-profile <yuzu-mirror-01052024|yuzu-2022-7edc31be2> (2022 unavailable)\n"
-        << "  --listen <ipv4>      loopback listen address (default 127.0.0.1)\n"
+        << "  --listen <ipv4>      listen address (default 127.0.0.1; use 0.0.0.0 to serve\n"
+        << "                       players on other machines)\n"
         << "  --listen-port <n>    ENet/UDP listen port for the Citra side (default 24873)\n"
-        << "  --room <ipv4>        Yuzu room address (default 127.0.0.1)\n"
+        << "  --room <host>        Yuzu room address: IPv4 literal or hostname (default 127.0.0.1)\n"
         << "  --room-port <n>      Yuzu room port (default 24872)\n"
         << "  --password <text>    room password (enforced locally, forwarded to the room)\n"
         << "  --room-capacity <n>  known member_slots for the local room-full check (0=unknown)\n"
@@ -376,6 +377,12 @@ int self_check() {
 } // namespace
 
 int main(int argc, char** argv) {
+    // A supervising console reads this process through a pipe, and a piped stdout is
+    // fully buffered in C++: every line would sit in the buffer until it filled or the
+    // process exited, so a crash left the operator with no diagnostic at all and the
+    // per-second status line never arrived. The program writes one line per second, so
+    // flushing per insertion costs nothing.
+    std::cout << std::unitbuf;
     std::vector<std::string> args(argv + 1, argv + argc);
     if (std::find(args.begin(), args.end(), "--capabilities") != args.end()) {
         if (args.size() != 1) {

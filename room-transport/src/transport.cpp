@@ -131,7 +131,12 @@ public:
     std::size_t boundary_rejections = 0;
     std::string boundary_reason;
     explicit Impl(Options o) : options(std::move(o)), session(options.session) {
-        if ((!options.allow_remote && options.address != "127.0.0.1") || options.port == 0 ||
+        // Any room address is accepted, loopback or not, literal or hostname. A gateway
+        // exists to forward players to a room server, which is commonly on another
+        // machine; refusing a non-loopback address made the CLI unusable for that.
+        // Options::allow_remote is kept for source compatibility but no longer gates
+        // anything.
+        if (options.port == 0 ||
             options.connect_timeout_ms == 0 || options.connect_timeout_ms > 60000 ||
             options.joined_timeout_minimum_ms == 0 || options.joined_timeout_minimum_ms > 60000 ||
             options.joined_timeout_limit_ms == 0 || options.joined_timeout_limit_ms > 60000 ||
@@ -293,8 +298,14 @@ void Transport::start(const room_client::JoinRequest& request) {
     impl_->host->maximumPacketSize = impl_->options.session.limits.packet_bytes;
     impl_->host->maximumWaitingData = impl_->options.queue_bytes;
     ENetAddress address{}; address.port = impl_->options.port;
-    if (enet_address_set_host_ip(&address, impl_->options.address.c_str()) != 0) {
-        impl_->fail("numeric address invalid"); return;
+    // `enet_address_set_host_ip` only accepts a numeric literal, so a room given as a
+    // hostname (www.example.com) could never connect. `enet_address_set_host` resolves
+    // through getaddrinfo as well; ENet is already initialised by the host_create above,
+    // so the Winsock startup has happened. A numeric address takes the fast path inside
+    // ENet, so the loopback and literal cases are unchanged.
+    if (enet_address_set_host(&address, impl_->options.address.c_str()) != 0) {
+        impl_->fail("room address could not be resolved: " + impl_->options.address);
+        return;
     }
     impl_->peer = enet_host_connect(impl_->host, &address, 1, 0);
     if (!impl_->peer) { impl_->fail("enet_host_connect failed"); return; }

@@ -36,13 +36,16 @@ enum class ClientPhase { Framing, Joining, Joined, Closing, Closed };
 std::string phase_name(ClientPhase phase);
 
 struct Options {
-    // Desktop may explicitly enable other IPv4 bindings; CLI stays loopback-only.
+    // Deprecated and no longer consulted: any IPv4 listen address is permitted,
+    // including 0.0.0.0. Kept so the desktop build's bridge_options() still compiles.
     bool allow_remote_listen = false;
     std::string listen_address = "127.0.0.1";
     std::uint16_t listen_port = 24873;
+    // The room may be anywhere: a literal IPv4 or a hostname, loopback or not.
     std::string room_address = "127.0.0.1";
     std::uint16_t room_port = 24872;
-    // Desktop application explicitly enables numeric remote room connections.
+    // Deprecated and no longer consulted: see room_address above. Kept for the same
+    // source-compatibility reason as allow_remote_listen.
     bool allow_remote_room = false;
     // V-016l: the room password this gateway enforces itself for the Citra side.
     // Citra checks the password before nickname/MAC/console id/version
