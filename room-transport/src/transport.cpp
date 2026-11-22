@@ -133,6 +133,9 @@ public:
     explicit Impl(Options o) : options(std::move(o)), session(options.session) {
         if ((!options.allow_remote && options.address != "127.0.0.1") || options.port == 0 ||
             options.connect_timeout_ms == 0 || options.connect_timeout_ms > 60000 ||
+            options.joined_timeout_minimum_ms == 0 || options.joined_timeout_minimum_ms > 60000 ||
+            options.joined_timeout_limit_ms == 0 || options.joined_timeout_limit_ms > 60000 ||
+            options.joined_timeout_limit_ms < options.joined_timeout_minimum_ms ||
             options.queue_packets == 0 || options.queue_packets > 1024 ||
             options.outgoing_packets == 0 || options.outgoing_packets > 1024 ||
             options.queue_bytes < options.session.limits.packet_bytes || options.queue_bytes > 4194304 ||
@@ -237,6 +240,13 @@ public:
         if (result == 0) return;
         if (event.type == ENET_EVENT_TYPE_CONNECT) {
             if (state != State::Connecting) { fail("unexpected connect event"); return; }
+            // V-337: the compact Connecting profile ends here. Joining/Joined
+            // retransmit under the configured joined profile instead of letting
+            // ENet notify a disconnect after ~1.5 s without an acknowledgement
+            // (protocol.c enet_protocol_check_timeouts), which used to kill the
+            // whole gateway session on a transient upstream loss burst.
+            enet_peer_timeout(peer, 8, options.joined_timeout_minimum_ms,
+                              options.joined_timeout_limit_ms);
             auto bytes = session.begin_join(request, now());
             state = State::Joining;
             if (!enqueue(bytes)) fail("join backpressure");
@@ -340,10 +350,15 @@ bool Transport::inject_inbound_for_test(const room_client::Bytes& frame) {
 }
 Snapshot Transport::snapshot() const {
     const std::lock_guard lock(impl_->mutex);
-    return {impl_->state, impl_->session.state(), impl_->session.room(), impl_->session.assigned_ip(),
+    Snapshot out{impl_->state, impl_->session.state(), impl_->session.room(), impl_->session.assigned_ip(),
             impl_->server_error, impl_->failure, impl_->events.size(), impl_->event_bytes,
             impl_->budget->packets, impl_->budget->bytes, impl_->host != nullptr,
             impl_->boundary_rejections, impl_->boundary_reason};
+    if (impl_->peer) {
+        out.peer_timeout_minimum_ms = impl_->peer->timeoutMinimum;
+        out.peer_timeout_maximum_ms = impl_->peer->timeoutMaximum;
+    }
+    return out;
 }
 std::size_t Transport::live_hosts() noexcept { return hosts.load(); }
 std::string state_name(State state) {

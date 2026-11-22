@@ -22,6 +22,18 @@ struct Options {
     std::uint16_t port = 24872;
     std::uint32_t connect_timeout_ms = 1500;
     room_client::SessionOptions session{{}, 1500, 500};
+    // V-337: the ENet peer timeout profile applied from the ENet connect event
+    // onward (Joining/Joined). Defaults are the ENet resets themselves
+    // (vendor peer.c enet_peer_reset: minimum 5000, maximum 30000). Connecting
+    // keeps the compact enet_peer_timeout(peer, 8, 500, 1500) call in start(),
+    // so an unreachable address still fails fast; after the link is up a loss
+    // burst retransmits under this profile instead of tearing the session down.
+    // The pre-V-337 compact profile stayed armed for the whole session, so
+    // roughly one second of upstream loss disconnected every Citra player
+    // behind the gateway (user-reported "frequent disconnects"; the real Yuzu
+    // client and the Citra-facing listener both run the ENet defaults).
+    std::uint32_t joined_timeout_minimum_ms = 5000;
+    std::uint32_t joined_timeout_limit_ms = 30000;
     std::size_t queue_packets = 128;
     std::size_t queue_bytes = 262144;
     std::size_t outgoing_packets = 64;
@@ -47,6 +59,10 @@ struct Snapshot {
     // Inbound frames discarded by a structural boundary guard; identity/state untouched.
     std::size_t boundary_rejections = 0;
     std::string boundary_reason;
+    // V-337: the live ENet peer timeout profile (0 without a peer). Makes the
+    // Connecting->Joining profile switch observable to tests and diagnostics.
+    std::uint32_t peer_timeout_minimum_ms = 0;
+    std::uint32_t peer_timeout_maximum_ms = 0;
 };
 // No worker thread. All methods serialize internally; poll services ENet <=5ms.
 // Owner must not destroy this object while another caller uses it.

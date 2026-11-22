@@ -369,6 +369,39 @@ int main() {
             deadline.transport.stop();
         }
         {
+            // V-337: the compact (8/500/1500) Connecting profile is replaced at
+            // the ENet connect event by the configured joined profile. The
+            // pre-V-337 compact profile stayed armed through Joining/Joined, so
+            // ~1 s of upstream loss disconnected the whole gateway session.
+            RoomGuard room(port, 2);
+            Client relaxed(options(port));
+            join(relaxed, join_request("TimeoutProfile"), {&relaxed});
+            const auto joined_snapshot = relaxed.transport.snapshot();
+            check(joined_snapshot.state == rt::State::Joined &&
+                      joined_snapshot.peer_timeout_minimum_ms == 5000 &&
+                      joined_snapshot.peer_timeout_maximum_ms == 30000,
+                  "joined sessions retransmit under the ENet default timeout profile");
+            auto tuned_options = options(port);
+            tuned_options.joined_timeout_minimum_ms = 4000;
+            tuned_options.joined_timeout_limit_ms = 45000;
+            Client tuned(tuned_options);
+            join(tuned, join_request("TimeoutTuned"), {&relaxed, &tuned});
+            const auto tuned_snapshot = tuned.transport.snapshot();
+            check(tuned_snapshot.state == rt::State::Joined &&
+                      tuned_snapshot.peer_timeout_minimum_ms == 4000 &&
+                      tuned_snapshot.peer_timeout_maximum_ms == 45000,
+                  "configured joined timeout profile reaches the live ENet peer");
+            relaxed.transport.stop(); tuned.transport.stop();
+            bool invalid = false;
+            try {
+                auto bad = options(port);
+                bad.joined_timeout_minimum_ms = 40000; bad.joined_timeout_limit_ms = 5000;
+                rt::Transport refused(bad);
+            } catch (const std::invalid_argument&) { invalid = true; }
+            check(invalid, "joined timeout profile validated (minimum <= limit, 1..60000)");
+            check(rt::Transport::live_hosts() == 0, "timeout profile clients release all hosts");
+        }
+        {
             RoomGuard room(port,1);
             auto o=options(port); o.outgoing_packets=1;
             Client bounded(o); join(bounded,join_request("BudgetClient"),{&bounded}); window({&bounded},30);
