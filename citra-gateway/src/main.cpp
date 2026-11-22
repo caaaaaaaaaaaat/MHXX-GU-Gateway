@@ -65,7 +65,8 @@ void usage() {
         << "  --room-port <n>      Yuzu room port (default 24872)\n"
         << "  --password <text>    room password (enforced locally, forwarded to the room)\n"
         << "  --room-capacity <n>  known member_slots for the local room-full check (0=unknown)\n"
-        << "  --seconds <n>        run for n seconds then dump and exit (default 5)\n"
+        << "  --seconds <n>        run for n seconds then dump and exit; 0 = run until\n"
+        << "                       stopped (default 5; a supervised gateway uses 0)\n"
         << "  --max-clients <n>    accept at most n Citra ENet/UDP peers (default 254)\n"
         << "  --max-inbound-citra <n>\n"
         << "                       pre decode Citra frame cap in bytes (default 65536 = the\n"
@@ -1218,7 +1219,14 @@ int main(int argc, char** argv) {
     }
 
     const auto start = std::chrono::steady_clock::now();
-    const auto deadline = start + std::chrono::seconds(seconds);
+    // --seconds 0 means "run until stopped", which is what a deployed gateway wants: a
+    // supervisor owns the lifetime, and a self-terminating default (5s) turned every
+    // managed mapping into a restart loop -- the gateway exited cleanly, the supervisor
+    // read that as an unexpected exit, and backed off forever. A finite value keeps its
+    // original meaning (dump and exit after N seconds).
+    const auto deadline = seconds == 0
+                              ? std::chrono::steady_clock::time_point::max()
+                              : start + std::chrono::seconds(seconds);
     unsigned last_report = 0;
     while (!g_stop.load() && std::chrono::steady_clock::now() < deadline) {
         gateway.tick(1);
