@@ -1,4 +1,4 @@
-# XXGU 联机网关（Windows x64 · V336）
+# XXGU 联机网关（Windows x64 · V339）
 
 双击 `XXGU-Gateway.exe`。无需安装 Python、Qt 或额外的运行库。
 

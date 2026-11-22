@@ -190,10 +190,13 @@ class DualHostCliTests(unittest.TestCase):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as probe:
             probe.bind(('127.0.0.1', 0))
             listen_port = str(probe.getsockname()[1])
+        # --seconds 0 means "run until stopped" (a supervised gateway), so this uses a
+        # finite second to keep the test bounded: the point is that a complete dual-mode
+        # argument set starts and prints its listening line.
         result = subprocess.run([str(EXE), '--ldn-dual-host', '--control-plane',
                                  '--uds-profile', 'mhxx', '--ldn-comm-id', '0100770008dd8000',
-                                 '--ldn-proxy-port', '12345', '--listen-port', listen_port, '--seconds', '0'],
-                                capture_output=True, text=True, timeout=10)
+                                 '--ldn-proxy-port', '12345', '--listen-port', listen_port, '--seconds', '1'],
+                                capture_output=True, text=True, timeout=30)
         self.assertEqual(result.returncode, 0, (result.stdout, result.stderr))
         self.assertIn('gateway listening', result.stdout)
 

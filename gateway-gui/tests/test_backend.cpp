@@ -108,10 +108,17 @@ int main() {
         check(!gateway_gui::validate(config).empty(), "zero local port rejected");
         config.local_port = free_port(); config.server_port = free_port();
         config.password = "desktop-password";
-        bool denied = false;
-        try { room_transport::Options o; o.address = "127.0.0.2"; room_transport::Transport transport(o); }
-        catch (const std::invalid_argument&) { denied = true; }
-        check(denied, "legacy remote guard retained");
+        // The transport used to refuse any room address other than the literal
+        // 127.0.0.1 unless Options::allow_remote was set. That guard is gone: the CLI
+        // needs to reach a room on another machine without an opt-in flag, and the
+        // desktop already set allow_remote. What must still hold is that a
+        // non-loopback address is accepted and actually connects -- exercised against
+        // a real room below -- so this checks the accepted side rather than a refusal
+        // that no longer exists.
+        bool accepted = false;
+        try { room_transport::Options o; o.address = "127.0.0.2"; room_transport::Transport transport(o); accepted = true; }
+        catch (const std::invalid_argument&) { }
+        check(accepted, "non-loopback room address accepted without opt-in");
         struct RoomGuard { Network::Room value; bool active = false; ~RoomGuard() { if (active) value.Destroy(); } } guard;
         auto& room = guard.value;
         check(room.Create("Desktop-test", "synthetic", "127.0.0.2", static_cast<std::uint16_t>(config.server_port),
