@@ -1278,6 +1278,56 @@ void group_a3_mappings() {
     }
 
     {
+        // B339: the operator does not know the room's capacity, so the console leaves
+        // it unset (0 = unknown on the command line). The gateway must learn the real
+        // number from the room's own RoomInformation and keep enforcing it locally,
+        // rather than silently skipping the check. This is what makes the capacity
+        // field removable from the UI without weakening the room-full answer.
+        const auto room_port = take_port();
+        const auto gw_port = take_port();
+        RoomGuard room(room_port, 1);
+        citra_gateway::Gateway gateway(gateway_options(gw_port, room.port(), 0, ""));
+        gateway.open();
+        CitraPeer alpha;
+        alpha.connect(gateway.port());
+        verify(join_peer(gateway, alpha, "alpha-1", "console-alpha"),
+               "B339 alpha joins with no configured capacity");
+        check(gateway.counters().room_member_slots == 1,
+              "B339 gateway learned the capacity (1) from the room itself");
+        CitraPeer beta;
+        beta.connect(gateway.port());
+        beta.send(citra_join_bytes("beta-2", "console-beta", citra_room::no_preferred_mac));
+        verify(wait_error_frame(gateway, beta, {&alpha, &beta}),
+               "B339 beta receives a rejection frame");
+        check(hex_of(beta.raw_frames()[0]) == golden_full,
+              "B339 a capacity learned from the room still maps to Citra 0c");
+        check(gateway.counters().local_room_full_rejections == 1,
+              "B339 the full check ran locally with the room's own capacity");
+        check(gateway.counters().room_errors_mapped == 0,
+              "B339 the room was not asked, so the answer order is unchanged");
+        dump_documents(gateway, "b339_capacity_from_room");
+    }
+
+    {
+        // B339b: a room that never reports a capacity (0 = unknown) must leave the
+        // check disabled, exactly as before, so the room itself answers. An unset
+        // field must not turn into "capacity 0 means no one may join".
+        const auto room_port = take_port();
+        const auto gw_port = take_port();
+        RoomGuard room(room_port, 1);
+        citra_gateway::Gateway gateway(gateway_options(gw_port, room.port(), 0, ""));
+        gateway.open();
+        // The gateway has not joined yet, so nothing is known: the fields must read 0
+        // rather than some default that would reject everybody.
+        check(gateway.counters().room_member_slots == 0,
+              "B339b an unjoined gateway reports no learned capacity");
+        CitraPeer alpha;
+        alpha.connect(gateway.port());
+        verify(join_peer(gateway, alpha, "alpha-1", "console-alpha"),
+               "B339b alpha still joins when the capacity is unknown");
+    }
+
+    {
         const auto room_port = take_port();
         const auto gw_port = take_port();
         RoomGuard room(room_port, 4);

@@ -806,6 +806,9 @@ public:
         add("citra_tcp_accepts", counters_.citra_tcp_accepts);
         add("members_in_room", counters_.members_in_room);
         add("max_members_in_room", counters_.max_members_in_room);
+        // 0 until the room reports its capacity; lets a console show what the room
+        // said instead of the number (or absence of one) it was configured with.
+        add("room_member_slots", counters_.room_member_slots);
         add("room_version_forwarded", counters_.room_version_forwarded);
         add("citra_version_served", counters_.citra_version_served);
 
@@ -2366,8 +2369,14 @@ private:
         // Every step below is a LOCAL decision; the Yuzu room is only asked once
         // all of them passed. When two faults are present the answer is the code
         // of the earliest failing step, which is what the multi-fault goldens pin.
-        if (options_.room_capacity != 0 &&
-            joined_or_joining_clients() >= options_.room_capacity) {
+        //
+        // The capacity is the configured one when the operator set it, otherwise the
+        // one the room reported when we joined. Before the first RoomInformation both
+        // are 0 and the check simply cannot run -- the Yuzu room then answers, which
+        // is why an unset capacity is safe rather than a hole.
+        const std::uint64_t effective_capacity =
+            options_.room_capacity != 0 ? options_.room_capacity : counters_.room_member_slots;
+        if (effective_capacity != 0 && joined_or_joining_clients() >= effective_capacity) {
             // citra-master/src/network/room.cpp:305-308: the real Citra server
             // checks members.size() >= member_slots before parsing the request.
             reject_local(client, citra_room::MessageId::RoomIsFull, "room is full");
@@ -3443,6 +3452,10 @@ private:
     void on_room_information(Client& client, const room_client::RoomInformation& room) {
         room_name_ = room.name;
         counters_.members_in_room = room.members.size();
+        // The room is the only authority on its own capacity. Recording it here means
+        // a gateway started with --room-capacity 0 still enforces the real limit
+        // instead of silently skipping the check.
+        counters_.room_member_slots = room.member_slots;
         counters_.max_members_in_room =
             std::max(counters_.max_members_in_room,
                      static_cast<std::uint64_t>(room.members.size()));

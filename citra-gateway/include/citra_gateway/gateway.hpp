@@ -439,6 +439,12 @@ struct Counters {
 
     std::uint64_t members_in_room = 0;
     std::uint64_t max_members_in_room = 0;
+    // The capacity the room server itself reported (RoomInformation::member_slots),
+    // learned once the gateway has joined. 0 means the room has not told us yet.
+    // This is what makes --room-capacity optional: with 0 on the command line and a
+    // value here, the local room-full check uses the server's own number instead of a
+    // number an operator had to guess.
+    std::uint64_t room_member_slots = 0;
 
     std::map<std::string, std::uint64_t> decode_error_codes;
     std::map<std::string, std::uint64_t> error_map_hits;

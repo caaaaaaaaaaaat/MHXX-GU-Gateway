@@ -1229,9 +1229,13 @@ int main(int argc, char** argv) {
                     .count());
             if (elapsed != last_report) {
                 last_report = elapsed;
+                // slots/members are what the ROOM reported, so a console can show the
+                // real capacity instead of asking an operator to type one.
                 std::cout << "t=" << elapsed << "s clients=" << gateway.client_count()
                           << " accepted=" << counters.clients_accepted
                           << " joined=" << counters.clients_joined
+                          << " slots=" << counters.room_member_slots
+                          << " members=" << counters.members_in_room
                           << " frames_in=" << counters.frames_in
                           << " forwarded=" << counters.payload_forwarded
                           << " rejected=" << counters.frames_rejected << "\n";
