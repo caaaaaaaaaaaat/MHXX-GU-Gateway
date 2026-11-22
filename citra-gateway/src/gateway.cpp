@@ -1,14 +1,34 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 // G-b loopback gateway implementation. Single threaded, non blocking, no worker
 // threads. See gateway.hpp and README.md.
+#ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <windows.h>
+#else
+// Linux hosts the same code so a container image can ship a gateway: the only
+// Windows-specific bits are the socket headers and the 1 ms sleep in tick().
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#endif
 #include <zstd.h>
 
 #include "citra_gateway/gateway.hpp"
 
 #include <enet/enet.h>
+
+// The harness-only TCP transport (Options::citra_tcp_test_transport) is written against
+// Winsock: no CLI flag reaches it, so a Linux build -- which exists so a container can
+// ship a gateway -- simply does not compile it. The alias keeps the member declarations
+// valid on both platforms.
+#if defined(_WIN32)
+using TestSocket = SOCKET;
+constexpr TestSocket kInvalidTestSocket = INVALID_SOCKET;
+#else
+using TestSocket = int;
+constexpr TestSocket kInvalidTestSocket = -1;
+#endif
 
 #include <algorithm>
 #include <chrono>
@@ -388,6 +408,7 @@ public:
     // exists so the deterministic A1..A10 / B1 / B2 groups keep their exact
     // evidence while the deliverable path is the ENet server above.
     void open_tcp_test_listener(const in_addr& parsed) {
+#if defined(_WIN32)
         WSADATA wsa{};
         if (::WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
             throw std::runtime_error("WSAStartup failed");
@@ -428,6 +449,13 @@ public:
         u_long non_blocking = 1;
         ::ioctlsocket(sock, FIONBIO, &non_blocking);
         listener_ = sock;
+#else
+        // Unreachable on Linux: no CLI flag selects the TCP test transport, and the
+        // deliverable path is the ENet server above.
+        (void)parsed;
+        throw std::runtime_error(
+            "the TCP test transport is a Windows-only harness feature");
+#endif
     }
 
     void tick(std::uint32_t wait_ms) {
@@ -456,7 +484,11 @@ public:
         }
         reap();
         if (wait_ms > 0) {
+#ifdef _WIN32
             Sleep(1);
+#else
+            ::usleep(1000);
+#endif
         }
     }
 
@@ -465,17 +497,21 @@ public:
             if (client->phase != ClientPhase::Closed) {
                 release_room_peer(*client);
                 release_citra_transport(*client);
-                if (client->sock != INVALID_SOCKET) {
+                if (client->sock != kInvalidTestSocket) {
+#if defined(_WIN32)
                     ::closesocket(client->sock);
-                    client->sock = INVALID_SOCKET;
+#endif
+                    client->sock = kInvalidTestSocket;
                 }
                 client->phase = ClientPhase::Closed;
             }
         }
         clients_.clear();
-        if (listener_ != INVALID_SOCKET) {
+        if (listener_ != kInvalidTestSocket) {
+#if defined(_WIN32)
             ::closesocket(listener_);
-            listener_ = INVALID_SOCKET;
+#endif
+            listener_ = kInvalidTestSocket;
         }
         if (enet_host_ != nullptr) {
             enet_host_destroy(enet_host_);
@@ -483,7 +519,9 @@ public:
         }
         open_ = false;
         if (wsa_started_) {
+#if defined(_WIN32)
             ::WSACleanup();
+#endif
             wsa_started_ = false;
         }
         identities_.clear();
@@ -1015,7 +1053,7 @@ public:
 private:
     struct Client {
         std::uint64_t id = 0;
-        SOCKET sock = INVALID_SOCKET;
+        TestSocket sock = kInvalidTestSocket;
         // Citra-side transport of this session: true = ENet/UDP (the deliverable
         // path), false = the test-only TCP length-prefix framing.
         bool enet = false;
@@ -1830,7 +1868,8 @@ private:
     }
 
     void accept_ready() {
-        if (listener_ == INVALID_SOCKET) {
+#if defined(_WIN32)
+        if (listener_ == kInvalidTestSocket) {
             return;
         }
         for (;;) {
@@ -1859,6 +1898,9 @@ private:
             add_event("client.accepted", client->id, "tcp");
             clients_.push_back(std::move(client));
         }
+#else
+        // No TCP listener exists on Linux (see open_tcp_test_listener).
+#endif
     }
 
     // G-c / V-027: pump the ENet/UDP listener. CONNECT opens one session,
@@ -1978,9 +2020,11 @@ private:
         record_departure(client);
         release_room_peer(client);
         release_citra_transport(client);
-        if (client.sock != INVALID_SOCKET) {
+        if (client.sock != kInvalidTestSocket) {
+#if defined(_WIN32)
             ::closesocket(client.sock);
-            client.sock = INVALID_SOCKET;
+#endif
+            client.sock = kInvalidTestSocket;
         }
         client.inbox.clear();
         client.outbox.clear();
@@ -2049,8 +2093,13 @@ private:
                 return true;
             }
             std::uint8_t buffer[8192];
+#if defined(_WIN32)
             const int received = ::recv(client.sock, reinterpret_cast<char*>(buffer),
                                         static_cast<int>(sizeof(buffer)), 0);
+#else
+            // The TCP transport does not exist on Linux; every client is ENet.
+            const int received = 0;
+#endif
             if (received > 0) {
                 client.inbox.insert(client.inbox.end(), buffer, buffer + received);
                 if (client.inbox.size() > options_.per_client_inbox_bytes) {
@@ -2063,6 +2112,7 @@ private:
             if (received == 0) {
                 return false;
             }
+#if defined(_WIN32)
             const int error = ::WSAGetLastError();
             if (error == WSAEWOULDBLOCK) {
                 return true;
@@ -2070,6 +2120,7 @@ private:
             if (error == WSAEINTR) {
                 continue;
             }
+#endif
             return false;
         }
     }
@@ -2080,8 +2131,12 @@ private:
         }
         while (!client.outbox.empty()) {
             room_client::Bytes& frame = client.outbox.front();
+#if defined(_WIN32)
             const int sent = ::send(client.sock, reinterpret_cast<const char*>(frame.data()),
                                     static_cast<int>(frame.size()), 0);
+#else
+            const int sent = 0;
+#endif
             if (sent > 0) {
                 const std::size_t sent_size = static_cast<std::size_t>(sent);
                 if (sent_size < frame.size()) {
@@ -2095,6 +2150,7 @@ private:
                 client.outbox.pop_front();
                 continue;
             }
+#if defined(_WIN32)
             if (sent == SOCKET_ERROR) {
                 const int error = ::WSAGetLastError();
                 if (error == WSAEWOULDBLOCK) {
@@ -2102,6 +2158,7 @@ private:
                 }
                 return false;
             }
+#endif
             return false;
         }
         return true;
@@ -3794,7 +3851,7 @@ private:
     bool open_ = false;
     bool closing_ = false;
     bool wsa_started_ = false;
-    SOCKET listener_ = INVALID_SOCKET;
+    TestSocket listener_ = kInvalidTestSocket;
     ENetHost* enet_host_ = nullptr;
     std::uint16_t bound_port_ = 0;
     std::vector<std::unique_ptr<Client>> clients_;

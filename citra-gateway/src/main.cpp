@@ -19,7 +19,11 @@
 #include <string>
 #include <vector>
 
+#ifdef _WIN32
 #include <windows.h>
+#else
+#include <sys/stat.h>
+#endif
 
 namespace {
 
@@ -34,7 +38,14 @@ void on_signal(int) {
 // stop file instead. Existence is the whole signal: a missing file is the normal case
 // and must never be reported as an error or end the run.
 bool stop_file_present(const std::string& path) {
+#if defined(_WIN32)
     return GetFileAttributesA(path.c_str()) != INVALID_FILE_ATTRIBUTES;
+#else
+    // Same question, POSIX spelling: a Linux build files no stop file of its own, but
+    // the check must compile and behave.
+    struct stat info {};
+    return ::stat(path.c_str(), &info) == 0;
+#endif
 }
 
 // D4: the host record identity a real MHXX host beacon advertises.  The captured
